@@ -1,0 +1,3 @@
+C:\Users\Артём\AppData\Roaming\LS32EC2C6F\Repositories\872167D7\trunk\Dagon_Stealer\bin\Release\DagonStealer.exe.config
+C:\Users\Артём\AppData\Roaming\LS32EC2C6F\Repositories\872167D7\trunk\Dagon_Stealer - копия\bin\Release\DagonStealer.exe.config
+C:\Users\Артём\AppData\Roaming\LS32EC2C6F\Repositories\872167D7\trunk\Dagon_Stealer - копия\bin\Release\DagonStealer2.exe.config
