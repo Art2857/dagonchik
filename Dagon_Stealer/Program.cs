@@ -599,11 +599,12 @@ namespace Dagon_Stealer
 
                     float nb = 0;
                     float mb = 100000;
-                    Hero[] plist = new Hero[5] { enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] };
+                    Hero[] plist = new Hero[5]/*{ enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] }*/;
                     float[] dlist = new float[5];
 
                     for (var b = 0; b < enemy.Count; b += 1)
                     {
+                        plist[b] = enemy[b];
                         dlist[b] = enemy[b].Distance2D(me.Position);
                     }
 
