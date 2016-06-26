@@ -512,6 +512,7 @@ namespace Dagon_Stealer
 
                     var quellingBlade = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_quelling_blade") || item.Name.Contains("item_iron_talon")));
                     damag = ((quellingBlade != null) ? ((me.IsRanged != null) ? (me.MinimumDamage * 1.40) : (me.MinimumDamage * 1.15)) : (me.MinimumDamage)) + me.BonusDamage;
+                    
                     var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (
 
                         ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && creep.IsSpawned && creep.IsAlive && creep.IsVisible && ((me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist)) || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2 && creep.Health < damag * (1 - creep.DamageResist))))
@@ -826,6 +827,12 @@ namespace Dagon_Stealer
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
 
                     //Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+
+                    if (id.Health+id.HealthRegeneration < (me.MinimumDamage + me.BonusDamage) * (1 - id.DamageResist) && me.Distance2D(id)<me.AttackRange && me.CanAttack() && !id.IsAttackImmune())
+                    {
+                        me.Attack(id);
+                        Utils.Sleep(100, "next");
+                    }
 
                     if (Utils.SleepCheck("next"))
                     {
