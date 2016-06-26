@@ -574,7 +574,7 @@ namespace Dagon_Stealer
             //damag = me.MinimumDamage + me.BonusDamage;
 
             var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-            var players = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team == me.Team && obj.IsAlive  && !obj.IsIllusion)).ToList();
+            var players = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team == me.Team && obj.IsAlive && !obj.IsIllusion)).ToList();
 
             damag = 0;
 
@@ -582,11 +582,11 @@ namespace Dagon_Stealer
             var ethereal = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_ethereal_blade"));
             var bottle = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_bottle"));
 
-            if (me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") != null && Utils.SleepCheck("bottle"))
+            if (bottle!=null && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("bottle"))
             {
                 foreach(var b in players)
                 {
-                    if (b.Modifiers.Any(o => o.Name == "modifier_bottle_regeneration") == null)
+                    if (!b.Modifiers.Any(o => o.Name == "modifier_bottle_regeneration"))
                     { 
                         bottle.UseAbility(b); Utils.Sleep(100, "bottle");
                         break;
