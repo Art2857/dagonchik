@@ -581,7 +581,7 @@ namespace Dagon_Stealer
             var ethereal = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_ethereal_blade"));
 
             //var kill = false;
-            double mdc = 0;//максимальный нанесёный урон для убийства врага
+            double mdc = 1000000;//минимальный //0;/максимальный нанесёный урон для убийства врага
             double mui = 100;//кол-во использованных итемов
             //double bse = 0;//наилучшая последовательность действий
 
@@ -758,7 +758,12 @@ namespace Dagon_Stealer
                                                             }
 
                                                         }
-                                                        else { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
+                                                        else
+                                                        {
+                                                            //if (ui <= mui) { if (dc < mdc) { 
+                                                            if (ui*dc <= mui*mdc) { mdc = dc; mui = ui; bse = se; id = v; }
+                                                            //} } 
+                                                        }
                                                         //else { kill = true; }
                                                     }
 
@@ -809,28 +814,28 @@ namespace Dagon_Stealer
                                 //Game.MousePosition
                                 Q.UseAbility(id);//id.Predict(500));
                                 Utils.Sleep(100, "next");
-                                n = 5;//return;
+                                break;//n = 5;//return;
                                 //Utils.Sleep(100, "Q");
                             }
                             if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther))//&& Utils.SleepCheck("W")
                             {
                                 W.UseAbility();
                                 Utils.Sleep(100, "next");
-                                n = 5;//return;
+                                break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
                             }
                             if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther)) //&& Utils.SleepCheck("dagon")
                             {
                                 dagon.UseAbility(id);
                                 Utils.Sleep(100, "next");
-                                n = 5;//return;
+                                break;//n = 5;//return;
                                 //Utils.Sleep(1000, "dagon");//1000
                             }
                             if (a == 4 && ethereal.CanBeCasted() && me.CanCast() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
                             {
                                 ethereal.UseAbility(id);
                                 Utils.Sleep(100, "next");
-                                n = 5;//return;
+                                break;//n = 5;//return;
                                 Utils.Sleep(2000, "ethereal");//3000
                             }
                             //if (ModifEther) { }
