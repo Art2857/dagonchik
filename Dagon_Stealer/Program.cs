@@ -709,7 +709,7 @@ namespace Dagon_Stealer
 
                                                                 if ((W != null && W.CanBeCasted() && W.Cooldown == 0 && mp > W.ManaCost && point_distance(v.Position, pos) < W.CastRange * W.CastRange))//W
                                                                 {
-                                                                    Drawing.DrawText("goodddddsfsda123sdfa", new Vector2(300,300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+                                                                    //Drawing.DrawText("goodddddsfsda123sdfa", new Vector2(300,300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
                                                                     /*damag = me.TotalAgility / me.TotalStrength;
                                                                     if (damag < 0.25) { damag = 0.25; }
                                                                     if (damag > 0.5 * W.Level) { damag = 0.5 * W.Level; }
@@ -789,14 +789,14 @@ namespace Dagon_Stealer
 
 
 
-                double a = 0;
+                //double a = 0;
                 //double b = bse;
                 if (id != me)//&& me.CanCast()
                 {
 
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
 
-                    Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                    //Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
                     if (Utils.SleepCheck("next"))
                     {
@@ -805,6 +805,7 @@ namespace Dagon_Stealer
                         //{
                         for (var n = 0; n < 4; n += 1)//a: 0-q,1-w,2-dagon,3-ethereal,4-veil
                         {
+                            double a = 0;
                             if (n == 0) { a = Math.Floor(bse / 1000); bse -= a * 1000; }
                             if (n == 1) { a = Math.Floor(bse / 100); bse -= a * 100; }
                             if (n == 2) { a = Math.Floor(bse / 10); bse -= a * 10; }
@@ -812,24 +813,24 @@ namespace Dagon_Stealer
 
                             if (a == 1 && Q.CanBeCasted() && me.CanCast() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
                             {
-                                Drawing.DrawText("1111111111111111111111111111111111111111", new Vector2(300, 350), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                //Drawing.DrawText("1111111111111111111111111111111111111111", new Vector2(300, 350), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 //Game.MousePosition
                                 Q.UseAbility(id);//id.Predict(500));
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "Q");
                             }
-                            if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther))//&& Utils.SleepCheck("W")
+                            if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther)) | (ethereal==null)))//&& Utils.SleepCheck("W")
                             {
-                                Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 W.UseAbility();
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
                             }
-                            if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther)) //&& Utils.SleepCheck("dagon")
+                            if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther)) | (ethereal == null))) //&& Utils.SleepCheck("dagon")
                             {
-                                Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                //Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 dagon.UseAbility(id);
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
@@ -837,11 +838,11 @@ namespace Dagon_Stealer
                             }
                             if (a == 4 && ethereal.CanBeCasted() && me.CanCast() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
                             {
-                                Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                //Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 ethereal.UseAbility(id);
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
-                                Utils.Sleep(2000, "ethereal");//3000
+                                if (Utils.SleepCheck("ethereal")){Utils.Sleep(2000, "ethereal");}//3000
                             }
                             //if (ModifEther) { }
                         }
