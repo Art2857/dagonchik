@@ -501,7 +501,7 @@ namespace Dagon_Stealer
 
                 if (id != null && id != me && id.IsAlive && id.IsVisible)
                 {
-                    if (point_distance(me.Position, id.Position) < (me.AttackRange + 400) * (me.AttackRange + 400))
+                    if (point_distance(me.Position, id.Position) < (me.AttackRange + 100) * (me.AttackRange + 100))
                     {
                         /*if id.IsVisible */
                         me.Attack(id); Utils.Sleep(me.SecondsPerAttack * 1000, "attack");
@@ -581,16 +581,30 @@ namespace Dagon_Stealer
             var dagon = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_dagon"));
             var ethereal = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_ethereal_blade"));
             var bottle = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_bottle"));
+            var hex = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_sheepstick"));
+            var shiva = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_shivas_guard"));
+            var soulring = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_soul_ring"));
+            var aganim = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_ultimate_scepter"));
+            var rod = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_rod_of_atos"));
+            var orchid = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_orchid"));
+            var bloodstone = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_bloodstone"));
+            var blink = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_blink"));
+            var bkb = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_black_king_bar"));
+            var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
+            
 
-            if (bottle!=null && bottle.Cooldown==0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("bottle"))
+
+
+            
+            if (bottle!=null && bottle.Cooldown==0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff")/*&& Utils.SleepCheck("bottle")*/)
             {
                 foreach(var b in players)
                 {
-                    //if (!b.Modifiers.Any(o => o.Name == "modifier_bottle_regeneration"))
-                    //{ 
-                        bottle.UseAbility(b); Utils.Sleep(250, "bottle");
+                    if (me.Distance2D(b) < 600 && !b.Modifiers.Any(o => o.Name == "modifier_bottle_regeneration") && (b.Health < b.MaximumHealth || b.Mana < b.MaximumMana))
+                    { 
+                        bottle.UseAbility(b);//Utils.Sleep(500, "bottle");
                         break;
-                    //}
+                    }
                 }
             }
 
