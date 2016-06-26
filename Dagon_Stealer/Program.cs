@@ -849,7 +849,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "Q");
                             }
-                            if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther)) | (ethereal==null)))//&& Utils.SleepCheck("W")
+                            if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && ethereal.Cooldown==0 && (!Utils.SleepCheck("ethereal") | ModifEther)) | (ethereal==null)))//&& Utils.SleepCheck("W")
                             {
                                 //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 W.UseAbility();
@@ -857,7 +857,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
                             }
-                            if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther)) | (ethereal == null))) //&& Utils.SleepCheck("dagon")
+                            if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && ethereal.Cooldown == 0 && (!Utils.SleepCheck("ethereal") | ModifEther)) | (ethereal == null))) //&& Utils.SleepCheck("dagon")
                             {
                                 //Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 dagon.UseAbility(id);
