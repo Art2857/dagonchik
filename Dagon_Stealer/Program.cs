@@ -582,15 +582,15 @@ namespace Dagon_Stealer
             var ethereal = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_ethereal_blade"));
             var bottle = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_bottle"));
 
-            if (bottle!=null && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("bottle"))
+            if (bottle!=null && bottle.Cooldown==0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("bottle"))
             {
                 foreach(var b in players)
                 {
-                    if (!b.Modifiers.Any(o => o.Name == "modifier_bottle_regeneration"))
-                    { 
-                        bottle.UseAbility(b); Utils.Sleep(100, "bottle");
+                    //if (!b.Modifiers.Any(o => o.Name == "modifier_bottle_regeneration"))
+                    //{ 
+                        bottle.UseAbility(b); Utils.Sleep(250, "bottle");
                         break;
-                    }
+                    //}
                 }
             }
 
