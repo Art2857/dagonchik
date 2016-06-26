@@ -812,6 +812,7 @@ namespace Dagon_Stealer
 
                             if (a == 1 && Q.CanBeCasted() && me.CanCast() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
                             {
+                                Drawing.DrawText("1111111111111111111111111111111111111111", new Vector2(300, 350), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 //Game.MousePosition
                                 Q.UseAbility(id);//id.Predict(500));
                                 Utils.Sleep(100, "next");
@@ -820,7 +821,7 @@ namespace Dagon_Stealer
                             }
                             if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther))//&& Utils.SleepCheck("W")
                             {
-
+                                Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 W.UseAbility();
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
@@ -828,6 +829,7 @@ namespace Dagon_Stealer
                             }
                             if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther)) //&& Utils.SleepCheck("dagon")
                             {
+                                Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 dagon.UseAbility(id);
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
@@ -835,6 +837,7 @@ namespace Dagon_Stealer
                             }
                             if (a == 4 && ethereal.CanBeCasted() && me.CanCast() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
                             {
+                                Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 ethereal.UseAbility(id);
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
