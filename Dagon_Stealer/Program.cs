@@ -796,7 +796,7 @@ namespace Dagon_Stealer
 
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
 
-
+                    Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
                     if (Utils.SleepCheck("next"))
                     {
