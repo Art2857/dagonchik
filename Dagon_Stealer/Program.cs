@@ -604,7 +604,7 @@ namespace Dagon_Stealer
 
                     for (var b = 0; b < enemy.Count; b += 1)
                     {
-                        plist[b] = enemy[b];
+                        plist[b]=enemy[b];
                         dlist[b] = enemy[b].Distance2D(me.Position);
                     }
 
@@ -916,7 +916,7 @@ namespace Dagon_Stealer
             texturename = "items/item_tango.vtf";
             Drawing.DrawRect(new Vector2(800, 0), new Vector2(100, 100), Color.White);
             */
-            for (uint i = 0; i < 10; i += 1)
+            for (uint i = 0; i < 0/*10*/; i += 1)
             {
                 phero[i] = ObjectMgr.GetPlayerById(i).Hero;
                 var h = phero[i];
