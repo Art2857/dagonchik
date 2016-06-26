@@ -709,6 +709,7 @@ namespace Dagon_Stealer
 
                                                                 if ((W != null && W.CanBeCasted() && W.Cooldown == 0 && mp > W.ManaCost && point_distance(v.Position, pos) < W.CastRange * W.CastRange))//W
                                                                 {
+                                                                    Drawing.DrawText("goodddddsfsda123sdfa", new Vector2(300,300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
                                                                     /*damag = me.TotalAgility / me.TotalStrength;
                                                                     if (damag < 0.25) { damag = 0.25; }
                                                                     if (damag > 0.5 * W.Level) { damag = 0.5 * W.Level; }
@@ -819,6 +820,7 @@ namespace Dagon_Stealer
                             }
                             if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && (!Utils.SleepCheck("ethereal") || ModifEther))//&& Utils.SleepCheck("W")
                             {
+
                                 W.UseAbility();
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
