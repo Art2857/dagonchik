@@ -594,7 +594,7 @@ namespace Dagon_Stealer
             var bkb = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_black_king_bar"));
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
-            if (!me.CanCast()) {if (manta != null && manta.Cooldown == 0 && me.Mana > manta.ManaCost) { manta.UseAbility();}
+            if (!me.CanCast()) { if (manta != null && manta.Cooldown == 0 && me.Mana > manta.ManaCost) { manta.UseAbility(); } }
 
             if (Game.IsKeyDown(keyCode: 'W') && Utils.SleepCheck("W") && W.Cooldown == 0)
             {
