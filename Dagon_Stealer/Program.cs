@@ -82,7 +82,8 @@ namespace Dagon_Stealer
 
         private static double bse;
         private static double maxbse;
-        
+        private static Hero maxid = ObjectMgr.LocalHero;
+
         private static double rep;
         //private static dynamic id = ObjectMgr.LocalHero;
         private static Hero id = ObjectMgr.LocalHero;
@@ -683,6 +684,7 @@ namespace Dagon_Stealer
 
                         double maxdamag = 0;//максимальный нанесёный урон
                         maxbse = 0;//максимальный bse
+                        maxid = me;
                         double maxmc = 0;//мана кост
                         //double bse = 0;//наилучшая последовательность действий
 
@@ -901,7 +903,7 @@ namespace Dagon_Stealer
                                 if (bse == 0 && maxdamag>0)
                                 {
                                 rep = Math.Ceiling(v.Health / maxdamag);
-                                if (me.Mana > rep * maxmc+(rep-1)*R.ManaCost) { bse = maxbse; id = v; }
+                                if (me.Mana > rep * maxmc + (rep - 1) * R.ManaCost) { bse = maxbse; id = v; maxid = v; }
                                 }
 
                             }
@@ -909,7 +911,7 @@ namespace Dagon_Stealer
 
                     }
                 }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && bse == 0 && rep > 0 && Utils.SleepCheck("next")) { bse = maxbse; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && bse == 0 && rep > 0 && Utils.SleepCheck("next")) { bse = maxbse; id = maxid; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
                 
             }
             else
