@@ -596,8 +596,8 @@ namespace Dagon_Stealer
 
 
 
-            
-            if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")
+
+            if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && !me.IsChanneling())//&& Utils.SleepCheck("bottle")
             {
                 foreach(var b in players)
                 {
@@ -608,7 +608,7 @@ namespace Dagon_Stealer
                     }
                 }
             }
-
+            
             //me.Modifiers;
             //var kill = false;
             double mdc = 1000000;//минимальный //0;/максимальный нанесёный урон для убийства врага
