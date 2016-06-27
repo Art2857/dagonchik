@@ -596,7 +596,7 @@ namespace Dagon_Stealer
 
 
 
-            /*
+            
             if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")
             {
                 foreach(var b in players)
@@ -607,7 +607,7 @@ namespace Dagon_Stealer
                         break;
                     }
                 }
-            }*/
+            }
 
             //me.Modifiers;
             //var kill = false;
