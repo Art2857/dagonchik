@@ -498,10 +498,9 @@ namespace Dagon_Stealer
             ////////////
 
 
-            //if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
-            var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-            if (enemy.Count == 0) { bse = 0; id = me; rep = 0; }
             if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
+            
+            //if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
 
 
             if (false)//(Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
@@ -581,7 +580,8 @@ namespace Dagon_Stealer
 
 
             //damag = me.MinimumDamage + me.BonusDamage;
-
+            var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
+            if (enemy.Count == 0) { bse = 0; id = me; rep = 0; }
             var players = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team == me.Team && obj.IsAlive && !obj.IsIllusion)).ToList();
 
             damag = 0;
@@ -663,11 +663,12 @@ namespace Dagon_Stealer
 
             //me.Modifiers;
 
-            Drawing.DrawText(id.Name, new Vector2(500, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(System.Convert.ToString(enemy.Count), new Vector2(100, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(rep), new Vector2(200, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(maxbse), new Vector2(400, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-
+            Drawing.DrawText(id.Name, new Vector2(500, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+            
 
             if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
             {
