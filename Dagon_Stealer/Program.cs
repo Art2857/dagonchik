@@ -88,10 +88,11 @@ namespace Dagon_Stealer
 
         private static void Main(string[] args)
         {
+            /*
             Menu.AddItem(new MenuItem("keyBind", "Main Key").SetValue(new KeyBind('H', KeyBindType.Toggle, true)));
             Menu.AddItem(new MenuItem("enemies", "Heroes").SetValue(new HeroToggler(enemies)));
             Menu.AddToMainMenu();
-
+            */
 
             //Game.OnUpdate += Vagina;
             Drawing.OnDraw += Vagina;
@@ -104,7 +105,7 @@ namespace Dagon_Stealer
             //if (time > 0) { time -= 1; return; } else { time = 30; }
 
             var me = ObjectMgr.LocalHero;
-            if (!Game.IsInGame) { return; }
+            if (!Game.IsInGame) { id = null; bse=0; return; }
             //if (!me.IsAlive) { hp = false; }
             if (me == null || !me.IsAlive) { return; }
             double damag = 0;
@@ -495,7 +496,7 @@ namespace Dagon_Stealer
 
 
             if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; } }
-
+            
             if (Utils.SleepCheck("attack") && me.CanAttack())
             {
 
@@ -594,7 +595,7 @@ namespace Dagon_Stealer
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
 
-
+            if (Game.IsKeyDown('R')) { if (soulring != null && soulring.Cooldown==0) { soulring.UseAbility(); } }
 
 
             if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && !me.IsChanneling())//&& Utils.SleepCheck("bottle")
@@ -828,13 +829,13 @@ namespace Dagon_Stealer
 
                     //Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
-                    /*
+                    
                     if (id.Health + id.HealthRegeneration < (me.MinimumDamage + me.BonusDamage) * (1 - id.DamageResist) && me.Distance2D(id) < me.AttackRange && me.CanAttack() && !id.IsAttackImmune() && Utils.SleepCheck("next"))
                     {
                         me.Attack(id);
                         Utils.Sleep(100, "next");
                     }
-                     */
+                     
 
                     if (Utils.SleepCheck("next"))
                     {
@@ -942,7 +943,7 @@ namespace Dagon_Stealer
 
 
             //enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-            if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed || !Game.IsInGame) { return; }
+            if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed /*|| !Game.IsInGame*/) { return; }
             /*string texturename = "";//materials/ensage_ui/<folder_name>/<texture_name>.vmat
             
             texturename = "materials/ensage_ui/items/tango.vmat";
