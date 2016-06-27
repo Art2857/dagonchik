@@ -595,10 +595,18 @@ namespace Dagon_Stealer
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
 
-            if (Game.IsKeyDown(keyCode: 'R')) { if (soulring != null && soulring.Cooldown==0) { soulring.UseAbility(); } }
+            if (Game.IsKeyDown(keyCode: 'R'))
+            {
+                if (soulring != null && soulring.Cooldown == 0 && me.Health>550) { soulring.UseAbility(); }
+                if (E != null && E.Cooldown == 0 && me.Mana > E.ManaCost) { E.UseAbility(me.Position); }
+                if (shiva != null && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost) { shiva.UseAbility(); }
+                if (R != null && me.Mana>R.ManaCost) { R.UseAbility(); } 
+            }
 
+            if (!me.IsChanneling())
+            {
 
-            if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && !me.IsChanneling())//&& Utils.SleepCheck("bottle")
+            if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")
             {
                 foreach(var b in players)
                 {
@@ -610,6 +618,13 @@ namespace Dagon_Stealer
                 }
             }
             
+            foreach (var b in enemy)
+            {
+                if (b.Modifiers.Any(o => o.Name == "modifier_teleporting")) { if (hex != null && hex.Cooldown == 0 && me.Mana > hex.ManaCost/*&& !b.IsMagicImmune()*/) { hex.UseAbility(b); break; } }
+            }
+
+            }
+
             //me.Modifiers;
             //var kill = false;
             double mdc = 1000000;//минимальный //0;/максимальный нанесёный урон для убийства врага
