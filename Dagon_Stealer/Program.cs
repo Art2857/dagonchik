@@ -595,7 +595,7 @@ namespace Dagon_Stealer
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
 
-            if (Game.IsKeyDown('R')) { if (soulring != null && soulring.Cooldown==0) { soulring.UseAbility(); } }
+            if (Game.IsKeyDown(keyCode: 'R')) { if (soulring != null && soulring.Cooldown==0) { soulring.UseAbility(); } }
 
 
             if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && !me.IsChanneling())//&& Utils.SleepCheck("bottle")
