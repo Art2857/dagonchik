@@ -817,8 +817,8 @@ namespace Dagon_Stealer
                                                                     ehp -= damag * mr;
                                                                     dc += damag * mr;
                                                                     ui += 1;
-                                                                    mp -= ethereal.ManaCost;
-                                                                    mc += ethereal.ManaCost;
+                                                                    mp -= shiva.ManaCost;
+                                                                    mc += shiva.ManaCost;
                                                                     se += (ev + 1) * 1000 / Math.Pow(10, n);
                                                                 }
 
