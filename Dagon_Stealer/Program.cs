@@ -669,7 +669,7 @@ namespace Dagon_Stealer
 
 
 
-            if ((Utils.SleepCheck("ai") || bse == 0 /*|| id == me*/))//!id.IsAlive || !id.IsVisible
+            if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
             {
                 if (rep <= 0)
                 {
@@ -865,11 +865,12 @@ namespace Dagon_Stealer
                                                                 {
                                                                     //if (ui <= mui) { if (dc < mdc) { 
                                                                     if (ui * dc <= mui * mdc) { mdc = dc; mui = ui; bse = se; id = v; }
-                                                                    if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; }
                                                                     //} } 
                                                                 }
+                                                                
                                                                 //else { kill = true; }
                                                             }
+                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; }
 
                                                             //if (ehp <= 0) { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
 
@@ -895,7 +896,7 @@ namespace Dagon_Stealer
 
                     }
                 }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling()) { R.UseAbility(); rep -= 1; } }
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && rep>0) { R.UseAbility(); rep -= 1; } }
             }
             else
             {
