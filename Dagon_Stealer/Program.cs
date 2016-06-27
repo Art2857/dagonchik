@@ -81,6 +81,7 @@ namespace Dagon_Stealer
         private static Dictionary<string, bool> enemies = new Dictionary<string, bool>();
 
         private static double bse;
+        private static double rep;
         //private static dynamic id = ObjectMgr.LocalHero;
         private static Hero id = ObjectMgr.LocalHero;
         //private static Vector3 prepos = ObjectMgr.LocalHero.Position;
@@ -105,7 +106,7 @@ namespace Dagon_Stealer
             //if (time > 0) { time -= 1; return; } else { time = 30; }
 
             var me = ObjectMgr.LocalHero;
-            if (!Game.IsInGame) { id = null; bse=0; return; }
+            if (!Game.IsInGame) { id = null; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
             if (me == null || !me.IsAlive) { return; }
             double damag = 0;
@@ -495,7 +496,7 @@ namespace Dagon_Stealer
             ////////////
 
 
-            if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; } }
+            if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
             
             if (Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
             {
@@ -670,39 +671,41 @@ namespace Dagon_Stealer
 
             if ((Utils.SleepCheck("ai") || bse == 0 /*|| id == me*/))//!id.IsAlive || !id.IsVisible
             {
-                if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
+                if (rep <= 0)
                 {
-                    Utils.Sleep(150, "ai");
-                    //bse = 0;//наилучшая последовательность действий
-                    //id = me;//наилучшая цель
-
-                    float nb = 0;
-                    float mb = 100000;
-                    Hero[] plist = new Hero[5]/*{ enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] }*/;
-                    float[] dlist = new float[5];
-
-                    for (var b = 0; b < Math.Min(5,enemy.Count); b += 1)
+                    if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
                     {
-                        plist[b]=enemy[b];
-                        dlist[b] = enemy[b].Distance2D(me.Position);
-                    }
+                        Utils.Sleep(150, "ai");
+                        //bse = 0;//наилучшая последовательность действий
+                        //id = me;//наилучшая цель
 
-                    for (var repeat = 0; repeat < 5; repeat += 1)
-                    {
-                        for (var b = 0; b < Math.Min(5, enemy.Count) - 1; b += 1)
-                    {
-                        if (dlist[b]>dlist[b+1])
+                        float nb = 0;
+                        float mb = 100000;
+                        Hero[] plist = new Hero[5]/*{ enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] }*/;
+                        float[] dlist = new float[5];
+
+                        for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)
                         {
-                            var a = dlist[b];
-                            dlist[b] = dlist[b + 1];
-                            dlist[b + 1] = a;
-
-                            var h = plist[b];
-                            plist[b] = plist[b + 1];
-                            plist[b + 1] = h;
+                            plist[b] = enemy[b];
+                            dlist[b] = enemy[b].Distance2D(me.Position);
                         }
-                    }
-                    }
+
+                        for (var repeat = 0; repeat < 5; repeat += 1)
+                        {
+                            for (var b = 0; b < Math.Min(5, enemy.Count) - 1; b += 1)
+                            {
+                                if (dlist[b] > dlist[b + 1])
+                                {
+                                    var a = dlist[b];
+                                    dlist[b] = dlist[b + 1];
+                                    dlist[b + 1] = a;
+
+                                    var h = plist[b];
+                                    plist[b] = plist[b + 1];
+                                    plist[b + 1] = h;
+                                }
+                            }
+                        }
 
                         /*foreach (var b in enemy)
                         {
@@ -713,180 +716,182 @@ namespace Dagon_Stealer
                             }
                         }*/
 
-                    for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)//foreach (var v in enemy)
+                        for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)//foreach (var v in enemy)
                         {
-                            var v=plist[b];
-                            if (Utils.SleepCheck("shiva") || v.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast") && me.Distance2D(v)<3000)
+                            var v = plist[b];
+                            if (Utils.SleepCheck("shiva") || v.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast") && me.Distance2D(v) < 3000)
                             {
-                            var linkens = v.Inventory.Items.FirstOrDefault(Gay => Gay.Name == "item_sphere");
-                            if (!((linkens != null && linkens.Cooldown == 0) || v.Modifiers.Any(x => Ignore.Contains(x.Name))))
-                            {
-                                for (var i1 = 0; i1 < 5; i1 += 1)
+                                var linkens = v.Inventory.Items.FirstOrDefault(Gay => Gay.Name == "item_sphere");
+                                if (!((linkens != null && linkens.Cooldown == 0) || v.Modifiers.Any(x => Ignore.Contains(x.Name))))
                                 {
-                                    for (var i2 = 0; i2 < 5; i2 += 1)
+                                    for (var i1 = 0; i1 < 5; i1 += 1)
                                     {
-                                        for (var i3 = 0; i3 < 5; i3 += 1)
+                                        for (var i2 = 0; i2 < 5; i2 += 1)
                                         {
-                                            for (var i4 = 0; i4 < 5; i4 += 1)
+                                            for (var i3 = 0; i3 < 5; i3 += 1)
                                             {
-                                                for (var i5 = 0; i5 < 5; i5 += 1)
+                                                for (var i4 = 0; i4 < 5; i4 += 1)
                                                 {
-                                                    if ((i1 != i2 && i1 != i3 && i1 != i4 && i1 != i5) && (i2 != i3 && i2 != i4 && i2 != i5) && (i3 != i4 && i3 != i5) && (i4 != i5))
-                                                {
-
-                                                    double mc = 0;//мана кост
-                                                    double ui = 0;//использованных предметов//нанесение урона
-                                                    double dc = 0;//нанесение урона по игроку
-                                                    Vector3 pos = me.Position;//new Vector2(x,y);
-                                                    //double hp=me.Health;
-                                                    double mp = me.Mana;//мана
-
-                                                    double ehp = v.Health + v.HealthRegeneration * 0.4;//хп врага
-                                                    double fr = 1 - v.DamageResist;//защита врага
-                                                    double mr = 1 - v.MagicDamageResist;//маг.защита врага
-                                                    double se = 0;
-                                                    for (var n = 0; n < 5; n += 1)//0-q,1-w,2-dagon,3-ethereal,4-shiva
+                                                    for (var i5 = 0; i5 < 5; i5 += 1)
                                                     {
-                                                        if (ehp > 0)
+                                                        if ((i1 != i2 && i1 != i3 && i1 != i4 && i1 != i5) && (i2 != i3 && i2 != i4 && i2 != i5) && (i3 != i4 && i3 != i5) && (i4 != i5))
                                                         {
 
-                                                            var ev = 0;
-                                                            if (n == 0) { ev = i1; } if (n == 1) { ev = i2; } if (n == 2) { ev = i3; } if (n == 3) { ev = i4; } if (n == 4) { ev = i5; }
+                                                            double mc = 0;//мана кост
+                                                            double ui = 0;//использованных предметов//нанесение урона
+                                                            double dc = 0;//нанесение урона по игроку
+                                                            Vector3 pos = me.Position;//new Vector2(x,y);
+                                                            //double hp=me.Health;
+                                                            double mp = me.Mana;//мана
 
-                                                            if (ev == 0 && Q != null && Q.CanBeCasted() && Q.Cooldown == 0 && mp > Q.ManaCost && point_distance(v.Position, pos) < Q.CastRange * Q.CastRange)//Q
+                                                            double ehp = v.Health + v.HealthRegeneration * 0.4;//хп врага
+                                                            double fr = 1 - v.DamageResist;//защита врага
+                                                            double mr = 1 - v.MagicDamageResist;//маг.защита врага
+                                                            double se = 0;
+                                                            for (var n = 0; n < 5; n += 1)//0-q,1-w,2-dagon,3-ethereal,4-shiva
                                                             {
-                                                                //pos = v.Position;
-                                                                damag = 80 * Q.Level;
-                                                                ehp -= damag;
-                                                                dc += damag;
-                                                                ui += 1;
-                                                                mp -= Q.ManaCost;
-                                                                mc += Q.ManaCost;
-                                                                se += (ev + 1) * 10000 / Math.Pow(10, n);
-
-                                                                /*if (me.CanAttack())
+                                                                if (ehp > 0)
                                                                 {
-                                                                    damag = me.AttackRange / v.MovementSpeed * dps;
-                                                                    ehp -= damag * fr;
-                                                                    dc += damag * fr;
-                                                                }*/
 
-                                                            }
-                                                            if (ev == 1 && b<2)
-                                                            {
-                                                                //Hero[] plist = new Hero[5];
-                                                                //int[] Penis = new int[5] { 400, 500, 600, 700, 800 };
-                                                                /*float nb = 0;
-                                                                float mb=100000;
+                                                                    var ev = 0;
+                                                                    if (n == 0) { ev = i1; } if (n == 1) { ev = i2; } if (n == 2) { ev = i3; } if (n == 3) { ev = i4; } if (n == 4) { ev = i5; }
 
-                                                                foreach (var b in enemy)
-                                                                {
-                                                                    var a=b.Distance2D(pos);
-                                                                    if (a>nb && a<mb)
+                                                                    if (ev == 0 && Q != null && Q.CanBeCasted() && Q.Cooldown == 0 && mp > Q.ManaCost && point_distance(v.Position, pos) < Q.CastRange * Q.CastRange)//Q
                                                                     {
-                                                                        mb = a;
+                                                                        //pos = v.Position;
+                                                                        damag = 80 * Q.Level;
+                                                                        ehp -= damag;
+                                                                        dc += damag;
+                                                                        ui += 1;
+                                                                        mp -= Q.ManaCost;
+                                                                        mc += Q.ManaCost;
+                                                                        se += (ev + 1) * 10000 / Math.Pow(10, n);
+
+                                                                        /*if (me.CanAttack())
+                                                                        {
+                                                                            damag = me.AttackRange / v.MovementSpeed * dps;
+                                                                            ehp -= damag * fr;
+                                                                            dc += damag * fr;
+                                                                        }*/
+
                                                                     }
+                                                                    if (ev == 1 && b < 2)
+                                                                    {
+                                                                        //Hero[] plist = new Hero[5];
+                                                                        //int[] Penis = new int[5] { 400, 500, 600, 700, 800 };
+                                                                        /*float nb = 0;
+                                                                        float mb=100000;
+
+                                                                        foreach (var b in enemy)
+                                                                        {
+                                                                            var a=b.Distance2D(pos);
+                                                                            if (a>nb && a<mb)
+                                                                            {
+                                                                                mb = a;
+                                                                            }
+                                                                        }
+                                                                        */
+
+
+                                                                        if ((W != null && W.CanBeCasted() && W.Cooldown == 0 && mp > W.ManaCost && point_distance(v.Position, pos) < W.CastRange * W.CastRange))//W
+                                                                        {
+                                                                            //Drawing.DrawText("goodddddsfsda123sdfa", new Vector2(300,300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+                                                                            /*damag = me.TotalAgility / me.TotalStrength;
+                                                                            if (damag < 0.25) { damag = 0.25; }
+                                                                            if (damag > 0.5 * W.Level) { damag = 0.5 * W.Level; }
+                                                                            damag *= me.TotalAgility;
+                                                                            damag += 100;
+                                                                            */
+                                                                            damag = 125 + 75 * (W.Level - 1);
+                                                                            ehp -= damag * mr;
+                                                                            dc += damag * mr;
+                                                                            ui += 1;
+                                                                            mp -= W.ManaCost;
+                                                                            mc += W.ManaCost;
+                                                                            se += (ev + 1) * 10000 / Math.Pow(10, n);
+                                                                        }
+
+                                                                    }
+                                                                    if (ev == 2 && dagon != null && dagon.CanBeCasted() && dagon.Cooldown == 0 && mp > dagon.ManaCost && point_distance(v.Position, pos) < dagon.CastRange * dagon.CastRange)//Dag
+                                                                    {
+                                                                        damag = (400 + (dagon.Level - 1) * 100);
+                                                                        ehp -= damag * mr;
+                                                                        dc += damag * mr;
+                                                                        ui += 1;
+                                                                        mp -= dagon.ManaCost;
+                                                                        mc += dagon.ManaCost;
+                                                                        se += (ev + 1) * 10000 / Math.Pow(10, n);
+                                                                    }
+                                                                    var ModifEther = v.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
+                                                                    if (ev == 3)
+                                                                    {
+                                                                        if ((ethereal != null && ethereal.CanBeCasted() && ethereal.Cooldown == 0 && mp > ethereal.ManaCost && point_distance(v.Position, pos) < ethereal.CastRange * ethereal.CastRange))//Eth
+                                                                        {
+                                                                            mr *= 1.4;
+                                                                            damag = me.TotalStrength;
+                                                                            if ((int)me.PrimaryAttribute == 1) { damag = me.TotalAgility; }
+                                                                            if ((int)me.PrimaryAttribute == 2) { damag = me.TotalIntelligence; }
+                                                                            damag *= 2;
+                                                                            damag += 75;
+
+                                                                            ehp -= damag * mr;
+                                                                            dc += damag * mr;
+                                                                            ui += 1;
+                                                                            mp -= ethereal.ManaCost;
+                                                                            mc += ethereal.ManaCost;
+                                                                            se += (ev + 1) * 10000 / Math.Pow(10, n);
+                                                                        }
+
+                                                                    }
+
+                                                                    if (ev == 4)
+                                                                    {
+                                                                        if ((shiva != null && shiva.CanBeCasted() && shiva.Cooldown == 0 && mp > shiva.ManaCost && v.Distance2D(pos) < shiva.CastRange - 100/*point_distance(v.Position, pos) < shiva.CastRange * shiva.CastRange*/))//shiva
+                                                                        {
+                                                                            damag = 200;
+
+                                                                            ehp -= damag * mr;
+                                                                            dc += damag * mr;
+                                                                            ui += 1;
+                                                                            mp -= shiva.ManaCost;
+                                                                            mc += shiva.ManaCost;
+                                                                            se += (ev + 1) * 10000 / Math.Pow(10, n);
+                                                                        }
+
+                                                                    }
+
                                                                 }
-                                                                */
-
-
-                                                                if ((W != null && W.CanBeCasted() && W.Cooldown == 0 && mp > W.ManaCost && point_distance(v.Position, pos) < W.CastRange * W.CastRange))//W
+                                                                else
                                                                 {
-                                                                    //Drawing.DrawText("goodddddsfsda123sdfa", new Vector2(300,300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-                                                                    /*damag = me.TotalAgility / me.TotalStrength;
-                                                                    if (damag < 0.25) { damag = 0.25; }
-                                                                    if (damag > 0.5 * W.Level) { damag = 0.5 * W.Level; }
-                                                                    damag *= me.TotalAgility;
-                                                                    damag += 100;
-                                                                    */
-                                                                    damag = 125 + 75 * (W.Level - 1);
-                                                                    ehp -= damag * mr;
-                                                                    dc += damag * mr;
-                                                                    ui += 1;
-                                                                    mp -= W.ManaCost;
-                                                                    mc += W.ManaCost;
-                                                                    se += (ev + 1) * 10000 / Math.Pow(10, n);
+                                                                    //if (ui <= mui) { if (dc < mdc) { 
+                                                                    if (ui * dc <= mui * mdc) { mdc = dc; mui = ui; bse = se; id = v; }
+                                                                    if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; }
+                                                                    //} } 
                                                                 }
-
+                                                                //else { kill = true; }
                                                             }
-                                                            if (ev == 2 && dagon != null && dagon.CanBeCasted() && dagon.Cooldown == 0 && mp > dagon.ManaCost && point_distance(v.Position, pos) < dagon.CastRange * dagon.CastRange)//Dag
-                                                            {
-                                                                damag = (400 + (dagon.Level - 1) * 100);
-                                                                ehp -= damag * mr;
-                                                                dc += damag * mr;
-                                                                ui += 1;
-                                                                mp -= dagon.ManaCost;
-                                                                mc += dagon.ManaCost;
-                                                                se += (ev + 1) * 10000 / Math.Pow(10, n);
-                                                            }
-                                                            var ModifEther = v.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
-                                                            if (ev == 3)
-                                                            {
-                                                                if ((ethereal != null && ethereal.CanBeCasted() && ethereal.Cooldown == 0 && mp > ethereal.ManaCost && point_distance(v.Position, pos) < ethereal.CastRange * ethereal.CastRange))//Eth
-                                                                {
-                                                                    mr *= 1.4;
-                                                                    damag = me.TotalStrength;
-                                                                    if ((int)me.PrimaryAttribute == 1) { damag = me.TotalAgility; }
-                                                                    if ((int)me.PrimaryAttribute == 2) { damag = me.TotalIntelligence; }
-                                                                    damag *= 2;
-                                                                    damag += 75;
 
-                                                                    ehp -= damag * mr;
-                                                                    dc += damag * mr;
-                                                                    ui += 1;
-                                                                    mp -= ethereal.ManaCost;
-                                                                    mc += ethereal.ManaCost;
-                                                                    se += (ev + 1) * 10000 / Math.Pow(10, n);
-                                                                }
-
-                                                            }
-                                                            
-                                                            if (ev == 4)
-                                                            {
-                                                                if ((shiva != null && shiva.CanBeCasted() && shiva.Cooldown == 0 && mp > shiva.ManaCost && v.Distance2D(pos) < shiva.CastRange - 100/*point_distance(v.Position, pos) < shiva.CastRange * shiva.CastRange*/))//shiva
-                                                                {
-                                                                    damag = 200;
-
-                                                                    ehp -= damag * mr;
-                                                                    dc += damag * mr;
-                                                                    ui += 1;
-                                                                    mp -= shiva.ManaCost;
-                                                                    mc += shiva.ManaCost;
-                                                                    se += (ev + 1) * 10000 / Math.Pow(10, n);
-                                                                }
-
-                                                            }
+                                                            //if (ehp <= 0) { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
 
                                                         }
-                                                        else
-                                                        {
-                                                            //if (ui <= mui) { if (dc < mdc) { 
-                                                            if (ui*dc <= mui*mdc) { mdc = dc; mui = ui; bse = se; id = v;}
-                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; }
-                                                            //} } 
-                                                        }
-                                                        //else { kill = true; }
-                                                    }
-
-                                                    //if (ehp <= 0) { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
-
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                }
 
-                                //Drawing.DrawText("Q", new Vector2(300, 450), new Vector2(100, 100), Color.White, FontFlags.AntiAlias);
+                                    //Drawing.DrawText("Q", new Vector2(300, 450), new Vector2(100, 100), Color.White, FontFlags.AntiAlias);
 
                                 }
-                                var rep=v.Health/maxdamag;
-                                if (me.Mana > rep * maxmc) { bse = maxbse; id = v; }
-                                
+                                rep = Math.Ceiling(v.Health / maxdamag);
+                                if (me.Mana > rep * maxmc+(rep-1)*R.ManaCost) { bse = maxbse; id = v; }
+
                             }
                         }
 
+                    }
                 }
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling()) { R.UseAbility(true); rep -= 1; } }
             }
             else
             {
