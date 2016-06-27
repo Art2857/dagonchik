@@ -662,7 +662,8 @@ namespace Dagon_Stealer
             }*/
 
             //me.Modifiers;
-            
+
+            Drawing.DrawText(id.Name, new Vector2(500, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(rep), new Vector2(200, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(maxbse), new Vector2(400, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
@@ -922,16 +923,15 @@ namespace Dagon_Stealer
 
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
 
-
-
+                    /* // добивание авто атакой
                     if (Utils.SleepCheck("attack") && id.Health + id.HealthRegeneration < (me.MinimumDamage + me.BonusDamage) * (1 - id.DamageResist) && me.Distance2D(id) < me.AttackRange && me.CanAttack() && !id.IsAttackImmune() && !me.IsChanneling() && Utils.SleepCheck("next"))
                     {
                         me.Attack(id);
                         Utils.Sleep(100, "next");
                     }
+                    */
 
-                    if (me.CanCast())
-                    {
+                    //if (me.CanCast()){
                         if (Utils.SleepCheck("next"))
                         {
                             var ModifEther = id.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
@@ -994,7 +994,7 @@ namespace Dagon_Stealer
                             //}
 
                         }
-                    }
+                    //}
                     //else { bse = 0; id = me; }
 
                 }
