@@ -519,12 +519,12 @@ namespace Dagon_Stealer
                         ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && creep.IsSpawned && creep.IsAlive && creep.IsVisible && ((me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist)) || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2 && creep.Health < damag * (1 - creep.DamageResist))))
                         //|| (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && ((me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist)) || (me.Team == creep.Team && creep.Health < creep.MaximumHealth*0.1 && creep.Health < damag * (1 - creep.DamageResist))))
 
-                        && (point_distance(me, creep) < (me.AttackRange + 350) * (me.AttackRange + 350)))).ToList();
+                        && (point_distance(me, creep) < (me.AttackRange + 100) * (me.AttackRange + 100)))).ToList();
 
                     if (creeps.Count > 0 && creeps.Any())
                     {
                         var a = creeps[0];
-                        float m = ((me.AttackRange + 350) * (me.AttackRange + 350));
+                        float m = ((me.AttackRange + 100) * (me.AttackRange + 100));
                         foreach (var v in creeps)
                         {
                             float d = point_distance(me, v);
@@ -625,6 +625,13 @@ namespace Dagon_Stealer
                 if (b.Modifiers.Any(o => o.Name == "modifier_teleporting")) { if (hex != null && hex.Cooldown == 0 && me.Mana > hex.ManaCost/*&& !b.IsMagicImmune()*/) { hex.UseAbility(b); break; } }
             }
 
+            }
+            foreach (var b in enemy)
+            {
+                if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard")) { Drawing.DrawText("1", new Vector2(300, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
+                if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_aura")) { Drawing.DrawText("2", new Vector2(325, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
+                if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast")) { Drawing.DrawText("3", new Vector2(350, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
+                if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_thinker")) { Drawing.DrawText("4", new Vector2(375, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
             }
 
             //me.Modifiers;
@@ -865,7 +872,7 @@ namespace Dagon_Stealer
 
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
 
-                    //Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                    Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
                     
                     if (id.Health + id.HealthRegeneration < (me.MinimumDamage + me.BonusDamage) * (1 - id.DamageResist) && me.Distance2D(id) < me.AttackRange && me.CanAttack() && !id.IsAttackImmune() && Utils.SleepCheck("next"))
@@ -873,9 +880,9 @@ namespace Dagon_Stealer
                         me.Attack(id);
                         Utils.Sleep(100, "next");
                     }
-                     
 
-                    if (Utils.SleepCheck("next"))
+
+                    if (Utils.SleepCheck("next") && me.CanCast())
                     {
                         var ModifEther = id.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
                         //if (ethereal == null || ModifEther || ethereal.Cooldown < 17 || Utils.SleepCheck("ethereal"))
@@ -889,7 +896,7 @@ namespace Dagon_Stealer
                             if (n == 3) { a = Math.Floor(bse / 10); bse -= a * 10; }
                             if (n == 4) { a = Math.Floor(bse); bse -= a; }
 
-                            if (a == 1 && Q.CanBeCasted() && me.CanCast() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
+                            if (a == 1 && Q.CanBeCasted() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
                             {
                                 //Drawing.DrawText("1111111111111111111111111111111111111111", new Vector2(300, 350), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 //Game.MousePosition
@@ -898,7 +905,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "Q");
                             }
-                            if (a == 2 && W.CanBeCasted() && me.CanCast() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
+                            if (a == 2 && W.CanBeCasted() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
                             {
                                 //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 W.UseAbility();
@@ -906,7 +913,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
                             }
-                            if (a == 3 && dagon.CanBeCasted() && me.CanCast() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null))) //&& Utils.SleepCheck("dagon")
+                            if (a == 3 && dagon.CanBeCasted() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null))) //&& Utils.SleepCheck("dagon")
                             {
                                 //Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 dagon.UseAbility(id);
@@ -914,7 +921,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(1000, "dagon");//1000
                             }
-                            if (a == 4 && ethereal.CanBeCasted() && me.CanCast() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
+                            if (a == 4 && ethereal.CanBeCasted() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
                             {
                                 //Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 ethereal.UseAbility(id);
@@ -922,10 +929,11 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 if (Utils.SleepCheck("ethereal")){Utils.Sleep(2000, "ethereal");}//3000
                             }
-                            if (a == 5 && shiva.CanBeCasted() && me.CanCast() && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
+                            if (a == 5 && shiva.CanBeCasted()  && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
                             {
                                 //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 shiva.UseAbility();
+                                Utils.Sleep(100, "next");
                                 Utils.Sleep(2500, "shiva");
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
