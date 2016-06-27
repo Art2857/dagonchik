@@ -650,7 +650,7 @@ namespace Dagon_Stealer
                     Hero[] plist = new Hero[5]/*{ enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] }*/;
                     float[] dlist = new float[5];
 
-                    for (var b = 0; b < enemy.Count; b += 1)
+                    for (var b = 0; b < Math.Min(5,enemy.Count); b += 1)
                     {
                         plist[b]=enemy[b];
                         dlist[b] = enemy[b].Distance2D(me.Position);
@@ -658,7 +658,7 @@ namespace Dagon_Stealer
 
                     for (var repeat = 0; repeat < 5; repeat += 1)
                     {
-                    for (var b = 0; b < enemy.Count-1; b += 1)
+                        for (var b = 0; b < Math.Min(5, enemy.Count) - 1; b += 1)
                     {
                         if (dlist[b]>dlist[b+1])
                         {
@@ -682,7 +682,7 @@ namespace Dagon_Stealer
                             }
                         }*/
 
-                        for (var b = 0; b < enemy.Count; b += 1)//foreach (var v in enemy)
+                    for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)//foreach (var v in enemy)
                         {
                             var v=plist[b];
                             var linkens = v.Inventory.Items.FirstOrDefault(Gay => Gay.Name == "item_sphere");
@@ -729,7 +729,7 @@ namespace Dagon_Stealer
                                                                 ui += 1;
                                                                 mp -= Q.ManaCost;
                                                                 mc += Q.ManaCost;
-                                                                se += (ev + 1) * 1000 / Math.Pow(10, n);
+                                                                se += (ev + 1) * 10000 / Math.Pow(10, n);
 
                                                                 /*if (me.CanAttack())
                                                                 {
@@ -772,7 +772,7 @@ namespace Dagon_Stealer
                                                                     ui += 1;
                                                                     mp -= W.ManaCost;
                                                                     mc += W.ManaCost;
-                                                                    se += (ev + 1) * 1000 / Math.Pow(10, n);
+                                                                    se += (ev + 1) * 10000 / Math.Pow(10, n);
                                                                 }
 
                                                             }
@@ -784,7 +784,7 @@ namespace Dagon_Stealer
                                                                 ui += 1;
                                                                 mp -= dagon.ManaCost;
                                                                 mc += dagon.ManaCost;
-                                                                se += (ev + 1) * 1000 / Math.Pow(10, n);
+                                                                se += (ev + 1) * 10000 / Math.Pow(10, n);
                                                             }
                                                             var ModifEther = v.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
                                                             if (ev == 3)
@@ -803,7 +803,7 @@ namespace Dagon_Stealer
                                                                     ui += 1;
                                                                     mp -= ethereal.ManaCost;
                                                                     mc += ethereal.ManaCost;
-                                                                    se += (ev + 1) * 1000 / Math.Pow(10, n);
+                                                                    se += (ev + 1) * 10000 / Math.Pow(10, n);
                                                                 }
 
                                                             }
@@ -819,7 +819,7 @@ namespace Dagon_Stealer
                                                                     ui += 1;
                                                                     mp -= shiva.ManaCost;
                                                                     mc += shiva.ManaCost;
-                                                                    se += (ev + 1) * 1000 / Math.Pow(10, n);
+                                                                    se += (ev + 1) * 10000 / Math.Pow(10, n);
                                                                 }
 
                                                             }
