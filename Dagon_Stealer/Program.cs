@@ -595,13 +595,15 @@ namespace Dagon_Stealer
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
 
-            if (Game.IsKeyDown(keyCode: 'R'))
+            if (Game.IsKeyDown(keyCode: 'R') && Utils.SleepCheck("R"))
             {
-                if (soulring != null && soulring.Cooldown == 0 && me.Health>550) { soulring.UseAbility(); }
-                if (E != null && E.Cooldown == 0 && me.Mana > E.ManaCost) { E.UseAbility(me.Position); }
-                if (shiva != null && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost) { shiva.UseAbility(); }
-                if (R != null && me.Mana>R.ManaCost) { R.UseAbility(); } 
+                if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) { soulring.UseAbility(true); }
+                if (E != null && E.Cooldown == 0 && me.Mana > E.ManaCost) { E.UseAbility(me.Position, true); }
+                if (shiva != null && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost) { shiva.UseAbility(true); }
+                if (R != null && me.Mana>R.ManaCost) { R.UseAbility(true); }
+                Utils.Sleep(500, "R");
             }
+            //shiva.UseAbility();
 
             if (!me.IsChanneling())
             {
