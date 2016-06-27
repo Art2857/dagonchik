@@ -594,13 +594,26 @@ namespace Dagon_Stealer
             var bkb = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_black_king_bar"));
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
+            if (!me.CanCast()) {if (manta != null && manta.Cooldown == 0 && me.Mana > manta.ManaCost) { manta.UseAbility();}
+
+            if (Game.IsKeyDown(keyCode: 'W') && Utils.SleepCheck("W") && W.Cooldown == 0)
+            {
+                if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) { soulring.UseAbility(true); }
+                if (W != null && me.Mana > W.ManaCost) { W.UseAbility(true); }
+                Utils.Sleep(500, "W");
+            }
 
             if (Game.IsKeyDown(keyCode: 'R') && Utils.SleepCheck("R"))
             {
-                if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) { soulring.UseAbility(true); }
-                if (E != null && E.Cooldown == 0 && me.Mana > E.ManaCost) { E.UseAbility(me.Position, true); }
-                if (shiva != null && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost) { shiva.UseAbility(true); }
-                if (R != null && me.Mana>R.ManaCost) { R.UseAbility(true); }
+                var mp = me.Mana;
+                if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) { soulring.UseAbility(true); mp += 150; }
+                if (mp > R.ManaCost)
+                {
+                    mp -= R.ManaCost;
+                    if (E != null && E.Cooldown == 0 && mp > E.ManaCost) { E.UseAbility(me.Position, true); mp -= E.ManaCost; }
+                    if (shiva != null && shiva.Cooldown == 0 && mp > shiva.ManaCost) { shiva.UseAbility(true); mp -= shiva.ManaCost; }
+                    if (R != null /*&& mp > R.ManaCost*/) { R.UseAbility(true); }
+                }
                 Utils.Sleep(500, "R");
             }
             //shiva.UseAbility();
@@ -626,13 +639,13 @@ namespace Dagon_Stealer
             }
 
             }
-            foreach (var b in enemy)
+            /*foreach (var b in enemy)
             {
                 if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard")) { Drawing.DrawText("1", new Vector2(300, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
                 if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_aura")) { Drawing.DrawText("2", new Vector2(325, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
                 if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast")) { Drawing.DrawText("3", new Vector2(350, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
                 if (b.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_thinker")) { Drawing.DrawText("4", new Vector2(375, 100), new Vector2(20, 30), Color.White, FontFlags.AntiAlias); }
-            }
+            }*/
 
             //me.Modifiers;
             //var kill = false;
@@ -646,7 +659,7 @@ namespace Dagon_Stealer
 
             if ((Utils.SleepCheck("ai") || bse == 0 /*|| id == me*/))//!id.IsAlive || !id.IsVisible
             {
-                if (bse == 0)//me.CanCast())
+                if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
                 {
                     Utils.Sleep(1000, "ai");
                     //bse = 0;//наилучшая последовательность действий
@@ -692,7 +705,7 @@ namespace Dagon_Stealer
                     for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)//foreach (var v in enemy)
                         {
                             var v=plist[b];
-                            if (Utils.SleepCheck("shiva") || v.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast"))
+                            if (Utils.SleepCheck("shiva") || v.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast") && me.Distance2D(v)<3000)
                             {
                             var linkens = v.Inventory.Items.FirstOrDefault(Gay => Gay.Name == "item_sphere");
                             if (!((linkens != null && linkens.Cooldown == 0) || v.Modifiers.Any(x => Ignore.Contains(x.Name))))
@@ -905,7 +918,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "Q");
                             }
-                            if (a == 2 && W.CanBeCasted() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
+                            if (a == 2 && W.CanBeCasted() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal")))//&& Utils.SleepCheck("W")
                             {
                                 //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 W.UseAbility();
@@ -913,7 +926,7 @@ namespace Dagon_Stealer
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
                             }
-                            if (a == 3 && dagon.CanBeCasted() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null))) //&& Utils.SleepCheck("dagon")
+                            if (a == 3 && dagon.CanBeCasted() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal"))) //&& Utils.SleepCheck("dagon")
                             {
                                 //Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 dagon.UseAbility(id);
@@ -926,10 +939,11 @@ namespace Dagon_Stealer
                                 //Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 ethereal.UseAbility(id);
                                 Utils.Sleep(100, "next");
-                                break;//n = 5;//return;
                                 if (Utils.SleepCheck("ethereal")){Utils.Sleep(2000, "ethereal");}//3000
+                                break;//n = 5;//return;
+                                
                             }
-                            if (a == 5 && shiva.CanBeCasted()  && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
+                            if (a == 5 && shiva.CanBeCasted() && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal")))//&& Utils.SleepCheck("W")
                             {
                                 //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 shiva.UseAbility();
