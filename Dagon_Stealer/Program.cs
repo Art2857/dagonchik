@@ -81,6 +81,8 @@ namespace Dagon_Stealer
         private static Dictionary<string, bool> enemies = new Dictionary<string, bool>();
 
         private static double bse;
+        private static double maxbse;
+        
         private static double rep;
         //private static dynamic id = ObjectMgr.LocalHero;
         private static Hero id = ObjectMgr.LocalHero;
@@ -577,6 +579,7 @@ namespace Dagon_Stealer
             //damag = me.MinimumDamage + me.BonusDamage;
 
             var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
+            if (enemy.Count == 0) { bse = 0; id = me; rep = 0; }
             var players = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team == me.Team && obj.IsAlive && !obj.IsIllusion)).ToList();
 
             damag = 0;
@@ -614,9 +617,10 @@ namespace Dagon_Stealer
             if (Game.IsKeyDown(keyCode: 'R') && Utils.SleepCheck("R"))
             {
                 var mp = me.Mana;
-                if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) { soulring.UseAbility(true); mp += 150; }
+                if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) {mp += 150; }
                 if (mp > R.ManaCost)
                 {
+                    if (soulring != null && soulring.Cooldown == 0 && me.Health > 550) { soulring.UseAbility(true); }
                     mp -= R.ManaCost;
                     if (E != null && E.Cooldown == 0 && mp > E.ManaCost) { E.UseAbility(me.Position, true); mp -= E.ManaCost; }
                     if (shiva != null && shiva.Cooldown == 0 && mp > shiva.ManaCost) { shiva.UseAbility(true); mp -= shiva.ManaCost; }
@@ -656,17 +660,7 @@ namespace Dagon_Stealer
             }*/
 
             //me.Modifiers;
-            //var kill = false;
-            double mdc = 1000000;//минимальный //0;/максимальный нанесёный урон для убийства врага
-            double mui = 100;//кол-во использованных итемов
-
-            double maxdamag=0;//максимальный нанесёный урон
-            double maxbse=0;//максимальный bse
-            double maxmc = 0;
-            //double bse = 0;//наилучшая последовательность действий
-
-            //double se = 0;
-
+            
             Drawing.DrawText(System.Convert.ToString(rep), new Vector2(200, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
@@ -677,6 +671,18 @@ namespace Dagon_Stealer
                 {
                     if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
                     {
+
+                        //var kill = false;
+                        double mdc = 1000000;//минимальный //0;/максимальный нанесёный урон для убийства врага
+                        double mui = 100;//кол-во использованных итемов
+
+                        double maxdamag = 0;//максимальный нанесёный урон
+                        maxbse = 0;//максимальный bse
+                        double maxmc = 0;//мана кост
+                        //double bse = 0;//наилучшая последовательность действий
+
+                        //double se = 0;
+
                         Utils.Sleep(150, "ai");
                         //bse = 0;//наилучшая последовательность действий
                         //id = me;//наилучшая цель
@@ -887,7 +893,7 @@ namespace Dagon_Stealer
 
                                 }
 
-                                if (bse==0)
+                                if (bse == 0 && maxdamag>0)
                                 {
                                 rep = Math.Ceiling(v.Health / maxdamag);
                                 if (me.Mana > rep * maxmc+(rep-1)*R.ManaCost) { bse = maxbse; id = v; }
@@ -898,7 +904,8 @@ namespace Dagon_Stealer
 
                     }
                 }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && rep > 0) { R.UseAbility(); Utils.Sleep(3000/Math.Pow(2,R.Level-1),"attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && rep > 0) { bse = maxbse; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
+                
             }
             else
             {
