@@ -108,7 +108,7 @@ namespace Dagon_Stealer
             //if (time > 0) { time -= 1; return; } else { time = 30; }
 
             var me = ObjectMgr.LocalHero;
-            if (!Game.IsInGame) { id = null; bse = 0; rep = 0; return; }
+            if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
             if (me == null || !me.IsAlive) { return; }
             double damag = 0;
@@ -498,9 +498,13 @@ namespace Dagon_Stealer
             ////////////
 
 
+            //if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
+            var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
+            if (enemy.Count == 0) { bse = 0; id = me; rep = 0; }
             if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
-            
-            if (Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
+
+
+            if (false)//(Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
             {
 
                 if (id != null && id != me && id.IsAlive && id.IsVisible)
@@ -578,8 +582,6 @@ namespace Dagon_Stealer
 
             //damag = me.MinimumDamage + me.BonusDamage;
 
-            var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-            if (enemy.Count == 0) { bse = 0; id = me; rep = 0; }
             var players = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team == me.Team && obj.IsAlive && !obj.IsIllusion)).ToList();
 
             damag = 0;
@@ -663,6 +665,7 @@ namespace Dagon_Stealer
             
             Drawing.DrawText(System.Convert.ToString(rep), new Vector2(200, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(System.Convert.ToString(maxbse), new Vector2(400, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
 
             if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
@@ -783,7 +786,7 @@ namespace Dagon_Stealer
                                                                         }*/
 
                                                                     }
-                                                                    if (ev == 1 && b < 2)
+                                                                    if (ev == 1 && ((b < 2 && aganim == null) || (b < 4 && aganim != null)))
                                                                     {
                                                                         //Hero[] plist = new Hero[5];
                                                                         //int[] Penis = new int[5] { 400, 500, 600, 700, 800 };
@@ -904,7 +907,7 @@ namespace Dagon_Stealer
 
                     }
                 }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && rep > 0 && Utils.SleepCheck("attack")) { bse = maxbse; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && bse == 0 && rep > 0 && Utils.SleepCheck("next")) { bse = maxbse; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
                 
             }
             else
