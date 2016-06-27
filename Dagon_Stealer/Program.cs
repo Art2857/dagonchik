@@ -690,13 +690,13 @@ namespace Dagon_Stealer
                             {
                                 for (var i1 = 0; i1 < 5; i1 += 1)
                                 {
-                                    for (var i2 = i1; i2 < 5; i2 += 1)
+                                    for (var i2 = 0; i2 < 5; i2 += 1)
                                     {
-                                        for (var i3 = i2; i3 < 5; i3 += 1)
+                                        for (var i3 = 0; i3 < 5; i3 += 1)
                                         {
-                                            for (var i4 = i3; i4 < 5; i4 += 1)
+                                            for (var i4 = 0; i4 < 5; i4 += 1)
                                             {
-                                                for (var i5 = i4; i5 < 5; i5 += 1)
+                                                for (var i5 = 0; i5 < 5; i5 += 1)
                                                 {
                                                     if ((i1 != i2 && i1 != i3 && i1 != i4 && i1 != i5) && (i2 != i3 && i2 != i4 && i2 != i5) && (i3 != i4 && i3 != i5) && (i4 != i5))
                                                 {
@@ -810,7 +810,7 @@ namespace Dagon_Stealer
                                                             
                                                             if (ev == 4)
                                                             {
-                                                                if ((shiva != null && shiva.CanBeCasted() && shiva.Cooldown == 0 && mp > shiva.ManaCost && v.Distance2D(pos) < shiva.CastRange-100/*point_distance(v.Position, pos) < shiva.CastRange * shiva.CastRange*/))//Eth
+                                                                if ((shiva != null && shiva.CanBeCasted() && shiva.Cooldown == 0 && mp > shiva.ManaCost && v.Distance2D(pos) < shiva.CastRange - 100/*point_distance(v.Position, pos) < shiva.CastRange * shiva.CastRange*/))//shiva
                                                                 {
                                                                     damag = 200;
 
