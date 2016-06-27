@@ -592,12 +592,12 @@ namespace Dagon_Stealer
             var blink = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_blink"));
             var bkb = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_black_king_bar"));
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
-            
 
 
 
-            
-            if (bottle!=null && bottle.Cooldown==0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff")/*&& Utils.SleepCheck("bottle")*/)
+
+            /*
+            if (bottle != null && bottle.Cooldown == 0 && me.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")
             {
                 foreach(var b in players)
                 {
@@ -607,7 +607,7 @@ namespace Dagon_Stealer
                         break;
                     }
                 }
-            }
+            }*/
 
             //me.Modifiers;
             //var kill = false;
@@ -828,11 +828,13 @@ namespace Dagon_Stealer
 
                     //Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
+                    /*
                     if (id.Health + id.HealthRegeneration < (me.MinimumDamage + me.BonusDamage) * (1 - id.DamageResist) && me.Distance2D(id) < me.AttackRange && me.CanAttack() && !id.IsAttackImmune() && Utils.SleepCheck("next"))
                     {
                         me.Attack(id);
                         Utils.Sleep(100, "next");
                     }
+                     */
 
                     if (Utils.SleepCheck("next"))
                     {
