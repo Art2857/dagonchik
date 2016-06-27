@@ -883,15 +883,19 @@ namespace Dagon_Stealer
                                     //Drawing.DrawText("Q", new Vector2(300, 450), new Vector2(100, 100), Color.White, FontFlags.AntiAlias);
 
                                 }
+
+                                if (bse==0)
+                                {
                                 rep = Math.Ceiling(v.Health / maxdamag);
                                 if (me.Mana > rep * maxmc+(rep-1)*R.ManaCost) { bse = maxbse; id = v; }
+                                }
 
                             }
                         }
 
                     }
                 }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling()) { R.UseAbility(true); rep -= 1; } }
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling()) { R.UseAbility(); rep -= 1; } }
             }
             else
             {
