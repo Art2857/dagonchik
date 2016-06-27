@@ -594,7 +594,14 @@ namespace Dagon_Stealer
             var bkb = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_black_king_bar"));
             var manta = me.Inventory.Items.FirstOrDefault(item => item.Name.Contains("item_manta"));
 
-            if (!me.CanCast()) { if (manta != null && manta.Cooldown == 0 && me.Mana > manta.ManaCost) { manta.UseAbility(); } }
+            if (!me.CanCast()) 
+            {
+                if (manta != null && manta.Cooldown == 0 && me.Mana > manta.ManaCost) { manta.UseAbility(); }
+                else
+                {
+                    if (bkb != null && bkb.Cooldown == 0 && me.Mana > bkb.ManaCost) { bkb.UseAbility(); }
+                }
+            }
 
             if (Game.IsKeyDown(keyCode: 'W') && Utils.SleepCheck("W") && W.Cooldown == 0)
             {
@@ -661,7 +668,7 @@ namespace Dagon_Stealer
             {
                 if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
                 {
-                    Utils.Sleep(1000, "ai");
+                    Utils.Sleep(150, "ai");
                     //bse = 0;//наилучшая последовательность действий
                     //id = me;//наилучшая цель
 
@@ -894,70 +901,72 @@ namespace Dagon_Stealer
                         Utils.Sleep(100, "next");
                     }
 
-
-                    if (Utils.SleepCheck("next") && me.CanCast())
+                    if (me.CanCast())
                     {
-                        var ModifEther = id.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
-                        //if (ethereal == null || ModifEther || ethereal.Cooldown < 17 || Utils.SleepCheck("ethereal"))
-                        //{
-                        for (var n = 0; n < 5; n += 1)//a: 0-q,1-w,2-dagon,3-ethereal,4-veil
+                        if (Utils.SleepCheck("next"))
                         {
-                            double a = 0;
-                            if (n == 0) { a = Math.Floor(bse / 10000); bse -= a * 10000; }
-                            if (n == 1) { a = Math.Floor(bse / 1000); bse -= a * 1000; }
-                            if (n == 2) { a = Math.Floor(bse / 100); bse -= a * 100; }
-                            if (n == 3) { a = Math.Floor(bse / 10); bse -= a * 10; }
-                            if (n == 4) { a = Math.Floor(bse); bse -= a; }
+                            var ModifEther = id.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
+                            //if (ethereal == null || ModifEther || ethereal.Cooldown < 17 || Utils.SleepCheck("ethereal"))
+                            //{
+                            for (var n = 0; n < 5; n += 1)//a: 0-q,1-w,2-dagon,3-ethereal,4-veil
+                            {
+                                double a = 0;
+                                if (n == 0) { a = Math.Floor(bse / 10000); bse -= a * 10000; }
+                                if (n == 1) { a = Math.Floor(bse / 1000); bse -= a * 1000; }
+                                if (n == 2) { a = Math.Floor(bse / 100); bse -= a * 100; }
+                                if (n == 3) { a = Math.Floor(bse / 10); bse -= a * 10; }
+                                if (n == 4) { a = Math.Floor(bse); bse -= a; }
 
-                            if (a == 1 && Q.CanBeCasted() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
-                            {
-                                //Drawing.DrawText("1111111111111111111111111111111111111111", new Vector2(300, 350), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-                                //Game.MousePosition
-                                Q.UseAbility(id);//id.Predict(500));
-                                Utils.Sleep(100, "next");
-                                break;//n = 5;//return;
-                                //Utils.Sleep(100, "Q");
+                                if (a == 1 && Q.CanBeCasted() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
+                                {
+                                    //Drawing.DrawText("1111111111111111111111111111111111111111", new Vector2(300, 350), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                    //Game.MousePosition
+                                    Q.UseAbility(id);//id.Predict(500));
+                                    Utils.Sleep(100, "next");
+                                    break;//n = 5;//return;
+                                    //Utils.Sleep(100, "Q");
+                                }
+                                if (a == 2 && W.CanBeCasted() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal")))//&& Utils.SleepCheck("W")
+                                {
+                                    //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                    W.UseAbility();
+                                    Utils.Sleep(100, "next");
+                                    break;//n = 5;//return;
+                                    //Utils.Sleep(100, "W");
+                                }
+                                if (a == 3 && dagon.CanBeCasted() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal"))) //&& Utils.SleepCheck("dagon")
+                                {
+                                    //Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                    dagon.UseAbility(id);
+                                    Utils.Sleep(100, "next");
+                                    break;//n = 5;//return;
+                                    //Utils.Sleep(1000, "dagon");//1000
+                                }
+                                if (a == 4 && ethereal.CanBeCasted() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
+                                {
+                                    //Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                    ethereal.UseAbility(id);
+                                    Utils.Sleep(100, "next");
+                                    if (Utils.SleepCheck("ethereal")) { Utils.Sleep(2000, "ethereal"); }//3000
+                                    break;//n = 5;//return;
+
+                                }
+                                if (a == 5 && shiva.CanBeCasted() && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal")))//&& Utils.SleepCheck("W")
+                                {
+                                    //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                    shiva.UseAbility();
+                                    Utils.Sleep(100, "next");
+                                    Utils.Sleep(2500, "shiva");
+                                    break;//n = 5;//return;
+                                    //Utils.Sleep(100, "W");
+                                }
+                                //if (ModifEther) { }
                             }
-                            if (a == 2 && W.CanBeCasted() && W.Cooldown == 0 && me.Mana > W.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal")))//&& Utils.SleepCheck("W")
-                            {
-                                //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-                                W.UseAbility();
-                                Utils.Sleep(100, "next");
-                                break;//n = 5;//return;
-                                //Utils.Sleep(100, "W");
-                            }
-                            if (a == 3 && dagon.CanBeCasted() && dagon.Cooldown == 0 && me.Mana > dagon.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal"))) //&& Utils.SleepCheck("dagon")
-                            {
-                                //Drawing.DrawText("333333333333333333333333333333333333", new Vector2(300, 450), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-                                dagon.UseAbility(id);
-                                Utils.Sleep(100, "next");
-                                break;//n = 5;//return;
-                                //Utils.Sleep(1000, "dagon");//1000
-                            }
-                            if (a == 4 && ethereal.CanBeCasted() && ethereal.Cooldown == 0 && me.Mana > ethereal.ManaCost) //&& Utils.SleepCheck("ethereal")
-                            {
-                                //Drawing.DrawText("44444444444444444444444444444444444444444444444", new Vector2(300, 500), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-                                ethereal.UseAbility(id);
-                                Utils.Sleep(100, "next");
-                                if (Utils.SleepCheck("ethereal")){Utils.Sleep(2000, "ethereal");}//3000
-                                break;//n = 5;//return;
-                                
-                            }
-                            if (a == 5 && shiva.CanBeCasted() && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | ethereal == null | Utils.SleepCheck("ethereal")))//&& Utils.SleepCheck("W")
-                            {
-                                //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-                                shiva.UseAbility();
-                                Utils.Sleep(100, "next");
-                                Utils.Sleep(2500, "shiva");
-                                break;//n = 5;//return;
-                                //Utils.Sleep(100, "W");
-                            }
-                            //if (ModifEther) { }
+                            //}
+
                         }
-                        //}
-
-
                     }
+                    else { bse = 0; id = me; }
 
                 }
 
