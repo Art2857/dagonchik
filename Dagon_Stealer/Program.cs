@@ -497,7 +497,7 @@ namespace Dagon_Stealer
 
             if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; } }
             
-            if (Utils.SleepCheck("attack") && me.CanAttack())
+            if (Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
             {
 
                 if (id != null && id != me && id.IsAlive && id.IsVisible)
@@ -688,15 +688,17 @@ namespace Dagon_Stealer
                             var linkens = v.Inventory.Items.FirstOrDefault(Gay => Gay.Name == "item_sphere");
                             if (!((linkens != null && linkens.Cooldown == 0) || v.Modifiers.Any(x => Ignore.Contains(x.Name))))
                             {
-                                for (var i1 = 0; i1 < 4; i1 += 1)
+                                for (var i1 = 0; i1 < 5; i1 += 1)
                                 {
-                                    for (var i2 = 0; i2 < 4; i2 += 1)
+                                    for (var i2 = i1; i2 < 5; i2 += 1)
                                     {
-                                        for (var i3 = 0; i3 < 4; i3 += 1)
+                                        for (var i3 = i2; i3 < 5; i3 += 1)
                                         {
-                                            for (var i4 = 0; i4 < 4; i4 += 1)
+                                            for (var i4 = i3; i4 < 5; i4 += 1)
                                             {
-                                                if ((i1 != i2 && i1 != i3 && i1 != i4) && (i2 != i3 && i2 != i4) && (i3 != i4))
+                                                for (var i5 = i4; i5 < 5; i5 += 1)
+                                                {
+                                                    if ((i1 != i2 && i1 != i3 && i1 != i4 && i1 != i5) && (i2 != i3 && i2 != i4 && i2 != i5) && (i3 != i4 && i3 != i5) && (i4 != i5))
                                                 {
 
                                                     double mc = 0;//мана кост
@@ -710,13 +712,13 @@ namespace Dagon_Stealer
                                                     double fr = 1 - v.DamageResist;//защита врага
                                                     double mr = 1 - v.MagicDamageResist;//маг.защита врага
                                                     double se = 0;
-                                                    for (var n = 0; n < 4; n += 1)//0-q,1-w,2-dagon,3-ethereal,4-veil
+                                                    for (var n = 0; n < 5; n += 1)//0-q,1-w,2-dagon,3-ethereal,4-shiva
                                                     {
                                                         if (ehp > 0)
                                                         {
 
                                                             var ev = 0;
-                                                            if (n == 0) { ev = i1; } if (n == 1) { ev = i2; } if (n == 2) { ev = i3; } if (n == 3) { ev = i4; }
+                                                            if (n == 0) { ev = i1; } if (n == 1) { ev = i2; } if (n == 2) { ev = i3; } if (n == 3) { ev = i4; } if (n == 4) { ev = i5; }
 
                                                             if (ev == 0 && Q != null && Q.CanBeCasted() && Q.Cooldown == 0 && mp > Q.ManaCost && point_distance(v.Position, pos) < Q.CastRange * Q.CastRange)//Q
                                                             {
@@ -805,6 +807,22 @@ namespace Dagon_Stealer
                                                                 }
 
                                                             }
+                                                            
+                                                            if (ev == 4)
+                                                            {
+                                                                if ((shiva != null && shiva.CanBeCasted() && shiva.Cooldown == 0 && mp > shiva.ManaCost && v.Distance2D(pos) < shiva.CastRange-100/*point_distance(v.Position, pos) < shiva.CastRange * shiva.CastRange*/))//Eth
+                                                                {
+                                                                    damag = 200;
+
+                                                                    ehp -= damag * mr;
+                                                                    dc += damag * mr;
+                                                                    ui += 1;
+                                                                    mp -= ethereal.ManaCost;
+                                                                    mc += ethereal.ManaCost;
+                                                                    se += (ev + 1) * 1000 / Math.Pow(10, n);
+                                                                }
+
+                                                            }
 
                                                         }
                                                         else
@@ -818,7 +836,7 @@ namespace Dagon_Stealer
 
                                                     //if (ehp <= 0) { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
 
-
+                                                    }
                                                 }
                                             }
                                         }
@@ -859,13 +877,14 @@ namespace Dagon_Stealer
                         var ModifEther = id.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
                         //if (ethereal == null || ModifEther || ethereal.Cooldown < 17 || Utils.SleepCheck("ethereal"))
                         //{
-                        for (var n = 0; n < 4; n += 1)//a: 0-q,1-w,2-dagon,3-ethereal,4-veil
+                        for (var n = 0; n < 5; n += 1)//a: 0-q,1-w,2-dagon,3-ethereal,4-veil
                         {
                             double a = 0;
-                            if (n == 0) { a = Math.Floor(bse / 1000); bse -= a * 1000; }
-                            if (n == 1) { a = Math.Floor(bse / 100); bse -= a * 100; }
-                            if (n == 2) { a = Math.Floor(bse / 10); bse -= a * 10; }
-                            if (n == 3) { a = Math.Floor(bse); bse -= a; }
+                            if (n == 0) { a = Math.Floor(bse / 10000); bse -= a * 10000; }
+                            if (n == 1) { a = Math.Floor(bse / 1000); bse -= a * 1000; }
+                            if (n == 2) { a = Math.Floor(bse / 100); bse -= a * 100; }
+                            if (n == 3) { a = Math.Floor(bse / 10); bse -= a * 10; }
+                            if (n == 4) { a = Math.Floor(bse); bse -= a; }
 
                             if (a == 1 && Q.CanBeCasted() && me.CanCast() && Q.Cooldown == 0 && me.Mana > Q.ManaCost) //&& Utils.SleepCheck("Q")
                             {
@@ -899,6 +918,14 @@ namespace Dagon_Stealer
                                 Utils.Sleep(100, "next");
                                 break;//n = 5;//return;
                                 if (Utils.SleepCheck("ethereal")){Utils.Sleep(2000, "ethereal");}//3000
+                            }
+                            if (a == 5 && shiva.CanBeCasted() && me.CanCast() && shiva.Cooldown == 0 && me.Mana > shiva.ManaCost && ((ethereal != null && (!Utils.SleepCheck("ethereal") | ModifEther | ethereal.Cooldown != 0)) | (ethereal == null)))//&& Utils.SleepCheck("W")
+                            {
+                                //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
+                                shiva.UseAbility();
+                                Utils.Sleep(100, "next");
+                                break;//n = 5;//return;
+                                //Utils.Sleep(100, "W");
                             }
                             //if (ModifEther) { }
                         }
