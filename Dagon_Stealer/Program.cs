@@ -637,7 +637,7 @@ namespace Dagon_Stealer
 
 
 
-            if (Utils.SleepCheck("ai") || bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
+            if ((Utils.SleepCheck("ai") || bse == 0 /*|| id == me*/))//!id.IsAlive || !id.IsVisible
             {
                 if (bse == 0)//me.CanCast())
                 {
@@ -685,6 +685,8 @@ namespace Dagon_Stealer
                     for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)//foreach (var v in enemy)
                         {
                             var v=plist[b];
+                            if (Utils.SleepCheck("shiva") || v.Modifiers.Any(o => o.Name == "modifier_item_shivas_guard_blast"))
+                            {
                             var linkens = v.Inventory.Items.FirstOrDefault(Gay => Gay.Name == "item_sphere");
                             if (!((linkens != null && linkens.Cooldown == 0) || v.Modifiers.Any(x => Ignore.Contains(x.Name))))
                             {
@@ -845,6 +847,7 @@ namespace Dagon_Stealer
 
                                 //Drawing.DrawText("Q", new Vector2(300, 450), new Vector2(100, 100), Color.White, FontFlags.AntiAlias);
 
+                                }
                             }
                         }
 
@@ -923,7 +926,7 @@ namespace Dagon_Stealer
                             {
                                 //Drawing.DrawText("2222222222222222222222222222222222222", new Vector2(300, 400), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
                                 shiva.UseAbility();
-                                Utils.Sleep(100, "next");
+                                Utils.Sleep(2500, "shiva");
                                 break;//n = 5;//return;
                                 //Utils.Sleep(100, "W");
                             }
