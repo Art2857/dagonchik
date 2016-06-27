@@ -904,7 +904,7 @@ namespace Dagon_Stealer
 
                     }
                 }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && rep > 0) { bse = maxbse; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
+                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && rep > 0 && Utils.SleepCheck("attack")) { bse = maxbse; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
                 
             }
             else
