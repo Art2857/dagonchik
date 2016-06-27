@@ -30,7 +30,7 @@ using Ensage.Items;
 //using System.Runtime.InteropServices;
 //using System.Security;
 
-using Attribute = Ensage.Attribute;
+//using Attribute = Ensage.Attribute;
 
 namespace Dagon_Stealer
 {
@@ -51,7 +51,7 @@ namespace Dagon_Stealer
         //private static readonly int[] spellq = new int[4] { 100, 175, 250, 325 };//урон первого скилла
         //private static readonly int[] spellw = new int[4] { 600, 700, 800, 900 };//дальность второго скилла
 
-        private static readonly Menu Menu = new Menu("Dagon Stealer", "dagonstealer", true);
+        //private static readonly Menu Menu = new Menu("Dagon Stealer", "dagonstealer", true);
         private static Font text;
         //private static float time;
         //private static bool hp;
@@ -188,8 +188,8 @@ namespace Dagon_Stealer
 
 
             /////////////
-            var pt = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_power_treads")));
-            pta = me.FindItem("item_power_treads") as PowerTreads;
+            //var pt = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_power_treads")));
+            //pta = me.FindItem("item_power_treads") as PowerTreads;
 
             //if (pt!=null){if (Utils.SleepCheck("pt")) { pt.UseAbility(); Utils.Sleep(750, "pt"); }}
             //if (!D.IsActivated)
@@ -673,8 +673,7 @@ namespace Dagon_Stealer
 
             if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
             {
-                if (rep <= 0)
-                {
+                //if (rep <= 0){
                     if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
                     {
 
@@ -903,15 +902,14 @@ namespace Dagon_Stealer
                                 if (bse == 0 && maxdamag>0)
                                 {
                                 rep = Math.Ceiling(v.Health / maxdamag);
-                                if (me.Mana > rep * maxmc + (rep - 1) * R.ManaCost) { bse = maxbse; id = v; maxid = v; }
+                                if (me.Mana > rep * maxmc + (rep - 1) * R.ManaCost) { bse = maxbse; id = v; /*maxid = v;*/ }
                                 }
 
                             }
                         }
 
                     }
-                }
-                else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && bse == 0 && rep > 0 && Utils.SleepCheck("next")) { bse = maxbse; id = maxid; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
+                //}else { if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && bse == 0 && rep > 0 && Utils.SleepCheck("next")) { bse = maxbse; id = maxid; R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } }//условие добавить того что бы не ультовал если может добить
                 
             }
             else
@@ -926,15 +924,15 @@ namespace Dagon_Stealer
 
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
 
-                    /* // добивание авто атакой
+                     // добивание авто атакой
                     if (Utils.SleepCheck("attack") && id.Health + id.HealthRegeneration < (me.MinimumDamage + me.BonusDamage) * (1 - id.DamageResist) && me.Distance2D(id) < me.AttackRange && me.CanAttack() && !id.IsAttackImmune() && !me.IsChanneling() && Utils.SleepCheck("next"))
                     {
                         me.Attack(id);
                         Utils.Sleep(100, "next");
                     }
-                    */
+                    
 
-                    //if (me.CanCast()){
+                    if (me.CanCast()){
                         if (Utils.SleepCheck("next"))
                         {
                             var ModifEther = id.Modifiers.Any(o => o.Name == "modifier_item_ethereal_blade_slow");
@@ -997,8 +995,8 @@ namespace Dagon_Stealer
                             //}
 
                         }
-                    //}
-                    //else { bse = 0; id = me; }
+                    }
+                    else { bse = 0; id = me; }
 
                 }
 
