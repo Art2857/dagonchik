@@ -658,6 +658,10 @@ namespace Dagon_Stealer
             //var kill = false;
             double mdc = 1000000;//минимальный //0;/максимальный нанесёный урон для убийства врага
             double mui = 100;//кол-во использованных итемов
+
+            double maxdamag=0;//максимальный нанесёный урон
+            double maxbse=0;//максимальный bse
+            double maxmc = 0;
             //double bse = 0;//наилучшая последовательность действий
 
             //double se = 0;
@@ -857,7 +861,8 @@ namespace Dagon_Stealer
                                                         else
                                                         {
                                                             //if (ui <= mui) { if (dc < mdc) { 
-                                                            if (ui*dc <= mui*mdc) { mdc = dc; mui = ui; bse = se; id = v; }
+                                                            if (ui*dc <= mui*mdc) { mdc = dc; mui = ui; bse = se; id = v;}
+                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; }
                                                             //} } 
                                                         }
                                                         //else { kill = true; }
@@ -875,6 +880,9 @@ namespace Dagon_Stealer
                                 //Drawing.DrawText("Q", new Vector2(300, 450), new Vector2(100, 100), Color.White, FontFlags.AntiAlias);
 
                                 }
+                                var rep=v.Health/maxdamag;
+                                if (me.Mana > rep * maxmc) { bse = maxbse; id = v; }
+                                
                             }
                         }
 
