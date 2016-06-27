@@ -723,7 +723,7 @@ namespace Dagon_Stealer
                                                             if (ev == 0 && Q != null && Q.CanBeCasted() && Q.Cooldown == 0 && mp > Q.ManaCost && point_distance(v.Position, pos) < Q.CastRange * Q.CastRange)//Q
                                                             {
                                                                 //pos = v.Position;
-                                                                damag = (80 * (Q.Level - 1));
+                                                                damag = 80 * Q.Level;
                                                                 ehp -= damag;
                                                                 dc += damag;
                                                                 ui += 1;
