@@ -505,7 +505,7 @@ namespace Dagon_Stealer
             //if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
 
 
-            if (false)//(Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
+            if (Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
             {
 
                 if (id != null && id != me && id.IsAlive && id.IsVisible)
@@ -676,7 +676,7 @@ namespace Dagon_Stealer
                 //if (rep <= 0){
                 if (id!=null && id != me && rep > 0)
                 {
-                    if (R != null && me.Mana > R.ManaCost && !me.IsChanneling()) { /*bse = maxbse;*/ R.UseAbility(true); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); rep -= 1; } //условие добавить того что бы не ультовал если может добить
+                    if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && Utils.SleepCheck("next")) { /*bse = maxbse;*/ R.UseAbility(true); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); rep -= 1; } //условие добавить того что бы не ультовал если может добить
                 }
 
                     if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
@@ -688,7 +688,7 @@ namespace Dagon_Stealer
 
                         double maxdamag = 0;//максимальный нанесёный урон
                         maxbse = 0;//максимальный bse
-                        maxid = me;
+                        //maxid = me;
                         double maxmc = 0;//мана кост
                         //double bse = 0;//наилучшая последовательность действий
 
@@ -889,7 +889,7 @@ namespace Dagon_Stealer
                                                                 
                                                                 //else { kill = true; }
                                                             }
-                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; }
+                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; /*maxid = v;*/ }
 
                                                             //if (ehp <= 0) { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
 
@@ -924,7 +924,7 @@ namespace Dagon_Stealer
 
                 //double a = 0;
                 //double b = bse;
-                if (id != me)//&& me.CanCast()
+                if (id != me && !me.IsChanneling())//&& me.CanCast()
                 {
 
                     //if (!id.IsAlive||!id.IsVisible) { bse = 0; return; }
