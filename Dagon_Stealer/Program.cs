@@ -669,8 +669,8 @@ namespace Dagon_Stealer
             Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(maxbse), new Vector2(400, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(id.Name, new Vector2(500, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
-            
 
+            if (id == me) { bse = 0; }
             if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
             {
                 //if (rep <= 0){
