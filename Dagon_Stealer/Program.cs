@@ -911,8 +911,8 @@ namespace Dagon_Stealer
 
                         if (bse == 0 && maxdamag > 0)
                         {
-                            rep = Math.Ceiling(maxid.Health / maxdamag);
-                            if (me.Mana > rep * maxmc + (rep - 1) * R.ManaCost) { bse = maxbse; id = maxid; /*maxid = v;*/ }
+                            rep = maxid.Health / maxdamag;//Math.Floor(maxid.Health / maxdamag);
+                            if (me.Mana > rep*(maxmc + R.ManaCost)) { bse = maxbse; id = maxid; /*maxid = v;*/ }
                         }
 
                     }
