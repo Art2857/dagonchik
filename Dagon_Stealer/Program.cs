@@ -674,9 +674,9 @@ namespace Dagon_Stealer
             if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
             {
                 //if (rep <= 0){
-                if (id!=null && id != me && rep > 0)
+                if (id!=null && id != me && rep >= 1)
                 {
-                    if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && Utils.SleepCheck("next")) { R.UseAbility(); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); rep -= 1; } //условие добавить того что бы не ультовал если может добить//bse = maxbse;
+                    if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && Utils.SleepCheck("next")) { R.UseAbility(true); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); rep -= 1; } //условие добавить того что бы не ультовал если может добить//bse = maxbse;
                 }
 
                     if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
