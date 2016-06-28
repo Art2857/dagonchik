@@ -674,10 +674,10 @@ namespace Dagon_Stealer
             if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
             {
                 //if (rep <= 0){
-                if (id!=null && id != me && rep > 0)
+                /*if (id!=null && id != me && rep > 0)
                 {
-                    if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && Utils.SleepCheck("next")) { /*bse = maxbse;*/ R.UseAbility(true); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); rep -= 1; } //условие добавить того что бы не ультовал если может добить
-                }
+                    if (R != null && me.Mana > R.ManaCost && !me.IsChanneling() && Utils.SleepCheck("next")) { R.UseAbility(true); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "attack"); Utils.Sleep(3000 / Math.Pow(2, R.Level - 1), "next"); rep -= 1; } //условие добавить того что бы не ультовал если может добить//bse = maxbse;
+                }*/
 
                     if (Utils.SleepCheck("ai") && bse == 0)//me.CanCast())
                     {
@@ -889,7 +889,7 @@ namespace Dagon_Stealer
                                                                 
                                                                 //else { kill = true; }
                                                             }
-                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; /*maxid = v;*/ }
+                                                            if (maxdamag < dc) { maxdamag = dc; maxbse = se; maxmc = mc; maxid = v; }
 
                                                             //if (ehp <= 0) { if (ui <= mui) { if (dc > mdc) { mdc = dc; mui = ui; bse = se; id = v; } } }
 
@@ -903,14 +903,16 @@ namespace Dagon_Stealer
                                     //Drawing.DrawText("Q", new Vector2(300, 450), new Vector2(100, 100), Color.White, FontFlags.AntiAlias);
 
                                 }
-
-                                if (bse == 0 && maxdamag>0)
-                                {
-                                rep = Math.Ceiling(v.Health / maxdamag);
-                                if (me.Mana > rep * maxmc + (rep - 1) * R.ManaCost) { bse = maxbse; id = v; /*maxid = v;*/ }
-                                }
-
+                                                                
                             }
+                            
+                        }
+
+
+                        if (bse == 0 && maxdamag > 0)
+                        {
+                            rep = Math.Ceiling(maxid.Health / maxdamag);
+                            if (me.Mana > rep * maxmc + (rep - 1) * R.ManaCost) { bse = maxbse; id = maxid; /*maxid = v;*/ }
                         }
 
                     }
