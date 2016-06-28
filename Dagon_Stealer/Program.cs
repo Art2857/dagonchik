@@ -505,7 +505,7 @@ namespace Dagon_Stealer
             //if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
 
 
-            if (Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
+            if (false)//(Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
             {
 
                 if (id != null && id != me && id.IsAlive && id.IsVisible)
