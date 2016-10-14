@@ -125,13 +125,17 @@ namespace Dagon_Stealer
 
             if (me.Team == Team.Radiant)
             {
-                var bx = -7000;
-                var by = -7000;
+                Vector3 posbase;
+                pos.X = -7000; 
+                pos.Y = -7000; 
+                pos.Z = me.Position.Z;
             }
             else
             {
-                var bx = 7000;
-                var by = 7000;
+                Vector3 posbase;
+                pos.X = 7000;
+                pos.Y = 7000;
+                pos.Z = me.Position.Z;
             }
 
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
@@ -141,7 +145,7 @@ namespace Dagon_Stealer
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             {
-                var dist = 1 / 3;//point_distance(me, new Vector3(bx, by, a.Position.Z));//me.Distance2D(new Vector3(bx, by, a.Position.Z));
+                var dist = point_distance(me, posbase);//me.Distance2D(new Vector3(bx, by, a.Position.Z));
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
@@ -200,7 +204,7 @@ namespace Dagon_Stealer
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
-            return Math.Sqrt((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
+            return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));//Math.Sqrt
         }
 
         /*private static void HandleEffect(Unit unit)
