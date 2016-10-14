@@ -141,12 +141,12 @@ namespace Dagon_Stealer
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
             //if (enemy_poof.Count > 2) { }
-            var mindist = 99999;
+            float mindist = 99999;
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             {
-                var dd = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);
-                var dist = 0;// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
+                //var dd = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);
+                float dist = me.Distance2D(a);// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
