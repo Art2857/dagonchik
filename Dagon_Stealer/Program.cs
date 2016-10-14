@@ -132,7 +132,7 @@ namespace Dagon_Stealer
                 float mindist = 99999;
                 foreach (var a in enemy_poof)
                 {
-                    dist = point_distance(me, a);
+                    var dist = point_distance(me, a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
                 if (mindist < 2250) { R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
