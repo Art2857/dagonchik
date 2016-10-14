@@ -140,7 +140,7 @@ namespace Dagon_Stealer
                     var dist = me.Distance2D(a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
-                if (mindist < 1200/*blink.CastRange()*/) { blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true); /*foreach (var a in meepo) { W.UseAbility(ins.Position); }*/ }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+                if (mindist < 1200/*blink.CastRange()*/) { /*blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true); foreach (var a in meepo) { W.UseAbility(ins.Position); }*/ }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
         }
