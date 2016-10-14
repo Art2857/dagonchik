@@ -111,7 +111,7 @@ namespace Dagon_Stealer
             var me = ObjectMgr.LocalHero;
             if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
-            if (me == null || !me.IsAlive || !Game.IsInGame /*|| me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo*/ || Game.IsWatchingGame) { return; }
+            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame) { return; }
             double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
             var Q = me.Spellbook.SpellQ;//setka
@@ -146,7 +146,7 @@ namespace Dagon_Stealer
         }
             
             if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            Drawing.DrawText(me.ClassID, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //Drawing.DrawText(me.ClassID, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
         }
 
