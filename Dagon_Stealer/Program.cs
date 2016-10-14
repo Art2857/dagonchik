@@ -13,6 +13,7 @@ using System.Windows.Input;
 
 using Ensage.Common.Objects;
 using Ensage.Items;
+
 //using System;
 //using System.Linq;
 //using System.Collections.Generic;
@@ -119,7 +120,6 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;//
             var R = me.Spellbook.SpellR;//rearm
 
-            //var enm = ObjectMgr.GetEntities<Hero>().Where(a => (a.IsAlive && a.IsVisible && !a.IsIllusion && point_distance(me, a)<R.CastRange)).ToList();
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
@@ -135,15 +135,9 @@ namespace Dagon_Stealer
                     dist = point_distance(me, a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
-                if (mindist<2250){ R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+                if (mindist < 2250) { R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
-
         }
-
-
-            
-
-            
 
         private static float point_distance(dynamic A, dynamic B)
         {
@@ -151,11 +145,11 @@ namespace Dagon_Stealer
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
-            return Math.Sqrt((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
+            return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
         }
+
 
     }
 }
-
 
 //new
