@@ -194,7 +194,7 @@ namespace Dagon_Stealer
 
 
 
-        private static void HandleEffect(Unit unit)
+        /*private static void HandleEffect(Unit unit)
         {
             ParticleEffect effect;
             if (unit.IsAlive)// && unit.IsVisibleToEnemies
@@ -214,7 +214,7 @@ namespace Dagon_Stealer
                 effect.Dispose();
                 Visible.Remove(unit);
             }
-        }
+        }*/
 
 
 
