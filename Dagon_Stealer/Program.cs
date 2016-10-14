@@ -125,17 +125,17 @@ namespace Dagon_Stealer
 
             if (me.Team == Team.Radiant)
             {
-                Vector3 posbase;
+                /*Vector3 posbase;
                 pos.X = -7000; 
                 pos.Y = -7000; 
-                pos.Z = me.Position.Z;
+                pos.Z = me.Position.Z;*/
             }
             else
             {
-                Vector3 posbase;
+                /*Vector3 posbase;
                 pos.X = 7000;
                 pos.Y = 7000;
-                pos.Z = me.Position.Z;
+                pos.Z = me.Position.Z;*/
             }
 
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
