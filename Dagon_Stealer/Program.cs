@@ -155,7 +155,7 @@ namespace Dagon_Stealer
                         var q = a.Spellbook.SpellQ;//setka
                         var w = a.Spellbook.SpellW;//puff
 
-                        if (W.Cooldown == 0 && Utils.SleepCheck("w" + n.ToString())) { w.UseAbility(ins.Position); Utils.Sleep(1500, "w" + n.ToString()); }
+                        if (W.Cooldown == 0 && Utils.SleepCheck("w" + n.ToString())) { w.UseAbility(ins.Position,true); Utils.Sleep(1500, "w" + n.ToString()); }
                     } 
                 }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
