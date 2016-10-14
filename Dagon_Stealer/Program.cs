@@ -111,7 +111,7 @@ namespace Dagon_Stealer
             var me = ObjectMgr.LocalHero;
             if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
-            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo  || Game.IsWatchingGame) { return; }
+            if (me == null || !me.IsAlive || !Game.IsInGame /*|| me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo*/ || Game.IsWatchingGame) { return; }
             double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
             var Q = me.Spellbook.SpellQ;//setka
@@ -120,7 +120,7 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
-            var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID=ClassID.CDOTA_Unit_Hero_Meepo && a.Team=me.Team && a.IsAlive && !a.IsIllusion)).ToList();
+            var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (/*a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo &&*/ a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
@@ -140,7 +140,7 @@ namespace Dagon_Stealer
                     var dist = me.Distance2D(a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
-                if (mindist < 1200/*blink.CastRange()*/) { /*blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true); foreach (var a in meepo) { W.UseAbility(ins.Position); }*/ }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+                if (mindist < 1200/*blink.CastRange()*/) {/*blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true); foreach (var a in meepo) { W.UseAbility(ins.Position); }*/ }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
         }
