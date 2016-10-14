@@ -13,7 +13,6 @@ using System.Windows.Input;
 
 using Ensage.Common.Objects;
 using Ensage.Items;
-
 //using System;
 //using System.Linq;
 //using System.Collections.Generic;
@@ -119,8 +118,31 @@ namespace Dagon_Stealer
             var E = me.Spellbook.SpellE;//marsh
             var D = me.Spellbook.SpellD;//
             var R = me.Spellbook.SpellR;//rearm
-            
 
+            //var enm = ObjectMgr.GetEntities<Hero>().Where(a => (a.IsAlive && a.IsVisible && !a.IsIllusion && point_distance(me, a)<R.CastRange)).ToList();
+            var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
+
+            var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+
+            enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
+
+            if (enemy_poof.Count > 0 && enemy_poof.Any())
+            {
+                var ins = enemy_poof[0];
+                float mindist = 99999;
+                foreach (var a in enemy_poof)
+                {
+                    dist = point_distance(me, a);
+                    if (dist < mindist) { mindist = dist; ins = a; }
+                }
+                if (mindist<2250){ R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+            }
+
+        }
+
+    }
+}
+            
 
             //illusion
             /*if (Utils.SleepCheck("R"))
@@ -497,12 +519,12 @@ namespace Dagon_Stealer
 }*/
 
             ////////////
-
+            /*
             var enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
             if (enemy.Count == 0) { bse = 0; id = me; rep = 0; }
-            if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
+            if (id != null && id != me) { if (!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }//(id != me && (!id.IsAlive || !id.IsVisible))
             
-            //if (id != null && id != me) { if /*(id != me && (!id.IsAlive || !id.IsVisible))*/(!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }
+            //if (id != null && id != me) { if (!id.IsAlive || !id.IsVisible) { id = me; bse = 0; rep = 0; } }//(id != me && (!id.IsAlive || !id.IsVisible))
 
 
             if (false)//(Utils.SleepCheck("attack") && me.CanAttack() && !me.IsChanneling())
@@ -512,7 +534,7 @@ namespace Dagon_Stealer
                 {
                     if (point_distance(me.Position, id.Position) < (me.AttackRange + 100) * (me.AttackRange + 100))
                     {
-                        /*if id.IsVisible */
+                        //if id.IsVisible 
                         me.Attack(id); Utils.Sleep(me.SecondsPerAttack * 1000, "attack");
                     }
                 }
@@ -577,7 +599,7 @@ namespace Dagon_Stealer
                              me.Move(a.Position);//+Math.Atan2(,)
                         }
                     }*/
-                }
+               /* }
             }
 
 
@@ -627,7 +649,7 @@ namespace Dagon_Stealer
                     mp -= R.ManaCost;
                     if (E != null && E.Cooldown == 0 && mp > E.ManaCost) { E.UseAbility(me.Position, true); mp -= E.ManaCost; }
                     if (shiva != null && shiva.Cooldown == 0 && mp > shiva.ManaCost) { shiva.UseAbility(true); mp -= shiva.ManaCost; }
-                    if (R != null /*&& mp > R.ManaCost*/) { R.UseAbility(true); }
+                    if (R != null ) { R.UseAbility(true); }//&& mp > R.ManaCost
                 }
                 Utils.Sleep(500, "R");
             }
@@ -663,7 +685,7 @@ namespace Dagon_Stealer
             }*/
 
             //me.Modifiers;
-
+/*
             Drawing.DrawText(System.Convert.ToString(enemy.Count), new Vector2(100, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(rep), new Vector2(200, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(System.Convert.ToString(bse), new Vector2(300, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
@@ -671,7 +693,7 @@ namespace Dagon_Stealer
             Drawing.DrawText(id.Name, new Vector2(500, 250), new Vector2(20, 30), Color.White, FontFlags.AntiAlias);
 
             if (id == me) { bse = 0; rep = 0; }
-            if (/*Utils.SleepCheck("ai") ||*/ bse == 0 /*|| id == me*/)//!id.IsAlive || !id.IsVisible
+            if (bse == 0)//!id.IsAlive || !id.IsVisible//Utils.SleepCheck("ai") || || id == me
             {
                 //if (rep <= 0){
                 if (id!=null && id != me && rep >= 1)
@@ -700,7 +722,7 @@ namespace Dagon_Stealer
 
                         float nb = 0;
                         float mb = 100000;
-                        Hero[] plist = new Hero[5]/*{ enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] }*/;
+                        Hero[] plist = new Hero[5]/*{ enemy[0], enemy[1], enemy[2], enemy[3], enemy[4] }*//*;
                         float[] dlist = new float[5];
 
                         for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)
@@ -734,7 +756,7 @@ namespace Dagon_Stealer
                                 mb = a;
                             }
                         }*/
-
+/*
                         for (var b = 0; b < Math.Min(5, enemy.Count); b += 1)//foreach (var v in enemy)
                         {
                             var v = plist[b];
@@ -793,7 +815,7 @@ namespace Dagon_Stealer
                                                                             dc += damag * fr;
                                                                         }*/
 
-                                                                    }
+                                                                    /*}
                                                                     if (ev == 1 && ((b < 2 && aganim == null) || (b < 4 && aganim != null)))
                                                                     {
                                                                         //Hero[] plist = new Hero[5];
@@ -811,7 +833,7 @@ namespace Dagon_Stealer
                                                                         }
                                                                         */
 
-
+/*
                                                                         if ((W != null && W.CanBeCasted() && W.Cooldown == 0 && mp > W.ManaCost && point_distance(v.Position, pos) < W.CastRange * W.CastRange))//W
                                                                         {
                                                                             //Drawing.DrawText("goodddddsfsda123sdfa", new Vector2(300,300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
@@ -821,7 +843,7 @@ namespace Dagon_Stealer
                                                                             damag *= me.TotalAgility;
                                                                             damag += 100;
                                                                             */
-                                                                            damag = 125 + 75 * (W.Level - 1);
+                                                                            /*damag = 125 + 75 * (W.Level - 1);
                                                                             ehp -= damag * mr;
                                                                             dc += damag * mr;
                                                                             ui += 1;
@@ -866,7 +888,7 @@ namespace Dagon_Stealer
                                                                     if (ev == 4)
                                                                     {
                                                                         if ((shiva != null && shiva.CanBeCasted() && shiva.Cooldown == 0 && mp > shiva.ManaCost && v.Distance2D(pos) <900 - 100/*point_distance(v.Position, pos) < shiva.CastRange * shiva.CastRange*/))//shiva
-                                                                        {
+                                                                       /* {
                                                                             damag = 200;
 
                                                                             ehp -= damag * mr;
@@ -912,7 +934,7 @@ namespace Dagon_Stealer
                         if (bse == 0 && maxdamag > 0)
                         {
                             rep = maxid.Health / maxdamag;//Math.Floor(maxid.Health / maxdamag);
-                            if (me.Mana > rep*(maxmc + R.ManaCost)) { bse = maxbse; id = maxid; /*maxid = v;*/ }
+                            if (me.Mana > rep*(maxmc + R.ManaCost)) { bse = maxbse; id = maxid; /*maxid = v;*/ /*}
                         }
 
                     }
@@ -1058,7 +1080,7 @@ namespace Dagon_Stealer
 
 
             //enemy = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-            if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed /*|| !Game.IsInGame*/) { return; }
+            //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed /*|| !Game.IsInGame*/) { return; }
             /*string texturename = "";//materials/ensage_ui/<folder_name>/<texture_name>.vmat
             
             texturename = "materials/ensage_ui/items/tango.vmat";
@@ -1081,7 +1103,8 @@ namespace Dagon_Stealer
             texturename = "items/item_tango.vtf";
             Drawing.DrawRect(new Vector2(800, 0), new Vector2(100, 100), Color.White);
             */
-            for (uint i = 0; i < 0/*10*/; i += 1)
+/*
+            for (uint i = 0; i < 0; i += 1)//10
             {
                 phero[i] = ObjectMgr.GetPlayerById(i).Hero;
                 var h = phero[i];
@@ -1090,10 +1113,10 @@ namespace Dagon_Stealer
 
                 if (h != null)
                 {
-                    if (h != null &&/*h.Team != me.Team &&*/ h.IsAlive && h.IsVisible/* && !h.IsIllusion && !h.IsMagicImmune()*/)
+                    if (h != null && h.IsAlive && h.IsVisible)//h.Team != me.Team && && !h.IsIllusion && !h.IsMagicImmune()
                     {
                         //var player = ObjectMgr.LocalPlayer;            
-                        //if (player == null || player.Team == Team.Observer/*|| me.ClassID != ClassID.CDOTA_Unit_Hero_Morphling*/) { return; }
+                        //if (player == null || player.Team == Team.Observer) { return; }//|| me.ClassID != ClassID.CDOTA_Unit_Hero_Morphling
                         //string strNumber = System.Convert.ToString(bse);
 
                         ppos[i] = new Vector2(HUDInfo.GetTopPanelPosition(h).X, HUDInfo.GetTopPanelPosition(h).Y + 45);
@@ -1104,7 +1127,7 @@ namespace Dagon_Stealer
                             if (item != null)
                             {
                                 //ptext[i] += item.Name /*+ "\n"*//*+ '\n'*/; 
-                                var text = item.Name;//item.Name;
+                                /*var text = item.Name;//item.Name;
                                 text = text.Substring(5);
                                 ptext[i * 6 + f] = text;
                                 //Drawing.DrawRect(new Vector2(100, 100), new Vector2(100, 100), (DotaTexture)Drawing.GetTexture(item.TextureName));
@@ -1117,12 +1140,12 @@ namespace Dagon_Stealer
                     for (int f = 0; f < 6; f += 1)
                     {
                         if ((ptext[i * 6 + f].Length) != 0) { Drawing.DrawText(ptext[i * 6 + f], new Vector2(/*HUDInfo.GetTopPanelPosition(h).X*/ppos[i].X, /*HUDInfo.GetTopPanelPosition(h).Y + 45 +*/ppos[i].Y + 30 * f), new Vector2(/*(float)Math.Sqrt(*/20, 20), Color.White, FontFlags.AntiAlias); }
-                    }
+                    //}
                     //Drawing.DrawText(/*ptext[i]*//*"Znach:"+strNumber"Vitos"*//*strNumber*//*+" Name: "+id.Name*/, new Vector2(HUDInfo.GetTopPanelPosition(h).X, HUDInfo.GetTopPanelPosition(h).Y + 40), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-                }
+               // }
 
-            }
-        }
+            //}
+       // }
 
         private static float point_distance(dynamic A, dynamic B)
         {
@@ -1130,11 +1153,10 @@ namespace Dagon_Stealer
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
-            return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
+            return Math.Sqrt((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
         }
 
 
-    }
-}
+
 
 //new

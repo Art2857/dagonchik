@@ -1,2 +1,3 @@
 C:\Users\Артём\AppData\Roaming\LS32EC2C6F\Repositories\872167D7\trunk\Dagon_Stealer\bin\Release\DagonStealer.exe.config
 D:\GML\DotaC\Dagon_Stealer\bin\Release\DagonStealer.exe.config
+D:\GML\DotaC\chiters\bin\Release\DagonStealer.exe.config
