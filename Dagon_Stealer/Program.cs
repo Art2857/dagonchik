@@ -137,7 +137,7 @@ namespace Dagon_Stealer
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
             //if (enemy_poof.Count > 2) { }
-            /*var mindist = 99999;
+            var mindist = 99999;
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             { 
@@ -145,7 +145,7 @@ namespace Dagon_Stealer
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
-            HandleEffect(minposmeepo);*/
+            //HandleEffect(minposmeepo);
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
