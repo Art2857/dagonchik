@@ -137,13 +137,16 @@ namespace Dagon_Stealer
                 float mindist = 99999;
                 foreach (var a in enemy_poof)
                 {
-                    var dist = me.Distance2D(a);
-                    if (dist < mindist) { mindist = dist; ins = a; }
+                    if (!a.Modifiers.Any(x => Ignore.Contains(x.Name)))
+                    {
+                        var dist = me.Distance2D(a);
+                        if (dist < mindist) { mindist = dist; ins = a; }
+                    }
                 }
                 if (mindist < 1200 && Q.Cooldown == 0 && W.Cooldown == 0/*blink.CastRange()*/)
                 {
                     Utils.Sleep(1500, "poof");
-                    blink.UseAbility(ins.Position); Q.UseAbility(ins.Position);
+                    blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true);
 
                     var n = 0;
                     foreach (var a in meepo) 
