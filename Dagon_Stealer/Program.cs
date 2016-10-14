@@ -141,7 +141,7 @@ namespace Dagon_Stealer
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             {
-                var dist = point_distance(me, new Vector3(bx, by, a.Position.Z));//me.Distance2D(new Vector3(bx, by, a.Position.Z));
+                var dist = 90;// point_distance(me, new Vector3(bx, by, a.Position.Z));//me.Distance2D(new Vector3(bx, by, a.Position.Z));
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
