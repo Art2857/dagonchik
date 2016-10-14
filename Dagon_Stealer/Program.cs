@@ -127,8 +127,9 @@ namespace Dagon_Stealer
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
 
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
-            if (blink!=null)
+            if (blink != null && Utils.SleepCheck("poof"))
             {
+                Utils.Sleep(10, "poof");
                 if (blink.Cooldown == 0)
                 {
             if (enemy_poof.Count > 0 && enemy_poof.Any())
@@ -140,7 +141,18 @@ namespace Dagon_Stealer
                     var dist = me.Distance2D(a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
-                if (mindist < 1200/*blink.CastRange()*/) {blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true); foreach (var a in meepo) { W.UseAbility(ins.Position); } }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+                if (mindist < 1200 && Q.Cooldown == 0 && W.Cooldown == 0/*blink.CastRange()*/)
+                { 
+                    blink.UseAbility(ins.Position); Q.UseAbility(ins.Position); 
+                                        
+                    foreach (var a in meepo) 
+                    {
+                        var q = a.Spellbook.SpellQ;//setka
+                        var w = a.Spellbook.SpellW;//puff
+
+                        if (W.Cooldown == 0) { w.UseAbility(ins.Position); }
+                    } 
+                }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
         }
