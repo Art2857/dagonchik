@@ -155,7 +155,7 @@ namespace Dagon_Stealer
                         var q = a.Spellbook.SpellQ;//setka
                         var w = a.Spellbook.SpellW;//puff
 
-                        if (W.Cooldown == 0 && Utils.SleepCheck("w" + n.ToString())) { w.UseAbility(ins.Position,true); Utils.Sleep(1500, "w" + n.ToString()); }
+                        if (W.Cooldown == 0 && Utils.SleepCheck("w" + n.ToString())) { w.UseAbility(ins.Position); Utils.Sleep(1500, "w" + n.ToString()); }
                     } 
                 }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
@@ -163,8 +163,8 @@ namespace Dagon_Stealer
         }
             
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            //Drawing.DrawText(W.CanBeCasted(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            //Drawing.DrawText(me.CanCast(), new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(me.Position.X, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(me.Position.Y, new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
         }
