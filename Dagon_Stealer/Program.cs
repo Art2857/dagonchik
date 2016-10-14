@@ -123,24 +123,16 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
-            if (me.Team == Team.Radiant)
+            /*if (me.Team == Team.Radiant)
             {
                 var bx = -7000.123;
                 var by = -7000.123;
-                /*Vector3 posbase;
-                pos.X = -7000; 
-                pos.Y = -7000; 
-                pos.Z = me.Position.Z;*/
             }
             else
             {
                 var bx = 7000.123;
                 var by = 7000.123;
-                /*Vector3 posbase;
-                pos.X = 7000;
-                pos.Y = 7000;
-                pos.Z = me.Position.Z;*/
-            }
+            }*/
 
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
@@ -149,6 +141,8 @@ namespace Dagon_Stealer
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             {
+                var bx = 0;
+                var by = 0;
                 //var dd = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);
                 float dist = me.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
