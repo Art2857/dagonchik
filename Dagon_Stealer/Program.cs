@@ -144,7 +144,7 @@ namespace Dagon_Stealer
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
-            HandleEffect(minposmeepo);
+            //HandleEffect(minposmeepo);
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
