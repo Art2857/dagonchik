@@ -13,7 +13,6 @@ using System.Windows.Input;
 
 using Ensage.Common.Objects;
 using Ensage.Items;
-
 //using System;
 //using System.Linq;
 //using System.Collections.Generic;
@@ -119,8 +118,28 @@ namespace Dagon_Stealer
             var E = me.Spellbook.SpellE;//marsh
             var D = me.Spellbook.SpellD;//
             var R = me.Spellbook.SpellR;//rearm
-            
 
+            //var enm = ObjectMgr.GetEntities<Hero>().Where(a => (a.IsAlive && a.IsVisible && !a.IsIllusion && point_distance(me, a)<R.CastRange)).ToList();
+            var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
+
+            var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+
+            enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
+
+            if (enemy_poof.Count > 0 && enemy_poof.Any())
+            {
+                var ins = enemy_poof[0];
+                float mindist = 99999;
+                foreach (var a in enemy_poof)
+                {
+                    dist = point_distance(me, a);
+                    if (dist < mindist) { mindist = dist; ins = a; }
+                }
+                if (mindist<2250){ R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+            }
+
+
+            
 
             //illusion
             /*if (Utils.SleepCheck("R"))
@@ -1130,7 +1149,7 @@ namespace Dagon_Stealer
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
-            return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
+            return Math.Sqrt((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
         }
 
 
