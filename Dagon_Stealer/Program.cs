@@ -144,6 +144,10 @@ namespace Dagon_Stealer
             }
         }
         }
+            
+            if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
+            Drawing.DrawText(me.ClassID, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
         }
 
 
