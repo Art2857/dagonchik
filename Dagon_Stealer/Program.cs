@@ -125,28 +125,36 @@ namespace Dagon_Stealer
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
 
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
-
+            if (blink!=null)
+            {
+                if (blink.Cooldown == 0)
+                {
             if (enemy_poof.Count > 0 && enemy_poof.Any())
             {
                 var ins = enemy_poof[0];
                 float mindist = 99999;
                 foreach (var a in enemy_poof)
                 {
-                    var dist = point_distance(me, a);
+                    var dist = me.Distance2D(a);//point_distance(me, a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
                 if (mindist < 2250) { R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
+        }}
 
-        private static float point_distance(dynamic A, dynamic B)
+
+       // me.Distance2D(v) < R.CastRange//1400
+           //    && R.Cooldown == 0
+
+        /*private static float point_distance(dynamic A, dynamic B)
         {
             if (!(A is Unit || A is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "A");
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
             return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
-        }
+        }*/
 
 
     }
