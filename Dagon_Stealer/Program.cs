@@ -145,7 +145,7 @@ namespace Dagon_Stealer
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             {
-                var dist = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
+                var dist = 9990;//me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
@@ -198,14 +198,14 @@ namespace Dagon_Stealer
 
         }
 
-        private static float point_distance(dynamic A, dynamic B)
+        /*private static float point_distance(dynamic A, dynamic B)
         {
             if (!(A is Unit || A is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "A");
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
             return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));//Math.Sqrt
-        }
+        }*/
 
         /*private static void HandleEffect(Unit unit)
         {
