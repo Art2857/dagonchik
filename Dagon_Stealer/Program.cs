@@ -138,7 +138,7 @@ namespace Dagon_Stealer
                     var dist = me.Distance2D(a);//point_distance(me, a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
-                if (mindist < 2250) { R.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+                if (mindist < 2250) { blink.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
         }}
