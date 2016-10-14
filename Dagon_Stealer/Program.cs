@@ -129,7 +129,6 @@ namespace Dagon_Stealer
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             if (blink != null && Utils.SleepCheck("poof"))
             {
-                Utils.Sleep(10, "poof");
                 if (blink.Cooldown == 0)
                 {
             if (enemy_poof.Count > 0 && enemy_poof.Any())
@@ -142,24 +141,27 @@ namespace Dagon_Stealer
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
                 if (mindist < 1200 && Q.Cooldown == 0 && W.Cooldown == 0/*blink.CastRange()*/)
-                { 
-                    blink.UseAbility(ins.Position); Q.UseAbility(ins.Position); 
-                                        
+                {
+                    Utils.Sleep(1500, "poof");
+                    blink.UseAbility(ins.Position); Q.UseAbility(ins.Position);
+
+                    var n = 0;
                     foreach (var a in meepo) 
                     {
+                        n += 1;
                         var q = a.Spellbook.SpellQ;//setka
                         var w = a.Spellbook.SpellW;//puff
 
-                        if (W.Cooldown == 0) { w.UseAbility(ins.Position); }
+                        if (W.Cooldown == 0 && Utils.SleepCheck("w" + n.ToString())) { w.UseAbility(ins.Position); Utils.Sleep(1500, "w" + n.ToString()); }
                     } 
                 }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
         }
             
-            if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            Drawing.DrawText(W.CanBeCasted(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(me.CanCast(), new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
+            //Drawing.DrawText(W.CanBeCasted(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //Drawing.DrawText(me.CanCast(), new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
         }
