@@ -125,8 +125,8 @@ namespace Dagon_Stealer
 
             if (me.Team == Team.Radiant)
             {
-                int bx = -7000;
-                int by = -7000;
+                var bx = -7000.123;
+                var by = -7000.123;
                 /*Vector3 posbase;
                 pos.X = -7000; 
                 pos.Y = -7000; 
@@ -134,8 +134,8 @@ namespace Dagon_Stealer
             }
             else
             {
-                int bx = 7000;
-                int by = 7000;
+                var bx = 7000.123;
+                var by = 7000.123;
                 /*Vector3 posbase;
                 pos.X = 7000;
                 pos.Y = 7000;
