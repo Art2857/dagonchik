@@ -144,7 +144,7 @@ namespace Dagon_Stealer
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
-            //HandleEffect(minposmeepo);
+            HandleEffect(minposmeepo);
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
@@ -202,7 +202,7 @@ namespace Dagon_Stealer
             return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));//Math.Sqrt
         }*/
 
-        /*private static void HandleEffect(Unit unit)
+        private static void HandleEffect(Unit unit)
         {
             ParticleEffect effect;
             if (unit.IsAlive)// && unit.IsVisibleToEnemies
@@ -222,7 +222,7 @@ namespace Dagon_Stealer
                 effect.Dispose();
                 Visible.Remove(unit);
             }
-        }*/
+        }
 
 
 
