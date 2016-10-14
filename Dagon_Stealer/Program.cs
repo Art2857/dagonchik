@@ -126,11 +126,11 @@ namespace Dagon_Stealer
             var bx = 7000;
             var by = 7000;
 
-            if (me.Team == Team.Radiant)
+            /*if (me.Team == Team.Radiant)
             {
-                var bx = -7000.123;
-                var by = -7000.123;
-            }
+                var bx = -7000;
+                var by = -7000;
+            }*/
             
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
