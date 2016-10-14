@@ -89,6 +89,7 @@ namespace Dagon_Stealer
         private static Hero id = ObjectMgr.LocalHero;
         //private static Vector3 prepos = ObjectMgr.LocalHero.Position;
         //private static Hero id;
+        //private static int nmb=0;//number meepo base
 
         private static void Main(string[] args)
         {
@@ -107,6 +108,17 @@ namespace Dagon_Stealer
         {
 
             //if (time > 0) { time -= 1; return; } else { time = 30; }
+            //Vector3 pos;
+            if (me.Team == Team.Radiant)
+            {
+                var bx= -7000;
+                var by= -7000;
+            }
+            else
+            {
+                var bx = 7000;
+                var by = 7000;
+            }
 
             var me = ObjectMgr.LocalHero;
             if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
@@ -121,29 +133,40 @@ namespace Dagon_Stealer
             var R = me.Spellbook.SpellR;
 
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
+
+            //if (enemy_poof.Count > 2) { }
+            var mindist = 99999;
+            var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            foreach (var a in meepo) 
+            { 
+                dist = me.Distance2D(new Vector2(bx, by));
+                if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
+            }
+
+            HandleEffect(minposmeepo);
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
 
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
-            if (blink != null && Utils.SleepCheck("poof"))
+            /*if (blink != null && Utils.SleepCheck("poof"))
             {
                 if (blink.Cooldown == 0)
                 {
             if (enemy_poof.Count > 0 && enemy_poof.Any())
             {
                 var ins = enemy_poof[0];
-                float mindist = 99999;
+                float minhp = 99999;
                 foreach (var a in enemy_poof)
                 {
                     if (!a.Modifiers.Any(x => Ignore.Contains(x.Name)))
                     {
-                        var dist = me.Distance2D(a);
-                        if (dist < mindist) { mindist = dist; ins = a; }
+                        var hp = a.Healt/(1-a.MagicDamageResist);//me.Distance2D(a);
+                        if (hp < minhp) { minhp = hp; ins = a; }
                     }
                 }
-                if (mindist < 1200 && Q.Cooldown == 0 && W.Cooldown == 0/*blink.CastRange()*/)
+                if (mindist < 1200 && Q.Cooldown == 0 && W.Cooldown == 0)//blink.CastRange()
                 {
                     Utils.Sleep(1500, "poof");
                     blink.UseAbility(ins.Position, true); Q.UseAbility(ins.Position, true);
@@ -160,13 +183,37 @@ namespace Dagon_Stealer
                 }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
-        }
+        }*/
             
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            Drawing.DrawText(me.Position[0], new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //Drawing.DrawText(me.Position[0], new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
+        }
+
+
+
+        private static void HandleEffect(Unit unit)
+        {
+            ParticleEffect effect;
+            if (unit.IsAlive)// && unit.IsVisibleToEnemies
+            {
+                if (Visible.TryGetValue(unit, out effect)) return;
+
+                unit.AddParticleEffect("particles/items2_fx/smoke_of_deceit_buff.vpcf");
+                unit.AddParticleEffect("particles/items2_fx/shadow_amulet_active_ground_proj.vpcf");
+
+                effect = unit.AddParticleEffect("particles/items_fx/aura_shivas.vpcf");
+
+                Visible.Add(unit, effect);
+            }
+            else
+            {
+                if (!Visible.TryGetValue(unit, out effect)) return;
+                effect.Dispose();
+                Visible.Remove(unit);
+            }
         }
 
 
