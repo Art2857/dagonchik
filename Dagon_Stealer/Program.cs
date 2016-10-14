@@ -111,15 +111,17 @@ namespace Dagon_Stealer
             var me = ObjectMgr.LocalHero;
             if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
-            if (me == null || !me.IsAlive) { return; }
+            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo  || Game.IsWatchingGame) { return; }
             double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
-            var Q = me.Spellbook.SpellQ;//laser
-            var W = me.Spellbook.SpellW;//rocket
-            var E = me.Spellbook.SpellE;//marsh
-            var D = me.Spellbook.SpellD;//
-            var R = me.Spellbook.SpellR;//rearm
+            var Q = me.Spellbook.SpellQ;//setka
+            var W = me.Spellbook.SpellW;//puff
+            var E = me.Spellbook.SpellE;
+            var D = me.Spellbook.SpellD;
+            var R = me.Spellbook.SpellR;
 
+            var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID=ClassID.CDOTA_Unit_Hero_Meepo && a.Team=me.Team && a.IsAlive && !a.IsIllusion)).ToList();
+            
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
@@ -135,29 +137,16 @@ namespace Dagon_Stealer
                 float mindist = 99999;
                 foreach (var a in enemy_poof)
                 {
-                    var dist = me.Distance2D(a);//point_distance(me, a);
+                    var dist = me.Distance2D(a);
                     if (dist < mindist) { mindist = dist; ins = a; }
                 }
-                if (mindist < 2250) { blink.UseAbility(ins.Position); }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
+                if (mindist < 1200/*blink.CastRange()*/) { blink.UseAbility(ins.Position); Q.UseAbility(ins.Position); foreach (var a in enemy_poof) { W.UseAbility(ins.Position); } }//me.Attack(a); Utils.Sleep(me.SecondsPerAttack * 1000, "attack"); 
             }
         }
         }}
 
 
-       // me.Distance2D(v) < R.CastRange//1400
-           //    && R.Cooldown == 0
-
-        /*private static float point_distance(dynamic A, dynamic B)
-        {
-            if (!(A is Unit || A is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "A");
-            if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
-            if (A is Unit) { A = A.Position; }
-            if (B is Unit) { B = B.Position; }
-            return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
-        }*/
-
 
     }
 }
 
-//new
