@@ -120,7 +120,7 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
-            var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (/*a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo &&*/ a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
+            var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
