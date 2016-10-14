@@ -109,16 +109,7 @@ namespace Dagon_Stealer
 
             //if (time > 0) { time -= 1; return; } else { time = 30; }
             //Vector3 pos;
-            if (me.Team == Team.Radiant)
-            {
-                var bx= -7000;
-                var by= -7000;
-            }
-            else
-            {
-                var bx = 7000;
-                var by = 7000;
-            }
+            
 
             var me = ObjectMgr.LocalHero;
             if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
@@ -132,10 +123,21 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
+            if (me.Team == Team.Radiant)
+            {
+                var bx = -7000;
+                var by = -7000;
+            }
+            else
+            {
+                var bx = 7000;
+                var by = 7000;
+            }
+
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
             //if (enemy_poof.Count > 2) { }
-            /*var mindist = 99999;
+            var mindist = 99999;
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             { 
@@ -144,7 +146,7 @@ namespace Dagon_Stealer
             }
 
             HandleEffect(minposmeepo);
-            */
+            
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
@@ -194,7 +196,7 @@ namespace Dagon_Stealer
 
 
 
-        /*private static void HandleEffect(Unit unit)
+        private static void HandleEffect(Unit unit)
         {
             ParticleEffect effect;
             if (unit.IsAlive)// && unit.IsVisibleToEnemies
@@ -214,7 +216,7 @@ namespace Dagon_Stealer
                 effect.Dispose();
                 Visible.Remove(unit);
             }
-        }*/
+        }
 
 
 
