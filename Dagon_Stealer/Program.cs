@@ -125,6 +125,8 @@ namespace Dagon_Stealer
 
             if (me.Team == Team.Radiant)
             {
+                var bx = -7000;
+                var by = -7000;
                 /*Vector3 posbase;
                 pos.X = -7000; 
                 pos.Y = -7000; 
@@ -132,6 +134,8 @@ namespace Dagon_Stealer
             }
             else
             {
+                var bx = 7000;
+                var by = 7000;
                 /*Vector3 posbase;
                 pos.X = 7000;
                 pos.Y = 7000;
@@ -146,7 +150,7 @@ namespace Dagon_Stealer
             foreach (var a in meepo) 
             {
                 //var dd = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);
-                float dist = me.Distance2D(new Vector3(100, 99, 98));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
+                float dist = me.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
 
