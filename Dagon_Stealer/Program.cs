@@ -187,7 +187,7 @@ namespace Dagon_Stealer
         }*/
             
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            //Drawing.DrawText(me.Position[0], new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(mindist.ToString()/*me.Position[0]*/, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
@@ -202,7 +202,7 @@ namespace Dagon_Stealer
             return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));//Math.Sqrt
         }*/
 
-        private static void HandleEffect(Unit unit)
+        /*private static void HandleEffect(Unit unit)
         {
             ParticleEffect effect;
             if (unit.IsAlive)// && unit.IsVisibleToEnemies
@@ -222,7 +222,7 @@ namespace Dagon_Stealer
                 effect.Dispose();
                 Visible.Remove(unit);
             }
-        }
+        }*/
 
 
 
