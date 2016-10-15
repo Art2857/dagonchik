@@ -135,29 +135,33 @@ namespace Dagon_Stealer
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
             //if (enemy_poof.Count > 2) { }
+            //Общее
             float mindist = 99999;
-            var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
-            foreach (var a in meepo) 
+            var minposmeepo = 0;//meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo) 
             {
+                Hero a=meepo[i];
                 //var dd = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);
                 float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
-                if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
+                if (dist < mindist) { mindist = dist; minposmeepo = i; } //.Position;
             }
             
             float minhp = 99999;
-            var minhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
-            foreach (var a in meepo)
+            var minhpmeepo = 0;//meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
+                Hero a=meepo[i];
                 float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
-                if (hp < minhp) { minhp = hp; minhpmeepo = a; }
+                if (hp < minhp) { minhp = hp; minhpmeepo = i; }
             }
             
             float maxhp = 0;
-            var maxhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
-            foreach (var a in meepo)
+            var maxhpmeepo = 0;//meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
+                Hero a=meepo[i];
                 float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
-                if (hp > maxhp) { maxhp = hp; maxhpmeepo = a; }
+                if (hp > maxhp) { maxhp = hp; maxhpmeepo = i; }
             }
 
             //HandleEffect(minposmeepo);
@@ -166,21 +170,55 @@ namespace Dagon_Stealer
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
             
-                     
+            //Фонтан         
             var nmf=0;//number meepo fountain
+            var nmw = 0;//number meepo war
+            float minhpf = 0;
+            var minhpfmeepo = 0;
             float maxhpf = 0;
-            Hero maxhpfmeepo = meepo[0];
-            foreach (var a in meepo)
+            var maxhpfmeepo = 0;//meepo[0];
+            
+            float minhpw = 0;
+            var minhpwmeepo = 0;
+            float maxhpw = 0;
+            var maxhpwmeepo = 0;
+
+            float mindistw = 99999;
+            var minposwmeepo = 0;
+
+            for (var i = 0; i < meepo.Count; i+=1 )//foreach (var a in meepo)
             {
+                Hero a=meepo[i];
+                float hp = a.Health;
                 if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
                 {
-                    nmf+=1;
-                    float hp = a.Health;
+                    nmf += 1;
                     if (hp > maxhpf)
                     {
-                        maxhpf=hp;
-                        maxhpfmeepo=a;
+                        maxhpf = hp;
+                        maxhpfmeepo = i;
                     }
+                    if (hp < minhpf)
+                    {
+                        minhpf = hp;
+                        minhpfmeepo = i;
+                    }
+                }
+                else
+                {
+                    nmw += 1;
+                    if (hp > maxhpw)
+                    {
+                        maxhpw = hp;
+                        maxhpwmeepo = i;
+                    }
+                    if (hp < minhpw)
+                    {
+                        minhpw = hp;
+                        minhpwmeepo = i;
+                    }
+                    float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
+                    if (dist < mindistw) { mindistw = dist; minposwmeepo = i; }
                 }
             }
 
@@ -189,18 +227,18 @@ namespace Dagon_Stealer
             
             }
 
-            if (minposmeepo.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")//minposmeepo
+            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")//minposmeepo
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0/*&& Utils.SleepCheck("w" + n.ToString())*/) {/*Utils.Sleep(1500, "w" + n.ToString());*/ minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position); } else { }//Улетаем на тп
+                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString())) { Utils.Sleep(1500, "w" + minhpmeepo.ToString()); meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[minposmeepo].Position); } else { }//Улетаем на тп
                 }   
             }
             else
             {
                 if (nmf == 0)
                 {
-                    minposmeepo.Move(new Vector3(bx, by, minposmeepo.Position.Z));
+                    meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
@@ -242,14 +280,21 @@ namespace Dagon_Stealer
         }
         }*/
             
-            //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            Drawing.DrawText(nmf.ToString()/*me.Position[0]*/, new Vector2(300, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(mindist.ToString()/*me.Position[0]*/, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(minhp.ToString()/*me.Position[0]*/, new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(maxhp.ToString()/*me.Position[0]*/, new Vector2(300, 400), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(maxhpf.ToString()/*me.Position[0]*/, new Vector2(300, 450), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText(minposmeepo.ToString(), new Vector2(300, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }//me.Position[0]
+            Drawing.DrawText("Общее", new Vector2(300, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(minhp.ToString(), new Vector2(300, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(maxhp.ToString(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(mindist.ToString(), new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
+            Drawing.DrawText("На базе", new Vector2(500, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(minhpf.ToString(), new Vector2(500, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(maxhpf.ToString(), new Vector2(500, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
+            Drawing.DrawText("В битве", new Vector2(700, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(minhpw.ToString(), new Vector2(700, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(maxhpw.ToString(), new Vector2(700, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
             //Drawing.DrawText("minposmeepo", HUDInfo.GetHPbarPositionX(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
             //Drawing.DrawText("minhpmeepo", HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
