@@ -165,9 +165,10 @@ namespace Dagon_Stealer
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
-                        
+            
+            /*         
             var nmf=0;//number meepo fountain
-            /*float maxhpf = 99999;
+            float maxhpf = 99999;
             Hero maxhpfmeepo = meepo[0];
             foreach (var a in meepo)
             {
@@ -181,7 +182,7 @@ namespace Dagon_Stealer
                         maxhpfmeepo=a;
                     }
                 }
-            }*/
+            }
 
             if (nmf>1)
             {
@@ -192,13 +193,14 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0){minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position);}else{/*Улетаем на тп*/}
+                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0){minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position);}else{}//Улетаем на тп
                 }   
             }
             else
             {
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
+            */
             
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
