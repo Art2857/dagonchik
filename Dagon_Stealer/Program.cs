@@ -233,7 +233,7 @@ namespace Dagon_Stealer
                 {
                     if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
-                        Utils.Sleep(1500, "w" + minhpmeepo.ToString());
+                        Utils.Sleep(2000, "w" + minhpmeepo.ToString());
                         
                         
                         
@@ -278,8 +278,9 @@ namespace Dagon_Stealer
             }
             else
             {
-                if (nmf == 0)
+                if (nmf == 0 && Utils.SleepCheck("m"))
                 {
+                    Utils.Sleep(100, "m");
                     meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
