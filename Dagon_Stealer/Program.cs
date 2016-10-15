@@ -152,12 +152,12 @@ namespace Dagon_Stealer
                 if (hp < minhp) { minhp = hp; minhpmeepo = a; }
             }
             
-            float maxhp = 99999;
+            float maxhp = 0;
             var maxhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo)
             {
                 float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
-                if (hp < maxhp) { maxhp = hp; maxhpmeepo = a; }
+                if (hp > maxhp) { maxhp = hp; maxhpmeepo = a; }
             }
 
             //HandleEffect(minposmeepo);
@@ -168,7 +168,7 @@ namespace Dagon_Stealer
             
                      
             var nmf=0;//number meepo fountain
-            float maxhpf = 99999;
+            float maxhpf = 0;
             Hero maxhpfmeepo = meepo[0];
             foreach (var a in meepo)
             {
@@ -176,7 +176,7 @@ namespace Dagon_Stealer
                 {
                     nmf+=1;
                     float hp = a.Health;
-                    if (hp < maxhpf)
+                    if (hp > maxhpf)
                     {
                         maxhpf=hp;
                         maxhpfmeepo=a;
