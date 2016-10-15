@@ -235,8 +235,8 @@ namespace Dagon_Stealer
                     {
                         Utils.Sleep(1500, "w" + minhpmeepo.ToString());
                         
-                        if (nmf > 1)
-                        {
+                        
+                        
                             var j = maxhpfmeepo;
 
                             //ишем кем с базы заменить на того кто в бою
@@ -265,11 +265,11 @@ namespace Dagon_Stealer
 
                             if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
                             {
-                                meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                if (nmf > 1) { meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); }
                                 meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
                             }
 
-                        }
+                        
 
                     }
                     else { }//”летаем на тп
