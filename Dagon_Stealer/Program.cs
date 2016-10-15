@@ -265,7 +265,8 @@ namespace Dagon_Stealer
 
                             if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
                             {
-                                if (nmf > 1) { meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); }
+                                if (nmf > 1) { meepo[maxhpfwmeepo].Stop(); meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); }
+                                meepo[minhpmeepo].Stop();
                                 meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
                             }
 
