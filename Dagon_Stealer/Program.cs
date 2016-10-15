@@ -143,13 +143,63 @@ namespace Dagon_Stealer
                 float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
             }
+            
+            float minhp = 99999;
+            var minhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            foreach (var a in meepo)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp < minhp) { minhp = hp; minhpmeepo = a; }
+            }
+            
+            float maxhp = 99999;
+            var maxhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            foreach (var a in meepo)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp < maxhp) { maxhp = hp; maxhpmeepo = a; }
+            }
 
             //HandleEffect(minposmeepo);
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+                        
+            var nmf=0;//number meepo fountain
+            float maxhpf = 99999;
+            Hero maxhpfmeepo = meepo[0];
+            foreach (var a in meepo)
+            {
+                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                {
+                    nmf+=1;
+                    float hp = a.Health;
+                    if (hp < maxhpf)
+                    {
+                        maxhpf=hp;
+                        maxhpfmeepo=a;
+                    }
+                }
+            }
 
+            if (nmf>1)
+            {
+            
+            }
+
+            if (minposmeepo.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")//minposmeepo
+            {
+                if (minposmeepo!= minhpmeepo)         
+                {
+                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0){minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position);}else{/*Улетаем на тп*/}
+                }   
+            }
+            else
+            {
+                //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
+            }
+            
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
             {
@@ -188,6 +238,9 @@ namespace Dagon_Stealer
             
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
             Drawing.DrawText(mindist.ToString()/*me.Position[0]*/, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
+            Drawing.DrawText("minposmeepo" HUDInfo.GetHpBarSize(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText("minhpmeepo" HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
