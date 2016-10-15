@@ -167,7 +167,7 @@ namespace Dagon_Stealer
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
                         
             var nmf=0;//number meepo fountain
-            float maxhpf = 99999;
+            /*float maxhpf = 99999;
             Hero maxhpfmeepo = meepo[0];
             foreach (var a in meepo)
             {
@@ -181,7 +181,7 @@ namespace Dagon_Stealer
                         maxhpfmeepo=a;
                     }
                 }
-            }
+            }*/
 
             if (nmf>1)
             {
