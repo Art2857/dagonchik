@@ -1,5 +1,6 @@
 
 using System;
+using System.Threading;
 using System.Linq;
 using Ensage.Common.Menu;
 using Ensage;
@@ -265,8 +266,10 @@ namespace Dagon_Stealer
 
                             if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
                             {
-                                if (nmf > 1) { meepo[maxhpfwmeepo].Stop(); meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); }
+                                if (nmf > 1) { Thread.Sleep(50); meepo[maxhpfwmeepo].Stop(); Thread.Sleep(50); meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); }
+                                Thread.Sleep(50);
                                 meepo[minhpmeepo].Stop();
+                                Thread.Sleep(50);
                                 meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
                             }
 
