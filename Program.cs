@@ -123,26 +123,41 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
+            var bx = 7000;
+            var by = 7000;
+
             if (me.Team == Team.Radiant)
             {
-                var bx = -7000;
-                var by = -7000;
+                bx = -7000;
+                by = -7000;
             }
-            else
-            {
-                var bx = 7000;
-                var by = 7000;
-            }
-
+            
             var meepo = ObjectMgr.GetEntities<Hero>().Where(a => (a.ClassID==ClassID.CDOTA_Unit_Hero_Meepo && a.Team==me.Team && a.IsAlive && !a.IsIllusion)).ToList();
 
             //if (enemy_poof.Count > 2) { }
-            var mindist = 99999;
+            float mindist = 99999;
             var minposmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
             foreach (var a in meepo) 
             {
-                var dist = point_distance(me,new Vector3(bx, by, a.Position.Z))//me.Distance2D(new Vector3(bx, by, a.Position.Z));
+                //var dd = me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);
+                float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
                 if (dist < mindist) { mindist = dist; minposmeepo = a; } //.Position;
+            }
+            
+            float minhp = 99999;
+            var minhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            foreach (var a in meepo)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp < minhp) { minhp = hp; minhpmeepo = a; }
+            }
+            
+            float maxhp = 99999;
+            var maxhpmeepo = meepo[0];//new Vector3(bx, by, me.Position.Z); 
+            foreach (var a in meepo)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp < maxhp) { maxhp = hp; maxhpmeepo = a; }
             }
 
             //HandleEffect(minposmeepo);
@@ -150,7 +165,47 @@ namespace Dagon_Stealer
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+            
+                     
+            var nmf=0;//number meepo fountain
+            float maxhpf = 99999;
+            Hero maxhpfmeepo = meepo[0];
+            foreach (var a in meepo)
+            {
+                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                {
+                    nmf+=1;
+                    float hp = a.Health;
+                    if (hp < maxhpf)
+                    {
+                        maxhpf=hp;
+                        maxhpfmeepo=a;
+                    }
+                }
+            }
 
+            if (nmf>1)
+            {
+            
+            }
+
+            if (minposmeepo.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")//minposmeepo
+            {
+                if (minposmeepo!= minhpmeepo)         
+                {
+                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0){minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position);}else{}//Улетаем на тп
+                }   
+            }
+            else
+            {
+                if (nmf == 0)
+                {
+                    minposmeepo.Move(new Vector3(bx, by, minposmeepo.Position.Z));
+                }
+                //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
+            }
+            
+            
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
             {
@@ -188,20 +243,23 @@ namespace Dagon_Stealer
         }*/
             
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
-            //Drawing.DrawText(me.Position[0], new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(mindist.ToString()/*me.Position[0]*/, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
+            //Drawing.DrawText("minposmeepo" HUDInfo.GetHpBarSize(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //Drawing.DrawText("minhpmeepo" HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
         }
 
-        private static float point_distance(dynamic A, dynamic B)
+        /*private static float point_distance(dynamic A, dynamic B)
         {
             if (!(A is Unit || A is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "A");
             if (!(B is Unit || B is Vector3)) throw new ArgumentException("Not valid parameters, Accepts Unit/Vector3 only", "B");
             if (A is Unit) { A = A.Position; }
             if (B is Unit) { B = B.Position; }
-            return Math.Sqrt((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));
-        }
+            return ((B.X - A.X) * (B.X - A.X) + (B.Y - A.Y) * (B.Y - A.Y));//Math.Sqrt
+        }*/
 
         /*private static void HandleEffect(Unit unit)
         {
