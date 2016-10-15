@@ -231,23 +231,46 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()) && meepo[maxhpfmeepo].Health > meepo[minhpmeepo].Health)
+                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         Utils.Sleep(1500, "w" + minhpmeepo.ToString());
-
-                        if (nmf>1) { meepo[maxhpfmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position, true); }
-
-                        var j = maxhpfmeepo;
-                        for (var i = 0; i < meepo.Count; i += 1)
+                        
+                        if (nmf > 1)
                         {
-                            Hero a = meepo[i];
-                            if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                            var j = maxhpfmeepo;
+
+                            //ишем кем с базы заменить на того кто в бою
+                            float maxhpfw = 0;
+                            var maxhpfwmeepo = 0;
+                            for (var i = 0; i < meepo.Count; i += 1)
                             {
-                                if (i != maxhpfmeepo) { j = i; break; }
+                                Hero a = meepo[i];
+                                float hp = a.Health;
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
+                                {
+                                    maxhpfw = hp;
+                                    maxhpfwmeepo = i;
+                                }
                             }
+
+                            //ишем того на кого выпрыгнуть из боя
+                            for (var i = 0; i < meepo.Count; i += 1)
+                            {
+                                Hero a = meepo[i];
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                                {
+                                    if (i != maxhpfmeepo) { j = i; break; }
+                                }
+                            }
+
+                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
+                            {
+                                meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
+                            }
+
                         }
 
-                        meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position, true);
                     }
                     else { }//Улетаем на тп
                 }   
