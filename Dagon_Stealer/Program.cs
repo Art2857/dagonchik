@@ -269,10 +269,10 @@ namespace Dagon_Stealer
                                 if (nmf > 1)
                                 {
                                     meepo[maxhpfwmeepo].Stop();
-                                    /*poof[maxhpfwmeepo] = minhpmeepo;*/ Utils.Sleep(100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                    poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
                                 }
                                 meepo[minhpmeepo].Stop();
-                                /*poof[minhpmeepo] = j;*/ Utils.Sleep(100, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
+                                poof[minhpmeepo] = j; Utils.Sleep(100, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
                             }
 
                         
@@ -295,6 +295,7 @@ namespace Dagon_Stealer
             {
                 if ((poof[i]>=0) && Utils.SleepCheck("pf"+i.ToString()))
                 {
+                    meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
                     poof[i] = -1;
                 }
             }
