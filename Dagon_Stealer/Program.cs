@@ -266,11 +266,11 @@ namespace Dagon_Stealer
 
                             if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
                             {
-                                if (nmf > 1) { Thread.Sleep(50); meepo[maxhpfwmeepo].Stop(); Thread.Sleep(50); meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); }
-                                Thread.Sleep(50);
+                                if (nmf > 1) { meepo[maxhpfwmeepo].Stop(); Thread.Sleep(250); meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); Thread.Sleep(250); }
                                 meepo[minhpmeepo].Stop();
-                                Thread.Sleep(50);
+                                Thread.Sleep(250);
                                 meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
+                                Thread.Sleep(250);
                             }
 
                         
