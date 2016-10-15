@@ -269,10 +269,10 @@ namespace Dagon_Stealer
                                 if (nmf > 1)
                                 {
                                     meepo[maxhpfwmeepo].Stop();
-                                    poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                    /*poof[maxhpfwmeepo] = minhpmeepo;*/ Utils.Sleep(100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
                                 }
                                 meepo[minhpmeepo].Stop();
-                                poof[minhpmeepo] = j; Utils.Sleep(100, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
+                                /*poof[minhpmeepo] = j;*/ Utils.Sleep(100, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
                             }
 
                         
@@ -291,13 +291,13 @@ namespace Dagon_Stealer
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
 
-            for (var i = 0; i < meepo.Count; i += 1)
+            /*for (var i = 0; i < meepo.Count; i += 1)
             {
                 if (poof[i] && Utils.SleepCheck("pf"+i.ToString()))
                 {
                     poof[i] = -1;
                 }
-            }
+            }*/
             
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
