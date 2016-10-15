@@ -247,7 +247,7 @@ namespace Dagon_Stealer
                             }
                         }
 
-                        //meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position, true);
+                        meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position, true);
                     }
                     else { }//Улетаем на тп
                 }   
