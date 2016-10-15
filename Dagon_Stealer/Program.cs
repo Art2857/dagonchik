@@ -245,8 +245,8 @@ namespace Dagon_Stealer
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }
             Drawing.DrawText(mindist.ToString()/*me.Position[0]*/, new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
-            Drawing.DrawText("minposmeepo", HUDInfo.GetHpBarSize(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
-            Drawing.DrawText("minhpmeepo", HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText("minposmeepo", new Vector2(HUDInfo.GetHPbarPositionX(minposmeepo), HUDInfo.GetHPbarPositionY(minposmeepo)), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
+            //Drawing.DrawText("minhpmeepo", HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //Drawing.DrawText(me.Position[1], new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
 
