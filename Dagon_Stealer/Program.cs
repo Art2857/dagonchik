@@ -231,7 +231,25 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString())) { Utils.Sleep(1500, "w" + minhpmeepo.ToString()); meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[minposmeepo].Position); } else { }//Улетаем на тп
+                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()) && meepo[maxhpfmeepo].Healt > meepo[minhpmeepo].Health)
+                    {
+                        Utils.Sleep(1500, "w" + minhpmeepo.ToString());
+
+                        if (nmf>1) { meepo[maxhpfmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position, true); }
+
+                        var j = maxhpfmeepo;
+                        for (var i = 0; i < meepo.Count; i += 1)
+                        {
+                            Hero a = meepo[i];
+                            if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                            {
+                                if (i != maxhpfmeepo) { j = i; break; }
+                            }
+                        }
+
+                        meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position, true);
+                    }
+                    else { }//Улетаем на тп
                 }   
             }
             else
