@@ -295,7 +295,7 @@ namespace Dagon_Stealer
             {
                 if (poof[i] && Utils.SleepCheck("pf"+i.ToString()))
                 {
-                    poof[i] = -1;
+                    poof[i] = 1;
                 }
             }
             
