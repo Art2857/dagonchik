@@ -231,7 +231,7 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()) && meepo[maxhpfmeepo].Healt > meepo[minhpmeepo].Health)
+                    if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()) && meepo[maxhpfmeepo].Health > meepo[minhpmeepo].Health)
                     {
                         Utils.Sleep(1500, "w" + minhpmeepo.ToString());
 
@@ -247,7 +247,7 @@ namespace Dagon_Stealer
                             }
                         }
 
-                        meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position, true);
+                        //meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position, true);
                     }
                     else { }//Улетаем на тп
                 }   
