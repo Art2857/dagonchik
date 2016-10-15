@@ -283,7 +283,7 @@ namespace Dagon_Stealer
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }//me.Position[0]
             Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(300, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText("min hp:"+minhp.ToString(), new Vector2(300, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("map hp:"+(maxhp.ToString(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText("map hp:"+maxhp.ToString(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText("min dist to b:"+mindist.ToString(), new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
             Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(500, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
