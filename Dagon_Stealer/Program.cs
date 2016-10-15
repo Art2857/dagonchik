@@ -198,6 +198,10 @@ namespace Dagon_Stealer
             }
             else
             {
+                if (nmf == 0)
+                {
+                    minposmeepo.Move(new Vector3(bx, by, minposmeepo.Position.Z));
+                }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
             
