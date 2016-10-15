@@ -193,7 +193,7 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0){minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position);}else{}//Улетаем на тп
+                    if (minhpmeepo.Spellbook.SpellW.Cooldown == 0/*&& Utils.SleepCheck("w" + n.ToString())*/) {/*Utils.Sleep(1500, "w" + n.ToString());*/ minhpmeepo.Spellbook.SpellW.UseAbility(minposmeepo.Position); } else { }//Улетаем на тп
                 }   
             }
             else
@@ -248,6 +248,7 @@ namespace Dagon_Stealer
             Drawing.DrawText(minhp.ToString()/*me.Position[0]*/, new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(maxhp.ToString()/*me.Position[0]*/, new Vector2(300, 400), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(maxhpf.ToString()/*me.Position[0]*/, new Vector2(300, 450), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText(minposmeepo.ToString(), new Vector2(300, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
             //Drawing.DrawText("minposmeepo", HUDInfo.GetHPbarPositionX(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
             //Drawing.DrawText("minhpmeepo", HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
