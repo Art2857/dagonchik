@@ -166,7 +166,7 @@ namespace Dagon_Stealer
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
             
-            /*         
+                     
             var nmf=0;//number meepo fountain
             float maxhpf = 99999;
             Hero maxhpfmeepo = meepo[0];
@@ -200,7 +200,7 @@ namespace Dagon_Stealer
             {
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
-            */
+            
             
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
