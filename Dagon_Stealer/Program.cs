@@ -223,12 +223,12 @@ namespace Dagon_Stealer
                 }
             }
 
-            if (nmf>1)
+            /*if (nmf>1)
             {
             
-            }
+            }*/
 
-            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))//&& Utils.SleepCheck("bottle")//minposmeepo
+            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z))<300)//&& Utils.SleepCheck("bottle")//minposmeepo
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
@@ -247,7 +247,7 @@ namespace Dagon_Stealer
                             {
                                 Hero a = meepo[i];
                                 float hp = a.Health;
-                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300 && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
                                 {
                                     maxhpfw = hp;
                                     maxhpfwmeepo = i;
@@ -258,7 +258,7 @@ namespace Dagon_Stealer
                             for (var i = 0; i < meepo.Count; i += 1)
                             {
                                 Hero a = meepo[i];
-                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300)
                                 {
                                     if (i != maxhpfmeepo) { j = i; break; }
                                 }
