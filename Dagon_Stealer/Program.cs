@@ -45,8 +45,8 @@ namespace Dagon_Stealer
 
         private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
         private static Font _text;
-        private static readonly int[] Penis = new int[5] { 400, 500, 600, 700, 800 };
-        private static readonly int[] ShitDickFuck = new int[5] { 600, 650, 700, 750, 800 };
+        private static readonly int[] poof = new int[5] { -1,-1,-1,-1,-1 };
+        //private static readonly int[] ShitDickFuck = new int[5] { 600, 650, 700, 750, 800 };
         //private static Key KeyC = Key.D;
 
         //private static readonly int[] spellq = new int[4] { 100, 175, 250, 325 };//урон первого скилла
@@ -266,11 +266,13 @@ namespace Dagon_Stealer
 
                             if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
                             {
-                                if (nmf > 1) { meepo[maxhpfwmeepo].Stop(); Thread.Sleep(250); meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position); Thread.Sleep(250); }
+                                if (nmf > 1)
+                                {
+                                    meepo[maxhpfwmeepo].Stop();
+                                    poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                }
                                 meepo[minhpmeepo].Stop();
-                                Thread.Sleep(250);
-                                meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
-                                Thread.Sleep(250);
+                                poof[minhpmeepo] = j; Utils.Sleep(100, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
                             }
 
                         
@@ -288,7 +290,14 @@ namespace Dagon_Stealer
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
-            
+
+            for (var i = 0; i < meepo.Count; i += 1)
+            {
+                if (poof[i] && Utils.SleepCheck("pf"+i.ToString()))
+                {
+                    poof[i] = -1;
+                }
+            }
             
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
