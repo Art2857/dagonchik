@@ -45,7 +45,7 @@ namespace Dagon_Stealer
 
         private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
         private static Font _text;
-        private static int[] poof = new int[5] { -1,-1,-1,-1,-1 };
+        private static readonly int[] poof = new int[5] { -1,-1,-1,-1,-1 };
         //private static readonly int[] ShitDickFuck = new int[5] { 600, 650, 700, 750, 800 };
         //private static Key KeyC = Key.D;
 
@@ -293,7 +293,7 @@ namespace Dagon_Stealer
 
             for (var i = 0; i < meepo.Count; i += 1)
             {
-                if (poof[i] && Utils.SleepCheck("pf"+i.ToString()))
+                if ((poof[i]>=0) && Utils.SleepCheck("pf"+i.ToString()))
                 {
                     poof[i] = -1;
                 }
