@@ -337,8 +337,8 @@ namespace Dagon_Stealer
                             if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
                             {
                                 var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
-                                var dir = Math.Atan2(-pos.Y.ToDouble(), pos.X.ToDouble());
-                                //meepo[i].Spellbook.SpellQ.UseAbility();
+                                //var dir = Math.Atan2(-pos.Y, pos.X);
+                                meepo[i].Spellbook.SpellQ.UseAbility(pos);
                                 Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857*1000, "q");
                             }
                         }
@@ -487,7 +487,7 @@ namespace Dagon_Stealer
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                 {
 
-                    if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
+                    if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } //else { meepo[i].Stop(); }
 
                     poof[i] = -2;
                 }
