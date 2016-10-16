@@ -293,7 +293,7 @@ namespace Dagon_Stealer
 
             
             Hero maxhpepmeepo = null;//enemy
-            double mindistmtoe = 1000000;//priority
+            double mindistmtoe = 10000000;//priority
             var minposmtoe = -1;//meepo
 
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
@@ -371,7 +371,7 @@ namespace Dagon_Stealer
                             {
                                 if (a.Spellbook.SpellQ.Level > 0)
                                 {
-                                    if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && a.Distance2D(maxhpepmeepo.Position) < 500 + 250 * (a.Spellbook.SpellQ.Level - 1) && a.Spellbook.SpellQ.Cooldown == 0)
+                                    if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_earthbind")) && a.Distance2D(maxhpepmeepo.Position) < 500 + 250 * (a.Spellbook.SpellQ.Level - 1) && a.Spellbook.SpellQ.Cooldown == 0)
                                     {
                                         var pos = maxhpepmeepo.Predict(300 + a.Distance2D(maxhpepmeepo.Position) / 857 * 1000);
                                         //var dir = Math.Atan2(meepo[i].Position.Y - pos.Y, pos.X - meepo[i].Position.X);
@@ -396,7 +396,7 @@ namespace Dagon_Stealer
                 
                     //if (!(minposmtoe > -1 && maxhpepmeepo != null))
                     //{
-                var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (me.Team != creep.Team || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))
+                var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege || creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan) && (me.Team != creep.Team || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))
                 
                     for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
                     {
