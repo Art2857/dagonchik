@@ -121,7 +121,7 @@ namespace Dagon_Stealer
             var font = FontFlags.AntiAlias;*/
             Drawing.DrawText("1", new Vector2(500, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
-            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame || !Utils.SleepCheck("tg")) { Utils.Sleep(100, "tg"); return; }
+            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame/*|| !Utils.SleepCheck("tg")*/) { /*Utils.Sleep(100, "tg");*/ return; }
 
             Drawing.DrawText("2", new Vector2(550, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //double damag = 0;
