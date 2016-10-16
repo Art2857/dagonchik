@@ -204,7 +204,7 @@ namespace Dagon_Stealer
 
             //float mindistw = 99999;
             //var minposwmeepo = 0;
-
+            /*ssss
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
                 Hero a = meepo[i];
@@ -243,6 +243,7 @@ namespace Dagon_Stealer
                 }
 
             }
+            */
 
             //ai kills
 
@@ -271,6 +272,8 @@ namespace Dagon_Stealer
                 if (hp < minhpep) { minhpep = hp; maxhpepmeepo = a; }
             }*/
 
+
+            /* ssss
             Hero maxhpepmeepo = null;//enemy
             double mindistmtoe = 1000000;//priority
             var minposmtoe = -1;//meepo
@@ -288,7 +291,7 @@ namespace Dagon_Stealer
 
 
 
-            /*
+            
             if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
@@ -423,7 +426,7 @@ namespace Dagon_Stealer
             {
             
             }*/
-            /*
+            /*ssss
             if (war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
             {
                 if (minposmeepo != minhpmeepo)
