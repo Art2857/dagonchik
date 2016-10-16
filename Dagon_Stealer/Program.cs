@@ -184,7 +184,7 @@ namespace Dagon_Stealer
             }
 
             
-            var mindistmtoe = 99999;
+            float mindistmtoe = 99999;
             var minposmtoe = 0;
             if (maxhpepmeepo!=null)
             { 
@@ -192,7 +192,7 @@ namespace Dagon_Stealer
                 {
                     Hero a = meepo[i];
 
-                    var dist = a.Distance2D(maxhpepmeepo.Position);
+                    float dist = a.Distance2D(maxhpepmeepo.Position);
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
                 }
             }
