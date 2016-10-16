@@ -291,6 +291,8 @@ namespace Dagon_Stealer
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
+                    if (Utils.SleepCheck("event" + i.ToString()))
+                    {
                     if (war[i] == 1)
                     {
                         if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null
@@ -328,6 +330,7 @@ namespace Dagon_Stealer
                             else
                             {
                                 meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
+                                Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "event" + i.ToString());
                             }
 
 
@@ -341,6 +344,7 @@ namespace Dagon_Stealer
                                         //var dir = Math.Atan2(-pos.Y, pos.X);
                                         meepo[i].Spellbook.SpellQ.UseAbility(pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
+                                        Utils.Sleep(300, "event" + i.ToString());
                                     }
                                 }
                             }
@@ -349,6 +353,7 @@ namespace Dagon_Stealer
                         }
                     }
                 }
+            }
             }
             else
             {
@@ -485,38 +490,42 @@ namespace Dagon_Stealer
 
             for (var i = 0; i < meepo.Count; i += 1)
             {
-                if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()))
+                if (Utils.SleepCheck("event" + i.ToString()))
                 {
-                    meepo[minhpmeepo].Stop();
-                    if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted())
+                    if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()))
                     {
-                        meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
-                        Utils.Sleep(2500, "war" + i.ToString());
-                        poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
+                        meepo[minhpmeepo].Stop();
+                        if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted())
+                        {
+                            meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
+                            Utils.Sleep(1700/*2500*/, "war" + i.ToString());
+                            poof[i] = -1; Utils.Sleep(1700/*2500*/, "stp" + i.ToString());
+                            Utils.Sleep(1750, "event" + i.ToString());
+                        }
+                        /*else
+                        {
+                            var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
+                            if (mtp == null)
+                            {
+                                mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+                                poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
+                            }
+                            if (mtp != null)
+                            {
+                                mtp.UseAbility(meepo[poof[i]].Position);
+                                Utils.Sleep(2500, "war" + i.ToString());
+                                poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
+                            }
+                        }*/
+
                     }
-                    /*else
+                    if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                     {
-                        var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-                        if (mtp == null)
-                        {
-                            mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
-                            poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
-                        }
-                        if (mtp != null)
-                        {
-                            mtp.UseAbility(meepo[poof[i]].Position);
-                            Utils.Sleep(2500, "war" + i.ToString());
-                            poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
-                        }
-                    }*/
 
-                }
-                if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
-                {
+                        if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
 
-                    if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
-
-                    poof[i] = -2;
+                        poof[i] = -2;
+                    }
                 }
             }
 
