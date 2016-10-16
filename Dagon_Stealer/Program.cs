@@ -356,7 +356,7 @@ namespace Dagon_Stealer
                     //if (!(minposmtoe > -1 && maxhpepmeepo != null))
                     //{
                 var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (me.Team != creep.Team || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))
-
+                /*
                     for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
                     {
                         if (Utils.SleepCheck("at"+i.ToString()))
@@ -373,7 +373,7 @@ namespace Dagon_Stealer
                         }
 
                     //}
-                    }
+                    }*/
             }
             
             /*
