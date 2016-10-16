@@ -309,7 +309,7 @@ namespace Dagon_Stealer
 
             for (var i = 0; i < meepo.Count; i += 1)
             {
-                /*if ((poof[i]>=0) && Utils.SleepCheck("pf"+i.ToString()))
+                if ((poof[i]>=0) && Utils.SleepCheck("pf"+i.ToString()))
                 {
                     meepo[minhpmeepo].Stop();
                     if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted()) 
@@ -329,7 +329,7 @@ namespace Dagon_Stealer
                         }
                     }
                     poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
-                }*/
+                }
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                 {
                     meepo[i].Stop();
