@@ -38,12 +38,12 @@ namespace Dagon_Stealer
     class Program
     {
 
-        //private static readonly Hero[] phero = new Hero[10];
+        private static readonly Hero[] phero = new Hero[10];
         //private static string[] ptext = new string[60];//{ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
         //private static Vector2[] ppos = new Vector2[10];
 
 
-        //private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
+        private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
         //private static Font _text;
         private static readonly int[] poof = new int[5] { -1, -1, -1, -1, -1 };
         private static readonly int[] war = new int[5] { 0, 0, 0, 0, 0 };
@@ -54,7 +54,7 @@ namespace Dagon_Stealer
         //private static readonly int[] spellw = new int[4] { 600, 700, 800, 900 };//дальность второго скилла
 
         //private static readonly Menu Menu = new Menu("Dagon Stealer", "dagonstealer", true);
-        //private static Font text;
+        private static Font text;
         //private static float time;
         //private static bool hp;
         //private static PowerTreads pta;
@@ -116,8 +116,10 @@ namespace Dagon_Stealer
             var me = ObjectMgr.LocalHero;
             //if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
-
-
+            /*var size = new Vector2(20, 20);
+            var colour = Color.White;
+            var font = FontFlags.AntiAlias;*/
+            Drawing.DrawText("Странно: " + meepo.Count.ToString(), new Vector2(500, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
             if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame || !Utils.SleepCheck("tg")) { Utils.Sleep(100, "tg"); return; }
             //double damag = 0;
