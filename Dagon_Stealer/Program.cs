@@ -322,7 +322,7 @@ namespace Dagon_Stealer
                                 {
                                     if (me.Health == me.MaximumHealth && nmf > 1 && Utils.SleepCheck("w" + i.ToString()))
                                     {
-                                        poof[0] = minposmtoe; Utils.Sleep(50, "pf" + i.ToString());
+                                        poof[0] = minposmtoe; Utils.Sleep(150, "pf" + i.ToString());
                                         Utils.Sleep(4500, "w" + i.ToString());
                                     }
                                 }
@@ -338,7 +338,7 @@ namespace Dagon_Stealer
                             else
                             {
                                 meepo[i].Attack(maxhpepmeepo);//minposmtoe
-                                Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "at" + i.ToString());
+                                Utils.Sleep(250/*meepo[i].SecondsPerAttack * 1000*/, "at" + i.ToString());
                             }
 
 
@@ -511,7 +511,7 @@ namespace Dagon_Stealer
                             meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
                             Utils.Sleep(2000, "war" + i.ToString());//2500
                             poof[i] = -1; Utils.Sleep(2000, "stp" + i.ToString());//2500
-                            //Utils.Sleep(2000, "event" + i.ToString());
+                            Utils.Sleep(2000, "event" + i.ToString());
                         }
                         //else
                         //{
