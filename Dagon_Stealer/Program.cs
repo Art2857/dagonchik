@@ -592,10 +592,13 @@ namespace Dagon_Stealer
                     }
                     if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                     {
+                        if (meepo[i].Health > meepo[i].MaximumHealth * 0.5)
+                        {
 
-                        if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
-
+                            if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
+                        }
                         poof[i] = -2;
+
                     }
                 //}
             }
