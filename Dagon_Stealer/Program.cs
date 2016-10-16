@@ -289,7 +289,7 @@ namespace Dagon_Stealer
 
 
 
-            if (minposmtoe > -1 && maxhpepmeepo != null)
+            /*if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
@@ -297,7 +297,7 @@ namespace Dagon_Stealer
                     //{
                     if (war[i] == 1)
                     {
-                        if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null
+                        if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
                         {
 
                             //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
@@ -305,10 +305,10 @@ namespace Dagon_Stealer
                             //if //tp
                             //}          
 
-                            if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 200)
+                            if (meepo[i].Distance2D(maxhpepmeepo.Position) > 200)//minposmtoe
                             {
-                                var mblink = meepo[i/*minposmtoe*/].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
-                                if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)
+                                var mblink = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
+                                if (meepo[i].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)//minposmtoe
                                 {
                                     mblink.UseAbility(maxhpepmeepo.Position);
                                 }
@@ -320,18 +320,18 @@ namespace Dagon_Stealer
                                         Utils.Sleep(4500, "w" + i.ToString());
                                     }
                                 }
-                                //if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 1200)
+                                //if (meepo[i].Distance2D(maxhpepmeepo.Position) > 1200)//minposmtoe
                                 //{
-                                //    meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(500));
+                                //    meepo[i].Move(maxhpepmeepo.Predict(500));//minposmtoe
                                 //}
                                 //else
                                 //{
-                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Position);
+                                meepo[i].Move(maxhpepmeepo.Position);//minposmtoe
                                 //}
                             }
                             else
                             {
-                                meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
+                                meepo[i].Attack(maxhpepmeepo);//minposmtoe
                                 Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "at" + i.ToString());
                             }
 
@@ -342,17 +342,17 @@ namespace Dagon_Stealer
                                 {
                                     if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
                                     {
-                                        /*var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
+                                        var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
                                         var dir = Math.Atan2(meepo[i].Position.Y-pos.Y, pos.X-meepo[i].Position.X);
                                         meepo[i].Spellbook.SpellQ.UseAbility(new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
-                                        */
+                                        
                                         //Utils.Sleep(300, "event" + i.ToString());
                                     }
                                 }
                             }
 
-                            Utils.Sleep(tick, "at" + i/*minposmtoe*/.ToString());
+                            Utils.Sleep(tick, "at" + i.ToString());//minposmtoe
                         }
                     }
                 //}
@@ -382,8 +382,9 @@ namespace Dagon_Stealer
 
                     //}
                     }
-            }
-            
+            }*/
+           
+          
             /*
             for (var i = 0; i < meepo.Count; i += 1)
             {
