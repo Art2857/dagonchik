@@ -238,7 +238,7 @@ namespace Dagon_Stealer
                         minhpw = hp;
                         minhpwmeepo = i;
                     }
-                    //float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a/*new Vector3(bx, by, a.Position.Z)*/);// point_distance(me, me);//
+                    //float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a);// point_distance(me, me);////new Vector3(bx, by, a.Position.Z)
                     //if (dist < mindistw) { mindistw = dist; minposwmeepo = i; }
                 }
 
