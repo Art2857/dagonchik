@@ -290,7 +290,7 @@ namespace Dagon_Stealer
             {
                 if (war[i] == 1)
                 {
-                    if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()))//minposmtoe > -1 && maxhpepmeepo!=null
+                    if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()) && nmf>0)//minposmtoe > -1 && maxhpepmeepo!=null
                     {
 
                         //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
