@@ -338,6 +338,7 @@ namespace Dagon_Stealer
                         if (mtp==null)
                         {
                             mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+                            poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
                         }
                         if (mtp != null)
                         {
@@ -350,11 +351,21 @@ namespace Dagon_Stealer
                 }
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                 {
-                    meepo[i].Stop();
+
+                    if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
+
                     poof[i] = -2;
                 }
             }
-            
+
+            /*var mousePosition = Game.MousePosition;
+            //me.Move(mousePosition);
+
+            //HeroPickState.
+
+            var closestToMouse = me.ClosestToMouseTarget(128);
+            if (closestToMouse != null){var target = me.ClosestToMouseTarget(range);}*/
+
             //enemy_poof.Modifiers.Any(x => Ignore.Contains(x.Name));
             /*if (blink != null && Utils.SleepCheck("poof"))
             {
