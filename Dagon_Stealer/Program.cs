@@ -177,8 +177,8 @@ namespace Dagon_Stealer
             var orchid = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_orchid")));
             var bloodthorn = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_bloodthorn")));
             var travel = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-            var travel1 = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots_1")));
-            var travel2 = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots_2")));
+            //var travel1 = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots_1")));
+            //var travel2 = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots_2")));
             var tp = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
             
             //Фонтан         
@@ -201,7 +201,7 @@ namespace Dagon_Stealer
             {
                 Hero a=meepo[i];
                 float hp = a.Health;
-                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 300)
+                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 300 && Utils.SleepCheck("war"+i.ToString()))
                 {
                     nmf += 1;
                     if (hp > maxhpf)
@@ -239,7 +239,7 @@ namespace Dagon_Stealer
             
             }*/
 
-            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z))<300)//&& Utils.SleepCheck("bottle")//minposmeepo
+            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()) && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 300)//&& Utils.SleepCheck("bottle")//minposmeepo
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
@@ -258,7 +258,7 @@ namespace Dagon_Stealer
                             {
                                 Hero a = meepo[i];
                                 float hp = a.Health;
-                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300 && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300 && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
                                 {
                                     maxhpfw = hp;
                                     maxhpfwmeepo = i;
@@ -269,7 +269,7 @@ namespace Dagon_Stealer
                             for (var i = 0; i < meepo.Count; i += 1)
                             {
                                 Hero a = meepo[i];
-                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300)
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300)
                                 {
                                     if (i != maxhpfmeepo) { j = i; break; }
                                 }
@@ -314,7 +314,8 @@ namespace Dagon_Stealer
                     meepo[minhpmeepo].Stop();
                     if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted()) 
                     { 
-                        meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position); 
+                        meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
+                        Utils.Sleep(2500, "war" + i.ToString());
                     }
                     else
                     {
@@ -326,6 +327,7 @@ namespace Dagon_Stealer
                         if (mtp != null)
                         {
                             mtp.UseAbility(meepo[poof[i]].Position);
+                            Utils.Sleep(2500, "war" + i.ToString());
                         }
                     }
                     poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
