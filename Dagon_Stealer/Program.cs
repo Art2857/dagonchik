@@ -38,13 +38,13 @@ namespace Dagon_Stealer
     class Program
     {
 
-        private static readonly Hero[] phero = new Hero[10];
-        private static string[] ptext = new string[60];//{ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
-        private static Vector2[] ppos = new Vector2[10];
+        //private static readonly Hero[] phero = new Hero[10];
+        //private static string[] ptext = new string[60];//{ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+        //private static Vector2[] ppos = new Vector2[10];
 
 
-        private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
-        private static Font _text;
+        //private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
+        //private static Font _text;
         private static readonly int[] poof = new int[5] { -1, -1, -1, -1, -1 };
         private static readonly int[] war = new int[5] { 0, 0, 0, 0, 0 };
         //private static readonly int[] ShitDickFuck = new int[5] { 600, 650, 700, 750, 800 };
@@ -54,11 +54,11 @@ namespace Dagon_Stealer
         //private static readonly int[] spellw = new int[4] { 600, 700, 800, 900 };//дальность второго скилла
 
         //private static readonly Menu Menu = new Menu("Dagon Stealer", "dagonstealer", true);
-        private static Font text;
+        //private static Font text;
         //private static float time;
         //private static bool hp;
-        private static PowerTreads pta;
-        private static int sleeptick;
+        //private static PowerTreads pta;
+        //private static int sleeptick;
 
         /*public static class Chars
         {
@@ -80,15 +80,15 @@ namespace Dagon_Stealer
             "modifier_abaddon_borrowed_time_damage_redirect"
         };
 
-        private static Dictionary<string, bool> enemies = new Dictionary<string, bool>();
+        //private static Dictionary<string, bool> enemies = new Dictionary<string, bool>();
 
-        private static double bse;
-        private static double maxbse;
-        private static Hero maxid = ObjectMgr.LocalHero;
+        //private static double bse;
+        //private static double maxbse;
+        //private static Hero maxid = ObjectMgr.LocalHero;
 
-        private static double rep;
+        //private static double rep;
         //private static dynamic id = ObjectMgr.LocalHero;
-        private static Hero id = ObjectMgr.LocalHero;
+        //private static Hero id = ObjectMgr.LocalHero;
         //private static Vector3 prepos = ObjectMgr.LocalHero.Position;
         //private static Hero id;
         //private static int nmb=0;//number meepo base
@@ -114,12 +114,12 @@ namespace Dagon_Stealer
 
 
             var me = ObjectMgr.LocalHero;
-            if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
+            //if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
 
 
 
-            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame || !Utils.SleepCheck("tg")) { Utils.Sleep(250, "tg"); return; }
+            if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame || !Utils.SleepCheck("tg")) { Utils.Sleep(100, "tg"); return; }
             //double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
             var Q = me.Spellbook.SpellQ;//setka
@@ -128,7 +128,7 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
-            var tick = Environment.TickCount;
+            //var tick = Environment.TickCount;
 
             var bx = 7000;
             var by = 7000;
@@ -305,19 +305,19 @@ namespace Dagon_Stealer
                     {
                         if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
                         {
-
+                            Hero a = meepo[i];
                             //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
                             //{
                             //if //tp
                             //}          
 
                             
-                            if (meepo[i].Distance2D(maxhpepmeepo.Position) < 1200)
+                            if (a.Distance2D(maxhpepmeepo.Position) < 1200)
                             {
-                                var mblink = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
+                                var mblink = a.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
                                 if (mblink != null && mblink.Cooldown == 0)//minposmtoe
                                 {
-                                    mblink.UseAbility(maxhpepmeepo.Position);
+                                    mblink.UseAbility(maxhpepmeepo.Predict(100));//Position
                                 }
                                 else
                                 {
@@ -330,7 +330,7 @@ namespace Dagon_Stealer
                             }
 
 
-                            if (meepo[i].Distance2D(maxhpepmeepo.Position) > 750)//minposmtoe
+                            if (a.Distance2D(maxhpepmeepo.Position) > 750)//minposmtoe
                             {
 
                                 //if (meepo[i].Distance2D(maxhpepmeepo.Position) > 1200)//minposmtoe
@@ -339,26 +339,26 @@ namespace Dagon_Stealer
                                 //}
                                 //else
                                 //{
-                                meepo[i].Move(maxhpepmeepo.Position);//minposmtoe
+                                a.Move(maxhpepmeepo.Position);//minposmtoe
                                 //}
                             }
                             else
                             {
-                                meepo[i].Attack(maxhpepmeepo);//minposmtoe
+                                a.Attack(maxhpepmeepo);//minposmtoe
                                 Utils.Sleep(250/*meepo[i].SecondsPerAttack * 1000*/, "at" + i.ToString());
                             }
 
 
                             if (Utils.SleepCheck("q"))
                             {
-                                if (meepo[i].Spellbook.SpellQ.Level > 0)
+                                if (a.Spellbook.SpellQ.Level > 0)
                                 {
-                                    if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
+                                    if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && a.Distance2D(maxhpepmeepo.Position) < 500 + 250 * (a.Spellbook.SpellQ.Level - 1) && a.Spellbook.SpellQ.Cooldown == 0)
                                     {
-                                        var pos = maxhpepmeepo.Predict(300 + meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
-                                        var dir = Math.Atan2(meepo[i].Position.Y - pos.Y, pos.X - meepo[i].Position.X);
-                                        meepo[i].Spellbook.SpellQ.UseAbility(pos);//new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
-                                        Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
+                                        var pos = maxhpepmeepo.Predict(300 + a.Distance2D(maxhpepmeepo.Position) / 857 * 1000);
+                                        //var dir = Math.Atan2(meepo[i].Position.Y - pos.Y, pos.X - meepo[i].Position.X);
+                                        a.Spellbook.SpellQ.UseAbility(pos);//new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
+                                        Utils.Sleep((500 + 250 * (a.Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
 
                                         //Utils.Sleep(300, "event" + i.ToString());
                                     }
@@ -374,12 +374,15 @@ namespace Dagon_Stealer
             else
             {
                 
+                
                     //if (!(minposmtoe > -1 && maxhpepmeepo != null))
                     //{
                 var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (me.Team != creep.Team || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))
                 
                     for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
                     {
+                        if (war[i] == 1)
+                        {
                         if (Utils.SleepCheck("at"+i.ToString()))
                         {
                         float mindistc = 99999;
@@ -396,6 +399,7 @@ namespace Dagon_Stealer
                     //}
                     }
             }
+        }
            
           
             /*
@@ -441,7 +445,8 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo != minhpmeepo)
                 {
-                    if (((meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && meepo[minhpmeepo].CanCast() && meepo[minhpmeepo].Spellbook.SpellW.CanBeCasted()) || (travel != null && meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3)) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    Hero b = meepo[minhpmeepo];
+                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.3/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
 
@@ -456,7 +461,7 @@ namespace Dagon_Stealer
                         {
                             Hero a = meepo[i];
                             float hp = a.Health;
-                            if (war[i] == 0 && Utils.SleepCheck("war" + i.ToString()) && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)//a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700
+                            if (war[i] == 0 && Utils.SleepCheck("war" + i.ToString()) && hp > maxhpfw && a.Spellbook.SpellW.Cooldown == 0)//a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700
                             {
                                 maxhpfw = hp;
                                 maxhpfwmeepo = i;
@@ -473,7 +478,8 @@ namespace Dagon_Stealer
                             }
                         }
 
-                        if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && Utils.SleepCheck("pf" + meepo[minhpmeepo].ToString()) && Utils.SleepCheck("stp" + meepo[minhpmeepo].ToString()) && (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
+                        
+                        if (meepo[maxhpfwmeepo].Health > b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
                         {
                             Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                             if (nmf > 1)
@@ -513,9 +519,10 @@ namespace Dagon_Stealer
                 if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()) && Utils.SleepCheck("stp" + i.ToString()))
                     {
                         meepo[minhpmeepo].Stop();
-                        if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted())
+                        Hero a=meepo[i];
+                        if (a.Spellbook.SpellW.Cooldown == 0 && a.CanCast() && a.Spellbook.SpellW.CanBeCasted())
                         {
-                            meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
+                            a.Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
                             Utils.Sleep(2000, "war" + i.ToString());//2500
                             poof[i] = -1; Utils.Sleep(2000, "stp" + i.ToString());//2500
                             //Utils.Sleep(2000, "event" + i.ToString());
