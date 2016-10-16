@@ -116,7 +116,7 @@ namespace Dagon_Stealer
             if (!Game.IsInGame) { id = me; bse = 0; rep = 0; return; }
             //if (!me.IsAlive) { hp = false; }
             if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame) { return; }
-            double damag = 0;
+            //double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
             var Q = me.Spellbook.SpellQ;//setka
             var W = me.Spellbook.SpellW;//puff
@@ -168,6 +168,20 @@ namespace Dagon_Stealer
             //HandleEffect(minposmeepo);
             
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
+
+            float damag=0;
+            foreach (var a in meepo)
+            {
+                if (W.Level>0){damag+=80+(W.Level-1)*20;}
+            }
+
+            float minhpep = 0;
+            Hero maxhpepmeepo = meepo[0];
+            foreach (var a in enemy_poof)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp > minhpep) { minhpep = hp; maxhpepmeepo = a; }
+            }
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
             var discord = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_recipe_veil_of_discord")));
@@ -392,6 +406,12 @@ namespace Dagon_Stealer
             Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(1000, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
+            Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
+            Drawing.DrawText("min hp:" + minhpep.ToString(), new Vector2(1550, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
+
+            //float maxhpep = 0;
+            //Hero maxhpepmeepo = meepo[0];
 
             //Drawing.DrawText("minposmeepo", HUDInfo.GetHPbarPositionX(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
             //Drawing.DrawText("minhpmeepo", HUDInfo.GetHpBarSize(minhpmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
