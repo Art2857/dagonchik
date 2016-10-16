@@ -169,7 +169,7 @@ namespace Dagon_Stealer
             //HandleEffect(minposmeepo);
 
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-            
+
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
             var discord = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_recipe_veil_of_discord")));
             var ethereal = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_ethereal_blade")));
@@ -210,7 +210,7 @@ namespace Dagon_Stealer
             if (mindistmtoe < 20000 && Utils.SleepCheck("at" + minposmtoe.ToString()))
             {
                 meepo[minposmtoe].Attack(maxhpepmeepo);
-                Utils.Sleep(100,"at" + minposmtoe.ToString());
+                Utils.Sleep(100, "at" + minposmtoe.ToString());
             }
 
             float damag = 0;
@@ -219,13 +219,20 @@ namespace Dagon_Stealer
                 if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
             }
 
-            double ethereal_damag = me.TotalStrength;
-            if ((int)me.PrimaryAttribute == 1) { ethereal_damag = me.TotalAgility; }
-            if ((int)me.PrimaryAttribute == 2) { ethereal_damag = me.TotalIntelligence; }
-            ethereal_damag *= 2;
-            ethereal_damag += 75;
+            if (ethereal != null)
+            {
+                double ethereal_damag = me.TotalStrength;
+                if ((int)me.PrimaryAttribute == 1) { ethereal_damag = me.TotalAgility; }
+                if ((int)me.PrimaryAttribute == 2) { ethereal_damag = me.TotalIntelligence; }
+                ethereal_damag *= 2;
+                ethereal_damag += 75;
+            }
+            else
+            {
+                double ethereal_damag = 0;
+            }
 
-            double dagon_damag = 400 + 100 * (dagon.Level - 1);
+            if (dagon != null) { double dagon_damag = 400 + 100 * (dagon.Level - 1); } else { double dagon_damage = 0; }
 
 
             //Фонтан         
@@ -288,7 +295,7 @@ namespace Dagon_Stealer
             
             }*/
 
-            if (war[minposmeepo]==0/*meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700*/ && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo
+            if (war[minposmeepo] == 0/*meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700*/ && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo
             {
                 if (minposmeepo != minhpmeepo)
                 {
@@ -307,7 +314,7 @@ namespace Dagon_Stealer
                         {
                             Hero a = meepo[i];
                             float hp = a.Health;
-                            if (war[i]==0/*a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700*/ && Utils.SleepCheck("war" + i.ToString()) && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
+                            if (war[i] == 0/*a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700*/ && Utils.SleepCheck("war" + i.ToString()) && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
                             {
                                 maxhpfw = hp;
                                 maxhpfwmeepo = i;
@@ -318,7 +325,7 @@ namespace Dagon_Stealer
                         for (var i = 0; i < meepo.Count; i += 1)
                         {
                             Hero a = meepo[i];
-                            if (war[i]==0/*a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700*/ && Utils.SleepCheck("war" + i.ToString()))
+                            if (war[i] == 0/*a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700*/ && Utils.SleepCheck("war" + i.ToString()))
                             {
                                 if (i != maxhpfmeepo) { j = i; break; }
                             }
