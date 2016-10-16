@@ -304,7 +304,7 @@ namespace Dagon_Stealer
                             }
                         }
 
-                        if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted())))
+                        if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
                         {
                             Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                             if (nmf > 1)
