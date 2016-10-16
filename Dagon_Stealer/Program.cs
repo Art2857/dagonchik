@@ -298,10 +298,10 @@ namespace Dagon_Stealer
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
-            
 
 
-            
+
+            /*
             if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
@@ -352,7 +352,7 @@ namespace Dagon_Stealer
                             else
                             {
                                 a.Attack(maxhpepmeepo);//minposmtoe
-                                Utils.Sleep(250/*meepo[i].SecondsPerAttack * 1000*/, "at" + i.ToString());
+                                Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "at" + i.ToString());//250
                             }
 
 
@@ -406,9 +406,9 @@ namespace Dagon_Stealer
                     //}
                     }
             }
-        }
-           
-          
+        }*/
+
+
             /*
             for (var i = 0; i < meepo.Count; i += 1)
             {
@@ -448,7 +448,7 @@ namespace Dagon_Stealer
             
             }*/
            
-            if (war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
+            if (nmf>0 && war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
             {
                 if (minposmeepo != minhpmeepo)
                 {
@@ -456,7 +456,7 @@ namespace Dagon_Stealer
                     if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.3/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
-
+                        
 
 
                         var j = maxhpfmeepo;
@@ -512,8 +512,32 @@ namespace Dagon_Stealer
             {
                 if (nmf == 0 && Utils.SleepCheck("m"))
                 {
-                    Utils.Sleep(100, "m");
+                    for (var i = 0; i < meepo.Count; i += 1)
+                    {
+                       Hero a = meepo[i];
+                       float hp = a.Health;
+                       if (meepo[i].Health < meepo[i].MaximumHealth * 0.3)
+                       {
+                           if (meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 3000) { poof[i] = minposmeepo; Utils.Sleep(50, "pf" + i.ToString()); }
+                           else
+                           {
+                               var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
+                               if (mtp = null)
+                               {
+                                   mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+                                   if (mtp != null) { mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z)); }
+                               }
+                               else
+                               {
+                                   mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z));
+                               }
+                               
+                           }
+                       }
+                    }
+
                     meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
+                    Utils.Sleep(100, "m");
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
