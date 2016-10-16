@@ -209,7 +209,7 @@ namespace Dagon_Stealer
 
 
             double mindistmtoe = 99999;
-            var minposmtoe = null;
+            var minposmtoe = -1;
             
                 for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
                 {
@@ -223,7 +223,7 @@ namespace Dagon_Stealer
                 }
 
 
-                if (minposmtoe !=null && Utils.SleepCheck("at" + minposmtoe.ToString()))
+                if (minposmtoe >-1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
                 {
                     /*if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
                     {
