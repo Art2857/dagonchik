@@ -194,66 +194,6 @@ namespace Dagon_Stealer
             }
 
 
-            /*float mindistmtoe = 99999;
-            var minposmtoe = 0;
-            if (maxhpepmeepo != null)
-            {
-                for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
-                {
-                    Hero a = meepo[i];
-
-                    float dist = a.Distance2D(maxhpepmeepo.Position);
-                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
-                }
-            }*/
-
-
-            double mindistmtoe = 99999;
-            var minposmtoe = -1;
-            
-                for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
-                {
-                    Hero a = meepo[i];
-                    foreach (var b in enemy_poof)
-                    {
-                        //double dist = a.Distance2D(b.Position);
-                        double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) * Math.Pow(a.Distance2D(b.Position),1.5)/10000;
-                        if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
-                    }
-                }
-
-
-                if (minposmtoe >-1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
-                {
-                    /*if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
-                    {
-                        if //tp
-                    }*/
-                    if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 200) { meepo[minposmtoe].Move(maxhpepmeepo.Position); } else { meepo[minposmtoe].Attack(maxhpepmeepo); }
-                    Utils.Sleep(100, "at" + minposmtoe.ToString());
-                }
-
-            float damag = 0;
-            foreach (var a in meepo)
-            {
-                if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
-            }
-
-            if (ethereal != null)
-            {
-                double ethereal_damag = me.TotalStrength;
-                if ((int)me.PrimaryAttribute == 1) { ethereal_damag = me.TotalAgility; }
-                if ((int)me.PrimaryAttribute == 2) { ethereal_damag = me.TotalIntelligence; }
-                ethereal_damag *= 2;
-                ethereal_damag += 75;
-            }
-            else
-            {
-                double ethereal_damag = 0;
-            }
-
-            if (dagon != null) { double dagon_damag = 400 + 100 * (dagon.Level - 1); } else { double dagon_damage = 0; }
-
 
             //Фонтан         
             var nmf = 0;//number meepo fountain
@@ -309,6 +249,98 @@ namespace Dagon_Stealer
                 }
 
             }
+
+            //ai kills
+
+
+
+            /*float mindistmtoe = 99999;
+            var minposmtoe = 0;
+            if (maxhpepmeepo != null)
+            {
+                for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
+                {
+                    Hero a = meepo[i];
+
+                    float dist = a.Distance2D(maxhpepmeepo.Position);
+                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
+                }
+            }*/
+
+
+            double mindistmtoe = 99999;
+            var minposmtoe = -1;
+
+            for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
+            {
+                Hero a = meepo[i];
+                foreach (var b in enemy_poof)
+                {
+                    //double dist = a.Distance2D(b.Position);
+                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) * Math.Pow(a.Distance2D(b.Position), 1.5) / 10000;
+                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
+                }
+            }
+
+
+            if (minposmtoe > -1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
+            {
+                /*if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
+                {
+                    if //tp
+                }*/
+
+                var mblink = meepo[minposmtoe].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+
+                if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 200)
+                {
+                    if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)
+                    {
+                        mblink.UseAbillity(maxhpepmeepo.Position);
+                    }
+                    else
+                    {
+                        if (me.Health == me.MaximumHealth && nmf > 1)
+                        {
+                            poof[0] = minposmtoe; Utils.Sleep(50, "pf0");
+                            /*W.UseAbility(meepo[minposmtoe].Position);
+                            Utils.Sleep(2500, "war0");
+                            poof[0] = -1; Utils.Sleep(2500, "stp0");*/
+                        }
+                    }
+                    if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 500)
+                    { meepo[minposmtoe].Move(maxhpepmeepo.Predict(1000)); }
+                    else { meepo[minposmtoe].Move(maxhpepmeepo.Predict(50)); }
+                }
+                else
+                { meepo[minposmtoe].Attack(maxhpepmeepo); }
+                Utils.Sleep(100, "at" + minposmtoe.ToString());
+            }
+
+            float damag = 0;
+            foreach (var a in meepo)
+            {
+                if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
+            }
+
+            if (ethereal != null)
+            {
+                double ethereal_damag = me.TotalStrength;
+                if ((int)me.PrimaryAttribute == 1) { ethereal_damag = me.TotalAgility; }
+                if ((int)me.PrimaryAttribute == 2) { ethereal_damag = me.TotalIntelligence; }
+                ethereal_damag *= 2;
+                ethereal_damag += 75;
+            }
+            else
+            {
+                double ethereal_damag = 0;
+            }
+
+            if (dagon != null) { double dagon_damag = 400 + 100 * (dagon.Level - 1); } else { double dagon_damage = 0; }
+
+
+
+
 
             /*if (nmf>1)
             {
