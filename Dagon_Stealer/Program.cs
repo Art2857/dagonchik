@@ -289,7 +289,7 @@ namespace Dagon_Stealer
 
 
 
-            /*if (minposmtoe > -1 && maxhpepmeepo != null)
+            if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
@@ -382,7 +382,7 @@ namespace Dagon_Stealer
 
                     //}
                     }
-            }*/
+            }
            
           
             /*
@@ -491,7 +491,7 @@ namespace Dagon_Stealer
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
-
+            /*
             for (var i = 0; i < meepo.Count; i += 1)
             {
                 //if (Utils.SleepCheck("event" + i.ToString()))
@@ -506,21 +506,21 @@ namespace Dagon_Stealer
                             poof[i] = -1; Utils.Sleep(2000/*2500*/, "stp" + i.ToString());
                             //Utils.Sleep(2000, "event" + i.ToString());
                         }
-                        /*else
-                        {
-                            var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-                            if (mtp == null)
-                            {
-                                mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
-                                poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
-                            }
-                            if (mtp != null)
-                            {
-                                mtp.UseAbility(meepo[poof[i]].Position);
-                                Utils.Sleep(2500, "war" + i.ToString());
-                                poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
-                            }
-                        }*/
+                        //else
+                        //{
+                         //   var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
+                          //  if (mtp == null)
+                          //  {
+                         //       mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+                          //      poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
+                           // }
+                          //  if (mtp != null)
+                          //  {
+                           //     mtp.UseAbility(meepo[poof[i]].Position);
+                          //      Utils.Sleep(2500, "war" + i.ToString());
+                           //     poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
+                          //  }
+                        //}
 
                     }
                     if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
@@ -532,6 +532,7 @@ namespace Dagon_Stealer
                     }
                 //}
             }
+            */
 
             /*var mousePosition = Game.MousePosition;
             //me.Move(mousePosition);
