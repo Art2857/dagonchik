@@ -351,17 +351,17 @@ namespace Dagon_Stealer
             var colour = Color.White;
             var font = FontFlags.AntiAlias;
             Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(300, 200), size,colour,font);
-            Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(300, 250), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(400, 250), new Vector2(20, 20), size, colour, font);
-            Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(300, 300), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(400, 300), new Vector2(20, 20), size, colour, font);
-            Drawing.DrawText("min dist to b:" + mindist.ToString(), new Vector2(300, 350), new Vector2(20, 20), size, colour, font); Drawing.DrawText("min dist to b:" + minposmeepo.ToString(), new Vector2(300, 350), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(300, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(400, 250), size, colour, font);
+            Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(300, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(400, 300), size, colour, font);
+            Drawing.DrawText("min dist to b:" + mindist.ToString(), new Vector2(300, 350), size, colour, font); Drawing.DrawText("min dist to b:" + minposmeepo.ToString(), new Vector2(300, 350), size, colour, font);
 
-            Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(500, 200), new Vector2(20, 20), size, colour, font);
-            Drawing.DrawText("min hp:" + minhpf.ToString(), new Vector2(500, 250), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpfmeepo.ToString(), new Vector2(600, 250), new Vector2(20, 20), size, colour, font);
-            Drawing.DrawText("max hp:" + maxhpf.ToString(), new Vector2(500, 300), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpfmeepo.ToString(), new Vector2(600, 300), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(500, 200), size, colour, font);
+            Drawing.DrawText("min hp:" + minhpf.ToString(), new Vector2(500, 250),  size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpfmeepo.ToString(), new Vector2(600, 250), size, colour, font);
+            Drawing.DrawText("max hp:" + maxhpf.ToString(), new Vector2(500, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpfmeepo.ToString(), new Vector2(600, 300), size, colour, font);
 
-            Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(700, 200), new Vector2(20, 20), size, colour, font);
-            Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(700, 250), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(800, 250), new Vector2(20, 20), size, colour, font);
-            Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(700, 300), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(800, 300), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(700, 200), size, colour, font);
+            Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(700, 250),  size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(800, 250), size, colour, font);
+            Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(700, 300),  size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(800, 300), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
             //Drawing.DrawText("minposmeepo", HUDInfo.GetHPbarPositionX(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
