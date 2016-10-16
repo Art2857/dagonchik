@@ -273,7 +273,7 @@ namespace Dagon_Stealer
             }*/
 
 
-            
+            /*ssss
             Hero maxhpepmeepo = null;//enemy
             double mindistmtoe = 1000000;//priority
             var minposmtoe = -1;//meepo
@@ -386,7 +386,7 @@ namespace Dagon_Stealer
                     //}
                     }
             }
-           
+           */
           
             /*
             for (var i = 0; i < meepo.Count; i += 1)
@@ -532,7 +532,7 @@ namespace Dagon_Stealer
 
                         if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
 
-                        poof[i] = -100;
+                        poof[i] = -2;
                     }
                 //}
             }
