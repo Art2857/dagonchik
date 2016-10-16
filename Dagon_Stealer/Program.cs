@@ -275,7 +275,7 @@ namespace Dagon_Stealer
                                 }
                             }
 
-                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted())))
+                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health/*&& (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted()))*/)
                             {
                                 Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                                 if (nmf > 1)
@@ -312,7 +312,7 @@ namespace Dagon_Stealer
                 if ((poof[i]>=0) && Utils.SleepCheck("pf"+i.ToString()))
                 {
                     meepo[minhpmeepo].Stop();
-                    /*if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted()) 
+                    if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted()) 
                     { 
                         meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position); 
                     }
@@ -327,7 +327,7 @@ namespace Dagon_Stealer
                         {
                             mtp.UseAbility(meepo[poof[i]].Position);
                         }
-                    }*/
+                    }
                     poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
                 }
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
