@@ -355,7 +355,7 @@ namespace Dagon_Stealer
                                 }
                             }
 
-                            Utils.Sleep(tick, "at" + i.ToString());//minposmtoe
+                            Utils.Sleep(tick+100, "at" + i.ToString());//minposmtoe
                         }
                     }
                 //}
@@ -380,7 +380,7 @@ namespace Dagon_Stealer
                             float dist = a.Distance2D(b.Position);
                             if (dist < mindistc) { mindistc = dist; minposcreep = b; }
                         }
-                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else {  Utils.Sleep(tick, "at" + i.ToString()); }
+                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else {  Utils.Sleep(tick+100, "at" + i.ToString()); }
                         }
 
                     //}
@@ -469,7 +469,7 @@ namespace Dagon_Stealer
                             if (nmf > 1)
                             {
                                 //meepo[maxhpfwmeepo].Stop();
-                                poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(tick, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(tick+100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
                             }
                             //meepo[minhpmeepo].Stop();
                             poof[minhpmeepo] = j; Utils.Sleep(500, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
@@ -604,7 +604,7 @@ namespace Dagon_Stealer
             //var minposmtoe = -1;//meepo
 
             Drawing.DrawText("priority:" + mindistmtoe.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
-            Drawing.DrawText("minposmtoe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); //Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
+            //Drawing.DrawText("minposmtoe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); //Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
             
             /*
             Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
