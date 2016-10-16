@@ -328,14 +328,19 @@ namespace Dagon_Stealer
                         {
                             meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
                         }
+                        
 
+                        if (Utils.SleepCheck("q"))
+                        {
                         if (meepo[i].Spellbook.SpellQ.Level>0)
                         {
                             if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
                             {
-                                meepo[i].Spellbook.SpellQ.UseAbility(maxhpepmeepo.Predict(500));
+                                meepo[i].Spellbook.SpellQ.UseAbility(maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position)/857*1000));
+                                Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857*1000, "q");
                             }
                         }
+                        }                    
 
                         Utils.Sleep(100, "at" + i/*minposmtoe*/.ToString());
                     }
