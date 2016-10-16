@@ -216,8 +216,8 @@ namespace Dagon_Stealer
             //float mindistw = 99999;
             //var minposwmeepo = 0;
 
-            var tmpw = 99999;
-            var tmpf = 99999;
+            float tmpw = 99999;
+            float tmpf = 99999;
 
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
