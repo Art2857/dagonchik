@@ -243,7 +243,7 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (((meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && meepo[minhpmeepo].CanCast() && meepo[minhpmeepo].Spellbook.SpellW.CanBeCasted())|| travel) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    if (((meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && meepo[minhpmeepo].CanCast() && meepo[minhpmeepo].Spellbook.SpellW.CanBeCasted()) || travel!=null) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
                         
@@ -275,7 +275,7 @@ namespace Dagon_Stealer
                                 }
                             }
 
-                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && (/*meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 ||*/ (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted())))
+                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted())))
                             {
                                 Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                                 if (nmf > 1)
