@@ -522,7 +522,7 @@ namespace Dagon_Stealer
                            else
                            {
                                var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-                               if (mtp = null)
+                               if (mtp == null)
                                {
                                    mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
                                    if (mtp != null) { mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z)); }
