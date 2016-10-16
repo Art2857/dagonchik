@@ -215,7 +215,7 @@ namespace Dagon_Stealer
             {
                 Hero a=meepo[i];
                 float hp = a.Health;
-                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 300 && Utils.SleepCheck("war"+i.ToString()))
+                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700 && Utils.SleepCheck("war"+i.ToString()))
                 {
                     nmf += 1;
                     if (hp > maxhpf)
@@ -253,7 +253,7 @@ namespace Dagon_Stealer
             
             }*/
 
-            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()) && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 300)//&& Utils.SleepCheck("bottle")//minposmeepo
+            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()) && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700)//&& Utils.SleepCheck("bottle")//minposmeepo
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
@@ -272,7 +272,7 @@ namespace Dagon_Stealer
                             {
                                 Hero a = meepo[i];
                                 float hp = a.Health;
-                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300 && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700 && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
                                 {
                                     maxhpfw = hp;
                                     maxhpfwmeepo = i;
@@ -283,7 +283,7 @@ namespace Dagon_Stealer
                             for (var i = 0; i < meepo.Count; i += 1)
                             {
                                 Hero a = meepo[i];
-                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 300)
+                                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700)
                                 {
                                     if (i != maxhpfmeepo) { j = i; break; }
                                 }
@@ -410,7 +410,7 @@ namespace Dagon_Stealer
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
             Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
-            Drawing.DrawText("min hp:" + minhpep.ToString(), new Vector2(1550, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
+            Drawing.DrawText("min hp:" + minhpep.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
 
             //float maxhpep = 0;
             //Hero maxhpepmeepo = meepo[0];
