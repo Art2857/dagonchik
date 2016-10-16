@@ -286,69 +286,95 @@ namespace Dagon_Stealer
 
 
 
-            if (minposmtoe > -1 && maxhpepmeepo!=null)
+
+            if (minposmtoe > -1 && maxhpepmeepo != null)
             {
-            for (var i = 0; i < meepo.Count; i += 1)
-            {
-                if (war[i] == 1)
+                for (var i = 0; i < meepo.Count; i += 1)
                 {
-                    if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()) && nmf>0)//minposmtoe > -1 && maxhpepmeepo!=null
+                    if (war[i] == 1)
                     {
-
-                        //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
-                        //{
-                        //if //tp
-                        //}          
-
-                        if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 200)
+                        if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null
                         {
-                            var mblink = meepo[i/*minposmtoe*/].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
-                            if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)
+
+                            //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
+                            //{
+                            //if //tp
+                            //}          
+
+                            if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 200)
                             {
-                                mblink.UseAbility(maxhpepmeepo.Position);
+                                var mblink = meepo[i/*minposmtoe*/].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+                                if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)
+                                {
+                                    mblink.UseAbility(maxhpepmeepo.Position);
+                                }
+                                else
+                                {
+                                    if (me.Health == me.MaximumHealth && nmf > 1 && Utils.SleepCheck("w" + i.ToString()))
+                                    {
+                                        poof[0] = minposmtoe; Utils.Sleep(50, "pf" + i.ToString());
+                                        Utils.Sleep(4500, "w" + i.ToString());
+                                    }
+                                }
+                                //if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 1200)
+                                //{
+                                //    meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(500));
+                                //}
+                                //else
+                                //{
+                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Position);
+                                //}
                             }
                             else
                             {
-                                if (me.Health == me.MaximumHealth && nmf > 1 && Utils.SleepCheck("w" + i.ToString()))
+                                meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
+                            }
+
+
+                            if (Utils.SleepCheck("q"))
+                            {
+                                if (meepo[i].Spellbook.SpellQ.Level > 0)
                                 {
-                                    poof[0] = minposmtoe; Utils.Sleep(50, "pf" + i.ToString());
-                                    Utils.Sleep(4500, "w" + i.ToString());
+                                    if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
+                                    {
+                                        var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
+                                        //var dir = Math.Atan2(-pos.Y, pos.X);
+                                        meepo[i].Spellbook.SpellQ.UseAbility(pos);
+                                        Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
+                                    }
                                 }
                             }
-                            if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 1200)
-                            {
-                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(500));
-                            }
-                            else
-                            {
-                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Position);
-                            }
-                        }
-                        else
-                        {
-                            meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
-                        }
-                        
 
-                        if (Utils.SleepCheck("q"))
-                        {
-                        if (meepo[i].Spellbook.SpellQ.Level>0)
-                        {
-                            if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
-                            {
-                                var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
-                                //var dir = Math.Atan2(-pos.Y, pos.X);
-                                meepo[i].Spellbook.SpellQ.UseAbility(pos);
-                                Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857*1000, "q");
-                            }
+                            Utils.Sleep(50, "at" + i/*minposmtoe*/.ToString());
                         }
-                        }                    
-
-                        Utils.Sleep(50, "at" + i/*minposmtoe*/.ToString());
                     }
                 }
             }
+            else
+            {
+                if (Utils.SleepCheck("at"))
+                {
+                    //if (!(minposmtoe > -1 && maxhpepmeepo != null))
+                    //{
+                    var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (/*(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))*/me.Team != creep.Team || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();
+
+                    for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
+                    {
+                        var mindistc = 99999;
+                        Hero a = meepo[i];
+                        foreach (var b in creeps)
+                        {
+                            float dist = a.Distance2D(b.Position);
+                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                        }
+                        a.Attack(minposcreep);
+                        Utils.Sleep(250, "at");
+                    }
+
+                    //}
+                }
             }
+            
             /*
             for (var i = 0; i < meepo.Count; i += 1)
             {
@@ -487,7 +513,7 @@ namespace Dagon_Stealer
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                 {
 
-                    if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } //else { meepo[i].Stop(); }
+                    if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
 
                     poof[i] = -2;
                 }
