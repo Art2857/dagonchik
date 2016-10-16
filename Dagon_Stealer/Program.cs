@@ -275,7 +275,7 @@ namespace Dagon_Stealer
                                 }
                             }
 
-                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health/*&& (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted()))*/)
+                            if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health && (meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted())))
                             {
                                 Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                                 if (nmf > 1)
@@ -319,7 +319,7 @@ namespace Dagon_Stealer
                     else
                     {
                         var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-                        if (mtp=null)
+                        if (mtp==null)
                         {
                             mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
                         }
