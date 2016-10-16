@@ -119,14 +119,15 @@ namespace Dagon_Stealer
             /*var size = new Vector2(20, 20);
             var colour = Color.White;
             var font = FontFlags.AntiAlias;*/
-            Drawing.DrawText(me.ToString(), new Vector2(500, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            /*
+             * Drawing.DrawText(me.ToString(), new Vector2(500, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(me.IsAlive.ToString(), new Vector2(500, 600), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(Game.IsInGame.ToString(), new Vector2(500, 700), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             Drawing.DrawText(Game.IsWatchingGame.ToString(), new Vector2(800, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            
+            */
             if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame/*|| !Utils.SleepCheck("tg")*/) { /*Utils.Sleep(100, "tg");*/ return; }
 
-            Drawing.DrawText("2", new Vector2(550, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            //Drawing.DrawText("2", new Vector2(550, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
             var Q = me.Spellbook.SpellQ;//setka
@@ -214,7 +215,10 @@ namespace Dagon_Stealer
 
             //float mindistw = 99999;
             //var minposwmeepo = 0;
-            
+
+            var tmpw = 99999;
+            var tmpf = 99999;
+
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
                 Hero a = meepo[i];
@@ -233,6 +237,8 @@ namespace Dagon_Stealer
                         minhpf = hp;
                         minhpfmeepo = i;
                     }
+                    var c=a.Spellbook.SpellW.Cooldown;
+                    if (c < tmpf) { tmpf = c; }
                 }
                 else
                 {
@@ -248,6 +254,8 @@ namespace Dagon_Stealer
                         minhpw = hp;
                         minhpwmeepo = i;
                     }
+                    var c = a.Spellbook.SpellW.Cooldown;
+                    if (c < tmpw) { tmpw = c; }
                     //float dist = a.Distance2D(new Vector3(bx, by, 0));// me.Distance2D(a);// point_distance(me, me);////new Vector3(bx, by, a.Position.Z)
                     //if (dist < mindistw) { mindistw = dist; minposwmeepo = i; }
                 }
@@ -301,7 +309,7 @@ namespace Dagon_Stealer
 
 
 
-            /*
+            
             if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
@@ -406,7 +414,7 @@ namespace Dagon_Stealer
                     //}
                     }
             }
-        }*/
+        }
 
 
             /*
@@ -638,6 +646,7 @@ namespace Dagon_Stealer
             Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(200, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(350, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(200, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(350, 300), size, colour, font);
             Drawing.DrawText("min dist to b:" + mindist.ToString(), new Vector2(200, 350), size, colour, font); Drawing.DrawText("min dist to b:" + minposmeepo.ToString(), new Vector2(350, 350), size, colour, font);
+            Drawing.DrawText("Swap:" + Math.Max(tmpf, tmpw).ToString(), new Vector2(200, 400), size, colour, font);
 
             Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(600, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhpf.ToString(), new Vector2(600, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpfmeepo.ToString(), new Vector2(750, 250), size, colour, font);
@@ -646,6 +655,10 @@ namespace Dagon_Stealer
             Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(1000, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(1000, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
+            
+            
+            
+            
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
             //Drawing.DrawText("tick: " + tick.ToString(), new Vector2(1000, 700), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
