@@ -350,7 +350,7 @@ namespace Dagon_Stealer
                     }
                 }
             }
-            /*else
+            else
             {
                 
                     //if (!(minposmtoe > -1 && maxhpepmeepo != null))
@@ -369,12 +369,12 @@ namespace Dagon_Stealer
                             float dist = a.Distance2D(b.Position);
                             if (dist < mindistc) { mindistc = dist; minposcreep = b; }
                         }
-                        if (minposcreep!=null){a.Attack(minposcreep);Utils.Sleep(a.SecondsPerAttack*1000 , "at"+i.ToString());}else{Utils.Sleep(50, "at"+i.ToString());}
-                    }
+                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(50, "at" + i.ToString()); }
+                        }
 
                     //}
-                }
-            }*/
+                    }
+            }
             
             /*
             for (var i = 0; i < meepo.Count; i += 1)
