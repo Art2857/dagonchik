@@ -273,7 +273,7 @@ namespace Dagon_Stealer
             }*/
 
 
-            /*
+            
             Hero maxhpepmeepo = null;//enemy
             double mindistmtoe = 1000000;//priority
             var minposmtoe = -1;//meepo
@@ -288,10 +288,10 @@ namespace Dagon_Stealer
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
-            */
+            
 
 
-            /*
+            
             if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
@@ -386,7 +386,7 @@ namespace Dagon_Stealer
                     //}
                     }
             }
-           */
+           
           
             /*
             for (var i = 0; i < meepo.Count; i += 1)
@@ -426,7 +426,7 @@ namespace Dagon_Stealer
             {
             
             }*/
-            /*ssss
+           
             if (war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
             {
                 if (minposmeepo != minhpmeepo)
@@ -536,7 +536,7 @@ namespace Dagon_Stealer
                     }
                 //}
             }
-            */
+            
 
             /*var mousePosition = Game.MousePosition;
             //me.Move(mousePosition);
@@ -600,8 +600,8 @@ namespace Dagon_Stealer
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
-            double mindistmtoe = 1000000;//priority
-            var minposmtoe = -1;//meepo
+            //double mindistmtoe = 1000000;//priority
+            //var minposmtoe = -1;//meepo
 
             Drawing.DrawText("priority:" + mindistmtoe.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("minposmtoe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); //Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
