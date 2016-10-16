@@ -314,13 +314,16 @@ namespace Dagon_Stealer
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
+                    Hero a = meepo[i];
+                    if (a.Health > a.MaximumHealth * 0.5)
+                    {
                     //if (Utils.SleepCheck("event" + i.ToString()))
                     //{
                     if (war[i] == 1)
                     {
                         if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
                         {
-                            Hero a = meepo[i];
+                            
                             //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
                             //{
                             //if //tp
@@ -384,6 +387,7 @@ namespace Dagon_Stealer
                         }
                     }
                 //}
+                }
             }
             }
             else
@@ -398,18 +402,21 @@ namespace Dagon_Stealer
                     {
                         if (war[i] == 1)
                         {
-                        if (Utils.SleepCheck("at"+i.ToString()))
-                        {
-                        float mindistc = 99999;
-                        Hero a = meepo[i];
-                        Unit minposcreep=null;
-                        foreach (var b in creeps)
-                        {
-                            float dist = a.Distance2D(b.Position);
-                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
-                        }
-                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else {  Utils.Sleep(100, "at" + i.ToString()); }
-                        }
+                            if (Utils.SleepCheck("at" + i.ToString()))
+                            {
+                                float mindistc = 99999;
+                                Hero a = meepo[i];
+                                if (a.Health > a.MaximumHealth * 0.5)
+                                {
+                                    Unit minposcreep = null;
+                                    foreach (var b in creeps)
+                                    {
+                                        float dist = a.Distance2D(b.Position);
+                                        if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                                    }
+                                    if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(100, "at" + i.ToString()); }
+                                }
+                            }
 
                     //}
                     }
@@ -461,7 +468,7 @@ namespace Dagon_Stealer
                 if (minposmeepo != minhpmeepo)
                 {
                     Hero b = meepo[minhpmeepo];
-                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.3/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
                         
@@ -494,7 +501,7 @@ namespace Dagon_Stealer
                         }
 
                         
-                        if (meepo[maxhpfwmeepo].Health > b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.3 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
+                        if (meepo[maxhpfwmeepo].Health > b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
                         {
                             Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                             if (nmf > 1)
@@ -518,13 +525,13 @@ namespace Dagon_Stealer
             }
             else
             {
-                if (nmf == 0 && Utils.SleepCheck("m"))
+                if (Utils.SleepCheck("m"))
                 {
                     for (var i = 0; i < meepo.Count; i += 1)
                     {
                        Hero a = meepo[i];
                        float hp = a.Health;
-                       if (meepo[i].Health < meepo[i].MaximumHealth * 0.3)
+                       if (meepo[i].Health < meepo[i].MaximumHealth * 0.5)
                        {
                            if (meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 3000) { poof[i] = minposmeepo; Utils.Sleep(50, "pf" + i.ToString()); }
                            else
@@ -533,7 +540,7 @@ namespace Dagon_Stealer
                                if (mtp == null)
                                {
                                    mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
-                                   if (mtp != null) { mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z)); }
+                                   if (mtp != null) { mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z)); }
                                }
                                else
                                {
@@ -545,7 +552,7 @@ namespace Dagon_Stealer
                     }
 
                     meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
-                    Utils.Sleep(100, "m");
+                    Utils.Sleep(250, "m");
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
