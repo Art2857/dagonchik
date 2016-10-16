@@ -194,7 +194,7 @@ namespace Dagon_Stealer
             }
 
 
-            float mindistmtoe = 99999;
+            /*float mindistmtoe = 99999;
             var minposmtoe = 0;
             if (maxhpepmeepo != null)
             {
@@ -205,13 +205,33 @@ namespace Dagon_Stealer
                     float dist = a.Distance2D(maxhpepmeepo.Position);
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
                 }
-            }
+            }*/
 
-            if (mindistmtoe < 20000 && Utils.SleepCheck("at" + minposmtoe.ToString()))
-            {
-                meepo[minposmtoe].Attack(maxhpepmeepo);
-                Utils.Sleep(100, "at" + minposmtoe.ToString());
-            }
+            
+            float mindistmtoe = 99999;
+            var minposmtoe = null;
+            
+                for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
+                {
+                    Hero a = meepo[i];
+                    foreach (var b in enemy_poof)
+                    {
+                        //double dist = a.Distance2D(b.Position);
+                        double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) * Math.Pow(a.Distance2D(b.Position),1.5)/10000;
+                        if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
+                    }
+                }
+
+
+                if (minposmtoe !=null && Utils.SleepCheck("at" + minposmtoe.ToString()))
+                {
+                    /*if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
+                    {
+                        if //tp
+                    }*/
+                    if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 200) { meepo[minposmtoe].Move(maxhpepmeepo.Position); } else { meepo[minposmtoe].Attack(maxhpepmeepo); }
+                    Utils.Sleep(100, "at" + minposmtoe.ToString());
+                }
 
             float damag = 0;
             foreach (var a in meepo)
