@@ -352,23 +352,24 @@ namespace Dagon_Stealer
             }
             else
             {
-                if (Utils.SleepCheck("at"))
-                {
+                
                     //if (!(minposmtoe > -1 && maxhpepmeepo != null))
                     //{
                     var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => ((creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (/*(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))*/me.Team != creep.Team || (me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();
 
                     for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
                     {
+                        if (Utils.SleepCheck("at"+i.ToString()))
+                        {
                         var mindistc = 99999;
                         Hero a = meepo[i];
+                        Hero minposcreep=null;
                         foreach (var b in creeps)
                         {
                             float dist = a.Distance2D(b.Position);
                             if (dist < mindistc) { mindistc = dist; minposcreep = b; }
                         }
-                        a.Attack(minposcreep);
-                        Utils.Sleep(250, "at");
+                        if (minposcreep!=null){a.Attack(minposcreep);Utils.Sleep(a.SecondsPerAttack*1000 , "at"+i.ToString());}else{Utils.Sleep(50, "at"+i.ToString());}
                     }
 
                     //}
