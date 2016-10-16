@@ -169,36 +169,7 @@ namespace Dagon_Stealer
             //HandleEffect(minposmeepo);
 
             var enemy_poof = ObjectMgr.GetEntities<Hero>().Where(obj => (obj.Team != me.Team && obj.IsAlive && obj.IsVisible && !obj.IsIllusion && !obj.IsMagicImmune())).ToList();
-
-            float damag = 0;
-            foreach (var a in meepo)
-            {
-                if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
-            }
-
-            float minhpep = 99999;
-            Hero maxhpepmeepo = null;
-            foreach (var a in enemy_poof)
-            {
-                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
-                if (hp < minhpep) { minhpep = hp; maxhpepmeepo = a; }
-            }
-
             
-            float mindistmtoe = 99999;
-            var minposmtoe = 0;
-            if (maxhpepmeepo!=null)
-            { 
-                for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
-                {
-                    Hero a = meepo[i];
-
-                    float dist = a.Distance2D(maxhpepmeepo.Position);
-                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
-                }
-            }
-
-
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
             var discord = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_recipe_veil_of_discord")));
             var ethereal = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_ethereal_blade")));
@@ -210,6 +181,52 @@ namespace Dagon_Stealer
             //var travel1 = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots_1")));
             //var travel2 = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots_2")));
             var tp = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+
+
+
+
+            float minhpep = 99999;
+            Hero maxhpepmeepo = null;
+            foreach (var a in enemy_poof)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp < minhpep) { minhpep = hp; maxhpepmeepo = a; }
+            }
+
+
+            float mindistmtoe = 99999;
+            var minposmtoe = 0;
+            if (maxhpepmeepo != null)
+            {
+                for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
+                {
+                    Hero a = meepo[i];
+
+                    float dist = a.Distance2D(maxhpepmeepo.Position);
+                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
+                }
+            }
+
+            if (mindistmtoe < 20000 && Utils.SleepCheck("at" + minposmtoe.ToString()))
+            {
+                meepo[minposmtoe].Attack(maxhpepmeepo);
+                Utils.Sleep(100,"at" + minposmtoe.ToString());
+            }
+
+            float damag = 0;
+            foreach (var a in meepo)
+            {
+                if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
+            }
+
+            double ethereal_damag = me.TotalStrength;
+            if ((int)me.PrimaryAttribute == 1) { ethereal_damag = me.TotalAgility; }
+            if ((int)me.PrimaryAttribute == 2) { ethereal_damag = me.TotalIntelligence; }
+            ethereal_damag *= 2;
+            ethereal_damag += 75;
+
+            double dagon_damag = 400 + 100 * (dagon.Level - 1);
+
 
             //Фонтан         
             var nmf = 0;//number meepo fountain
