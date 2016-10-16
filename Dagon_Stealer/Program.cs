@@ -270,7 +270,7 @@ namespace Dagon_Stealer
             }*/
 
             Hero maxhpepmeepo = null;//enemy
-            double mindistmtoe = 99999;//priority
+            double mindistmtoe = 1000000;//priority
             var minposmtoe = -1;//meepo
 
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
@@ -279,7 +279,7 @@ namespace Dagon_Stealer
                 foreach (var b in enemy_poof)
                 {
                     //double dist = a.Distance2D(b.Position);
-                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1.75);
+                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1.5);
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
@@ -315,13 +315,13 @@ namespace Dagon_Stealer
                                     Utils.Sleep(4500, "w" + i.ToString());
                                 }
                             }
-                            if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 500)
+                            if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 1200)
                             {
                                 meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(500));
                             }
                             else
                             {
-                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(10));
+                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Position);
                             }
                         }
                         else
@@ -336,13 +336,15 @@ namespace Dagon_Stealer
                         {
                             if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
                             {
-                                meepo[i].Spellbook.SpellQ.UseAbility(maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position)/857*1000));
+                                var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
+                                var dir = Math.Atan2(-pos.Y.ToDouble(), pos.X.ToDouble());
+                                //meepo[i].Spellbook.SpellQ.UseAbility();
                                 Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857*1000, "q");
                             }
                         }
                         }                    
 
-                        Utils.Sleep(100, "at" + i/*minposmtoe*/.ToString());
+                        Utils.Sleep(50, "at" + i/*minposmtoe*/.ToString());
                     }
                 }
             }
