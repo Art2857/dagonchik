@@ -361,7 +361,7 @@ namespace Dagon_Stealer
                     {
                         if (Utils.SleepCheck("at"+i.ToString()))
                         {
-                        var mindistc = 99999;
+                        float mindistc = 99999;
                         Hero a = meepo[i];
                         Hero minposcreep=null;
                         foreach (var b in creeps)
