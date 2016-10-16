@@ -273,7 +273,7 @@ namespace Dagon_Stealer
             }*/
 
 
-            /*ssss
+            
             Hero maxhpepmeepo = null;//enemy
             double mindistmtoe = 1000000;//priority
             var minposmtoe = -1;//meepo
@@ -296,8 +296,8 @@ namespace Dagon_Stealer
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
-                    //if (Utils.SleepCheck("event" + i.ToString()))
-                    //{
+                    if (Utils.SleepCheck("event" + i.ToString()))
+                    {
                     if (war[i] == 1)
                     {
                         if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
@@ -350,15 +350,15 @@ namespace Dagon_Stealer
                                         meepo[i].Spellbook.SpellQ.UseAbility(new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
                                         
-                                        //Utils.Sleep(300, "event" + i.ToString());
+                                        Utils.Sleep(300, "event" + i.ToString());
                                     }
                                 }
                             }
 
-                            Utils.Sleep(tick+100, "at" + i.ToString());//minposmtoe
+                            Utils.Sleep(100, "at" + i.ToString());//minposmtoe
                         }
                     }
-                //}
+                }
             }
             }
             else
@@ -380,13 +380,13 @@ namespace Dagon_Stealer
                             float dist = a.Distance2D(b.Position);
                             if (dist < mindistc) { mindistc = dist; minposcreep = b; }
                         }
-                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else {  Utils.Sleep(tick+100, "at" + i.ToString()); }
+                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else {  Utils.Sleep(100, "at" + i.ToString()); }
                         }
 
                     //}
                     }
             }
-           */
+           
           
             /*
             for (var i = 0; i < meepo.Count; i += 1)
@@ -469,7 +469,7 @@ namespace Dagon_Stealer
                             if (nmf > 1)
                             {
                                 //meepo[maxhpfwmeepo].Stop();
-                                poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(tick+100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(100, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
                             }
                             //meepo[minhpmeepo].Stop();
                             poof[minhpmeepo] = j; Utils.Sleep(500, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
@@ -489,7 +489,7 @@ namespace Dagon_Stealer
             {
                 if (nmf == 0 && Utils.SleepCheck("m"))
                 {
-                    Utils.Sleep(tick+100, "m");
+                    Utils.Sleep(100, "m");
                     meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
@@ -498,8 +498,8 @@ namespace Dagon_Stealer
             
             for (var i = 0; i < meepo.Count; i += 1)
             {
-                //if (Utils.SleepCheck("event" + i.ToString()))
-                //{
+                if (Utils.SleepCheck("event" + i.ToString()))
+                {
                     if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()))
                     {
                         meepo[minhpmeepo].Stop();
@@ -534,7 +534,7 @@ namespace Dagon_Stealer
 
                         poof[i] = -2;
                     }
-                //}
+                }
             }
             
 
@@ -600,7 +600,7 @@ namespace Dagon_Stealer
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             
-            Drawing.DrawText("tick: " + tick.ToString(), new Vector2(1000, 700), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
+            //Drawing.DrawText("tick: " + tick.ToString(), new Vector2(1000, 700), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
 
             //double mindistmtoe = 1000000;//priority
             //var minposmtoe = -1;//meepo
