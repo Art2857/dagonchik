@@ -491,6 +491,7 @@ namespace Dagon_Stealer
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
+
             /*
             for (var i = 0; i < meepo.Count; i += 1)
             {
@@ -502,8 +503,8 @@ namespace Dagon_Stealer
                         if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted())
                         {
                             meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
-                            Utils.Sleep(2000/*2500*/, "war" + i.ToString());
-                            poof[i] = -1; Utils.Sleep(2000/*2500*/, "stp" + i.ToString());
+                            Utils.Sleep(2000, "war" + i.ToString());//2500
+                            poof[i] = -1; Utils.Sleep(2000, "stp" + i.ToString());//2500
                             //Utils.Sleep(2000, "event" + i.ToString());
                         }
                         //else
@@ -531,8 +532,8 @@ namespace Dagon_Stealer
                         poof[i] = -100;
                     }
                 //}
-            }
-            */
+            }*/
+            
 
             /*var mousePosition = Game.MousePosition;
             //me.Move(mousePosition);
