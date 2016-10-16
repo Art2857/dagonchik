@@ -45,7 +45,8 @@ namespace Dagon_Stealer
 
         private static readonly Dictionary<Unit, ParticleEffect> Effects = new Dictionary<Unit, ParticleEffect>();
         private static Font _text;
-        private static readonly int[] poof = new int[5] { -1,-1,-1,-1,-1 };
+        private static readonly int[] poof = new int[5] { -1, -1, -1, -1, -1 };
+        private static readonly int[] war = new int[5] { 0, 0, 0, 0, 0 };
         //private static readonly int[] ShitDickFuck = new int[5] { 600, 650, 700, 750, 800 };
         //private static Key KeyC = Key.D;
 
@@ -232,6 +233,7 @@ namespace Dagon_Stealer
                 float hp = a.Health;
                 if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700 && Utils.SleepCheck("war" + i.ToString()))
                 {
+                    war[i] = 0;
                     nmf += 1;
                     if (hp > maxhpf)
                     {
@@ -246,6 +248,7 @@ namespace Dagon_Stealer
                 }
                 else
                 {
+                    war[i] = 1;
                     nmw += 1;
                     if (hp > maxhpw)
                     {
@@ -268,7 +271,7 @@ namespace Dagon_Stealer
             
             }*/
 
-            if (meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()) && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700)//&& Utils.SleepCheck("bottle")//minposmeepo
+            if (war[minposmeepo]==0/*meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700*/ && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo
             {
                 if (minposmeepo != minhpmeepo)
                 {
@@ -287,7 +290,7 @@ namespace Dagon_Stealer
                         {
                             Hero a = meepo[i];
                             float hp = a.Health;
-                            if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700 && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
+                            if (war[i]=0/*a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700*/ && Utils.SleepCheck("war" + i.ToString()) && hp > maxhpfw && meepo[i].Spellbook.SpellW.Cooldown == 0)
                             {
                                 maxhpfw = hp;
                                 maxhpfwmeepo = i;
@@ -298,7 +301,7 @@ namespace Dagon_Stealer
                         for (var i = 0; i < meepo.Count; i += 1)
                         {
                             Hero a = meepo[i];
-                            if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && Utils.SleepCheck("war" + i.ToString()) && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700)
+                            if (war[i]=0/*a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, a.Position.Z)) < 700*/ && Utils.SleepCheck("war" + i.ToString()))
                             {
                                 if (i != maxhpfmeepo) { j = i; break; }
                             }
@@ -437,7 +440,7 @@ namespace Dagon_Stealer
 
             Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
             Drawing.DrawText("min hp e:" + minhpep.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
-            Drawing.DrawText("min dist toe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1550, 300), size, colour, font);
+            Drawing.DrawText("min dist toe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
             //var mindistmtoe = 99999;
             //var minposmtoe = 0;
 
