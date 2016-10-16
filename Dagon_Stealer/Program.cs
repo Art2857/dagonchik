@@ -293,8 +293,8 @@ namespace Dagon_Stealer
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
-                    if (Utils.SleepCheck("event" + i.ToString()))
-                    {
+                    //if (Utils.SleepCheck("event" + i.ToString()))
+                    //{
                     if (war[i] == 1)
                     {
                         if (Utils.SleepCheck("at" + i/*minposmtoe*/.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null
@@ -354,7 +354,7 @@ namespace Dagon_Stealer
                             Utils.Sleep(tick, "at" + i/*minposmtoe*/.ToString());
                         }
                     }
-                }
+                //}
             }
             }
             else
@@ -492,8 +492,8 @@ namespace Dagon_Stealer
 
             for (var i = 0; i < meepo.Count; i += 1)
             {
-                if (Utils.SleepCheck("event" + i.ToString()))
-                {
+                //if (Utils.SleepCheck("event" + i.ToString()))
+                //{
                     if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()))
                     {
                         meepo[minhpmeepo].Stop();
@@ -502,7 +502,7 @@ namespace Dagon_Stealer
                             meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
                             Utils.Sleep(2000/*2500*/, "war" + i.ToString());
                             poof[i] = -1; Utils.Sleep(2000/*2500*/, "stp" + i.ToString());
-                            Utils.Sleep(2000, "event" + i.ToString());
+                            //Utils.Sleep(2000, "event" + i.ToString());
                         }
                         /*else
                         {
@@ -528,7 +528,7 @@ namespace Dagon_Stealer
 
                         poof[i] = -100;
                     }
-                }
+                //}
             }
 
             /*var mousePosition = Game.MousePosition;
@@ -592,6 +592,12 @@ namespace Dagon_Stealer
             Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(1000, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+
+            double mindistmtoe = 1000000;//priority
+            var minposmtoe = -1;//meepo
+
+            Drawing.DrawText("priority:" + mindistmtoe.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
+            Drawing.DrawText("minposmtoe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); //Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
             
             /*
             Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
