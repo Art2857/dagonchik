@@ -299,8 +299,8 @@ namespace Dagon_Stealer
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
-                    if (Utils.SleepCheck("event" + i.ToString()))
-                    {
+                    //if (Utils.SleepCheck("event" + i.ToString()))
+                    //{
                     if (war[i] == 1)
                     {
                         if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
@@ -353,7 +353,7 @@ namespace Dagon_Stealer
                                         meepo[i].Spellbook.SpellQ.UseAbility(new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
                                         
-                                        Utils.Sleep(300, "event" + i.ToString());
+                                        //Utils.Sleep(300, "event" + i.ToString());
                                     }
                                 }
                             }
@@ -361,7 +361,7 @@ namespace Dagon_Stealer
                             Utils.Sleep(100, "at" + i.ToString());//minposmtoe
                         }
                     }
-                }
+                //}
             }
             }
             else
@@ -501,8 +501,8 @@ namespace Dagon_Stealer
             
             for (var i = 0; i < meepo.Count; i += 1)
             {
-                if (Utils.SleepCheck("event" + i.ToString()))
-                {
+                //if (Utils.SleepCheck("event" + i.ToString()))
+                //{
                     if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()))
                     {
                         meepo[minhpmeepo].Stop();
@@ -511,7 +511,7 @@ namespace Dagon_Stealer
                             meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
                             Utils.Sleep(2000, "war" + i.ToString());//2500
                             poof[i] = -1; Utils.Sleep(2000, "stp" + i.ToString());//2500
-                            Utils.Sleep(2000, "event" + i.ToString());
+                            //Utils.Sleep(2000, "event" + i.ToString());
                         }
                         //else
                         //{
@@ -537,7 +537,7 @@ namespace Dagon_Stealer
 
                         poof[i] = -2;
                     }
-                }
+                //}
             }
             
 
