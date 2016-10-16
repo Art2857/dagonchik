@@ -207,8 +207,8 @@ namespace Dagon_Stealer
                 }
             }*/
 
-            
-            float mindistmtoe = 99999;
+
+            double mindistmtoe = 99999;
             var minposmtoe = null;
             
                 for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
