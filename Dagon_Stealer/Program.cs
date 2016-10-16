@@ -344,7 +344,7 @@ namespace Dagon_Stealer
                                     {
                                         var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
                                         var dir = Math.Atan2(meepo[i].Position.Y-pos.Y, pos.X-meepo[i].Position.X);
-                                        //meepo[i].Spellbook.SpellQ.UseAbility(new Vector3(pos.X + Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)), pos.Y + Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)), meepo[minposmeepo].Position.Z));//pos);
+                                        meepo[i].Spellbook.SpellQ.UseAbility(new Vector3(pos.X/* + Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))*/, pos.Y/* + Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))*/, meepo[minposmeepo].Position.Z));//pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
                                         Utils.Sleep(300, "event" + i.ToString());
                                     }
