@@ -343,7 +343,7 @@ namespace Dagon_Stealer
                                     if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
                                     {
                                         var pos = maxhpepmeepo.Predict(meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
-                                        //var dir = Math.Atan2(-pos.Y, pos.X);
+                                        var dir = pos.X;//Math.Atan2(-pos.Y, pos.X);
                                         meepo[i].Spellbook.SpellQ.UseAbility(pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
                                         Utils.Sleep(300, "event" + i.ToString());
@@ -500,9 +500,9 @@ namespace Dagon_Stealer
                         if (meepo[i].Spellbook.SpellW.Cooldown == 0 && meepo[i].CanCast() && meepo[i].Spellbook.SpellW.CanBeCasted())
                         {
                             meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
-                            Utils.Sleep(1700/*2500*/, "war" + i.ToString());
-                            poof[i] = -1; Utils.Sleep(1700/*2500*/, "stp" + i.ToString());
-                            Utils.Sleep(1750, "event" + i.ToString());
+                            Utils.Sleep(2000/*2500*/, "war" + i.ToString());
+                            poof[i] = -1; Utils.Sleep(2000/*2500*/, "stp" + i.ToString());
+                            Utils.Sleep(2000, "event" + i.ToString());
                         }
                         /*else
                         {
