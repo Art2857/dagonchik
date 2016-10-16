@@ -311,10 +311,11 @@ namespace Dagon_Stealer
                             //if //tp
                             //}          
 
-                            if (meepo[i].Distance2D(maxhpepmeepo.Position) > 200)//minposmtoe
+                            
+                            if (meepo[i].Distance2D(maxhpepmeepo.Position) < 1200)
                             {
                                 var mblink = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
-                                if (meepo[i].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)//minposmtoe
+                                if (mblink != null && mblink.Cooldown == 0)//minposmtoe
                                 {
                                     mblink.UseAbility(maxhpepmeepo.Position);
                                 }
@@ -326,6 +327,12 @@ namespace Dagon_Stealer
                                         Utils.Sleep(4500, "w" + i.ToString());
                                     }
                                 }
+                            }
+
+
+                            if (meepo[i].Distance2D(maxhpepmeepo.Position) > 750)//minposmtoe
+                            {
+
                                 //if (meepo[i].Distance2D(maxhpepmeepo.Position) > 1200)//minposmtoe
                                 //{
                                 //    meepo[i].Move(maxhpepmeepo.Predict(500));//minposmtoe
@@ -348,11 +355,11 @@ namespace Dagon_Stealer
                                 {
                                     if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
                                     {
-                                        var pos = maxhpepmeepo.Predict(300+meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
-                                        var dir = Math.Atan2(meepo[i].Position.Y-pos.Y, pos.X-meepo[i].Position.X);
+                                        var pos = maxhpepmeepo.Predict(300 + meepo[i].Distance2D(maxhpepmeepo.Position) / 857 * 1000);
+                                        var dir = Math.Atan2(meepo[i].Position.Y - pos.Y, pos.X - meepo[i].Position.X);
                                         meepo[i].Spellbook.SpellQ.UseAbility(pos);//new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
-                                        
+
                                         //Utils.Sleep(300, "event" + i.ToString());
                                     }
                                 }
