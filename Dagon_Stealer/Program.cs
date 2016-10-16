@@ -285,7 +285,7 @@ namespace Dagon_Stealer
 
             
 
-            /*if (minposmtoe > -1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
+            if (minposmtoe > -1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
             {
                 
                 //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
@@ -298,7 +298,7 @@ namespace Dagon_Stealer
                     var mblink = meepo[minposmtoe].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
                     if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)
                     {
-                        mblink.UseAbillity(maxhpepmeepo.Position);
+                        mblink.UseAbility(maxhpepmeepo.Position);
                     }
                     else
                     {
@@ -321,7 +321,7 @@ namespace Dagon_Stealer
                     meepo[minposmtoe].Attack(maxhpepmeepo); 
                 }
                 Utils.Sleep(100, "at" + minposmtoe.ToString());
-            }*/
+            }*
 
             float damag = 0;
             foreach (var a in meepo)
