@@ -204,7 +204,7 @@ namespace Dagon_Stealer
 
             //float mindistw = 99999;
             //var minposwmeepo = 0;
-            /*ssss
+            
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
                 Hero a = meepo[i];
@@ -243,7 +243,7 @@ namespace Dagon_Stealer
                 }
 
             }
-            */
+            
 
             //ai kills
 
