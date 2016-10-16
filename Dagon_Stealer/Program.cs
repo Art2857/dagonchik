@@ -603,7 +603,8 @@ namespace Dagon_Stealer
             //double mindistmtoe = 1000000;//priority
             //var minposmtoe = -1;//meepo
 
-            Drawing.DrawText("priority:" + mindistmtoe.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
+            //Drawing.DrawText("priority:" + mindistmtoe.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
+            
             //Drawing.DrawText("minposmtoe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); //Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
             
             /*
