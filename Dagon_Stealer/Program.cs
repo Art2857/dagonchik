@@ -500,8 +500,8 @@ namespace Dagon_Stealer
                             }
                         }
 
-                        
-                        if (meepo[maxhpfwmeepo].Health > b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
+
+                        if (maxhpfwmeepo != minhpmeepo && minhpmeepo != j && meepo[maxhpfwmeepo].Health > b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
                         {
                             Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                             if (nmf > 1)
@@ -533,7 +533,7 @@ namespace Dagon_Stealer
                        float hp = a.Health;
                        if (meepo[i].Health < meepo[i].MaximumHealth * 0.5)
                        {
-                           if (meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 3000) { poof[i] = minposmeepo; Utils.Sleep(50, "pf" + i.ToString()); }
+                           if (meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 5000 && i != minposmeepo) { poof[i] = minposmeepo; Utils.Sleep(50, "pf" + i.ToString()); }
                            else
                            {
                                var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
@@ -595,7 +595,7 @@ namespace Dagon_Stealer
                         if (meepo[i].Health > meepo[i].MaximumHealth * 0.5)
                         {
 
-                            if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
+                            if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } //else { meepo[i].Stop(); }
                         }
                         poof[i] = -2;
 
