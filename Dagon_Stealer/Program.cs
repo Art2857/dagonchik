@@ -185,14 +185,6 @@ namespace Dagon_Stealer
 
 
 
-            float minhpep = 99999;
-            Hero maxhpepmeepo = null;
-            foreach (var a in enemy_poof)
-            {
-                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
-                if (hp < minhpep) { minhpep = hp; maxhpepmeepo = a; }
-            }
-
 
 
             //Фонтан         
@@ -268,8 +260,18 @@ namespace Dagon_Stealer
             }*/
 
 
-            double mindistmtoe = 99999;
-            var minposmtoe = -1;
+
+            /*float minhpep = 99999;
+            Hero maxhpepmeepo = null;
+            foreach (var a in enemy_poof)
+            {
+                float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
+                if (hp < minhpep) { minhpep = hp; maxhpepmeepo = a; }
+            }*/
+
+            Hero maxhpepmeepo = null;//enemy
+            double mindistmtoe = 99999;//priority
+            var minposmtoe = -1;//meepo
 
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
             {
@@ -277,8 +279,8 @@ namespace Dagon_Stealer
                 foreach (var b in enemy_poof)
                 {
                     //double dist = a.Distance2D(b.Position);
-                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) * Math.Pow(a.Distance2D(b.Position), 1.5) / 10000;
-                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; }
+                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1.75);
+                    if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
 
@@ -307,7 +309,7 @@ namespace Dagon_Stealer
                             }
                             else
                             {
-                                if (me.Health == me.MaximumHealth && nmf > 1 && Utils.SleepCheck("w"+i.ToString()))
+                                if (me.Health == me.MaximumHealth && nmf > 1 && Utils.SleepCheck("w" + i.ToString()))
                                 {
                                     poof[0] = minposmtoe; Utils.Sleep(50, "pf" + i.ToString());
                                     Utils.Sleep(4500, "w" + i.ToString());
@@ -315,17 +317,26 @@ namespace Dagon_Stealer
                             }
                             if (meepo[i/*minposmtoe*/].Distance2D(maxhpepmeepo.Position) > 500)
                             {
-                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(1000));
+                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(500));
                             }
                             else
                             {
-                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(50));
+                                meepo[i/*minposmtoe*/].Move(maxhpepmeepo.Predict(10));
                             }
                         }
                         else
                         {
                             meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
                         }
+
+                        if (meepo[i].Spellbook.SpellQ.Level>0)
+                        {
+                            if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_divided_we_stand")) && meepo[i].Distance2D(maxhpepmeepo.Position) < 500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1) && meepo[i].Spellbook.SpellQ.Cooldown == 0)
+                            {
+                                meepo[i].Spellbook.SpellQ.UseAbility(maxhpepmeepo.Predict(500));
+                            }
+                        }
+
                         Utils.Sleep(100, "at" + i/*minposmtoe*/.ToString());
                     }
                 }
@@ -449,7 +460,7 @@ namespace Dagon_Stealer
                         Utils.Sleep(2500, "war" + i.ToString());
                         poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
                     }
-                    else
+                    /*else
                     {
                         var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
                         if (mtp == null)
@@ -463,7 +474,7 @@ namespace Dagon_Stealer
                             Utils.Sleep(2500, "war" + i.ToString());
                             poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
                         }
-                    }
+                    }*/
 
                 }
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
@@ -536,10 +547,13 @@ namespace Dagon_Stealer
             Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(1000, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-
+            
+            /*
             Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
             Drawing.DrawText("min hp e:" + minhpep.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("min dist toe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
+            */
+
             //var mindistmtoe = 99999;
             //var minposmtoe = 0;
 
