@@ -332,7 +332,7 @@ namespace Dagon_Stealer
                             else
                             {
                                 meepo[i/*minposmtoe*/].Attack(maxhpepmeepo);
-                                Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "event" + i.ToString());
+                                Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "at" + i.ToString());
                             }
 
 
@@ -346,7 +346,7 @@ namespace Dagon_Stealer
                                         var dir = Math.Atan2(meepo[i].Position.Y-pos.Y, pos.X-meepo[i].Position.X);
                                         meepo[i].Spellbook.SpellQ.UseAbility(new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
                                         Utils.Sleep((500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
-                                        Utils.Sleep(300, "event" + i.ToString());
+                                        //Utils.Sleep(300, "event" + i.ToString());
                                     }
                                 }
                             }
