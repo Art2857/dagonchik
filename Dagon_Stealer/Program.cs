@@ -283,17 +283,19 @@ namespace Dagon_Stealer
             }
 
 
-            if (minposmtoe > -1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
-            {
-                /*if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
-                {
-                    if //tp
-                }*/
+            
 
-                var mblink = meepo[minposmtoe].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
+            /*if (minposmtoe > -1 && Utils.SleepCheck("at" + minposmtoe.ToString()))
+            {
+                
+                //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
+                //{
+                    //if //tp
+                //}          
 
                 if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 200)
                 {
+                    var mblink = meepo[minposmtoe].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
                     if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) < 1200 && mblink != null && mblink.Cooldown == 0)
                     {
                         mblink.UseAbillity(maxhpepmeepo.Position);
@@ -303,19 +305,23 @@ namespace Dagon_Stealer
                         if (me.Health == me.MaximumHealth && nmf > 1)
                         {
                             poof[0] = minposmtoe; Utils.Sleep(50, "pf0");
-                            /*W.UseAbility(meepo[minposmtoe].Position);
-                            Utils.Sleep(2500, "war0");
-                            poof[0] = -1; Utils.Sleep(2500, "stp0");*/
                         }
                     }
                     if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 500)
-                    { meepo[minposmtoe].Move(maxhpepmeepo.Predict(1000)); }
-                    else { meepo[minposmtoe].Move(maxhpepmeepo.Predict(50)); }
+                    {
+                        meepo[minposmtoe].Move(maxhpepmeepo.Predict(1000)); 
+                    }
+                    else 
+                    { 
+                        meepo[minposmtoe].Move(maxhpepmeepo.Predict(50)); 
+                    }
                 }
                 else
-                { meepo[minposmtoe].Attack(maxhpepmeepo); }
+                { 
+                    meepo[minposmtoe].Attack(maxhpepmeepo); 
+                }
                 Utils.Sleep(100, "at" + minposmtoe.ToString());
-            }
+            }*/
 
             float damag = 0;
             foreach (var a in meepo)
