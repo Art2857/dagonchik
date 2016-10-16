@@ -175,12 +175,12 @@ namespace Dagon_Stealer
                 if (W.Level>0){damag+=80+(W.Level-1)*20;}
             }
 
-            float minhpep = 0;
+            float minhpep = 99999;
             Hero maxhpepmeepo = meepo[0];
             foreach (var a in enemy_poof)
             {
                 float hp = a.Health;//Distance2D(new Vector3(bx, by, 0));
-                if (hp > minhpep) { minhpep = hp; maxhpepmeepo = a; }
+                if (hp < minhpep) { minhpep = hp; maxhpepmeepo = a; }
             }
 
             var blink = me.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));
@@ -257,7 +257,7 @@ namespace Dagon_Stealer
             {
                 if (minposmeepo!= minhpmeepo)         
                 {
-                    if (((meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && meepo[minhpmeepo].CanCast() && meepo[minhpmeepo].Spellbook.SpellW.CanBeCasted()) || travel!=null) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    if (((meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && meepo[minhpmeepo].CanCast() && meepo[minhpmeepo].Spellbook.SpellW.CanBeCasted()) || (travel != null && meepo[minhpmeepo].Health < meepo[minhpmeepo].MaximumHealth * 0.3)) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
                         
@@ -330,6 +330,7 @@ namespace Dagon_Stealer
                     { 
                         meepo[i].Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
                         Utils.Sleep(2500, "war" + i.ToString());
+                        poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
                     }
                     else
                     {
@@ -342,9 +343,10 @@ namespace Dagon_Stealer
                         {
                             mtp.UseAbility(meepo[poof[i]].Position);
                             Utils.Sleep(2500, "war" + i.ToString());
+                            poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
                         }
                     }
-                    poof[i] = -1; Utils.Sleep(2500, "stp" + i.ToString());
+                    
                 }
                 if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
                 {
