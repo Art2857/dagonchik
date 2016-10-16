@@ -191,7 +191,7 @@ namespace Dagon_Stealer
             {
                 Hero a=meepo[i];
                 float hp = a.Health;
-                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff"))
+                if (a.Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && a.Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 300)
                 {
                     nmf += 1;
                     if (hp > maxhpf)
@@ -234,7 +234,7 @@ namespace Dagon_Stealer
                 {
                     if (meepo[minhpmeepo].Spellbook.SpellW.Cooldown == 0 && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
-                        Utils.Sleep(2000, "w" + minhpmeepo.ToString());
+                        //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
                         
                         
                         
@@ -266,13 +266,18 @@ namespace Dagon_Stealer
 
                             if (meepo[maxhpfwmeepo].Health > meepo[minhpmeepo].Health)
                             {
+                                Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                                 if (nmf > 1)
                                 {
                                     meepo[maxhpfwmeepo].Stop();
                                     poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(10, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
                                 }
                                 meepo[minhpmeepo].Stop();
-                                poof[minhpmeepo] = j; Utils.Sleep(250, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
+                                poof[minhpmeepo] = j; Utils.Sleep(500, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
+                            }
+                            else
+                            {
+                                Utils.Sleep(500, "w" + minhpmeepo.ToString());
                             }
 
                         
@@ -342,18 +347,21 @@ namespace Dagon_Stealer
         }*/
             
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }//me.Position[0]
-            Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(300, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("min hp:"+minhp.ToString(), new Vector2(300, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("map hp:"+maxhp.ToString(), new Vector2(300, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("min dist to b:"+mindist.ToString(), new Vector2(300, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            var size = new Vector2(20, 20);
+            var colour = Color.White;
+            var font = FontFlags.AntiAlias;
+            Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(300, 200), size,colour,font);
+            Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(300, 250), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(400, 250), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(300, 300), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(400, 300), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("min dist to b:" + mindist.ToString(), new Vector2(300, 350), new Vector2(20, 20), size, colour, font); Drawing.DrawText("min dist to b:" + minposmeepo.ToString(), new Vector2(300, 350), new Vector2(20, 20), size, colour, font);
 
-            Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(500, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("min hp:"+minhpf.ToString(), new Vector2(500, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("max hp:"+maxhpf.ToString(), new Vector2(500, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(500, 200), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("min hp:" + minhpf.ToString(), new Vector2(500, 250), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpfmeepo.ToString(), new Vector2(600, 250), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("max hp:" + maxhpf.ToString(), new Vector2(500, 300), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpfmeepo.ToString(), new Vector2(600, 300), new Vector2(20, 20), size, colour, font);
 
-            Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(700, 200), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("min hp:"+minhpw.ToString(), new Vector2(700, 250), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            Drawing.DrawText("max hp:"+maxhpw.ToString(), new Vector2(700, 300), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
+            Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(700, 200), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(700, 250), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(800, 250), new Vector2(20, 20), size, colour, font);
+            Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(700, 300), new Vector2(20, 20), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(800, 300), new Vector2(20, 20), size, colour, font);
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
 
             //Drawing.DrawText("minposmeepo", HUDInfo.GetHPbarPositionX(minposmeepo), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);//new Vector2(HUDInfo.GetHPBarSizeX(enemy), HUDInfo.GetHpBarSizeY(enemy));
