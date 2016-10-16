@@ -288,7 +288,7 @@ namespace Dagon_Stealer
 
 
 
-
+            /*
             if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
@@ -383,7 +383,7 @@ namespace Dagon_Stealer
                     //}
                     }
             }
-           
+           */
           
             /*
             for (var i = 0; i < meepo.Count; i += 1)
