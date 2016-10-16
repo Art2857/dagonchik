@@ -125,6 +125,8 @@ namespace Dagon_Stealer
             var D = me.Spellbook.SpellD;
             var R = me.Spellbook.SpellR;
 
+            var tick = Environment.TickCount;
+
             var bx = 7000;
             var by = 7000;
 
@@ -349,7 +351,7 @@ namespace Dagon_Stealer
                                 }
                             }
 
-                            Utils.Sleep(50, "at" + i/*minposmtoe*/.ToString());
+                            Utils.Sleep(tick, "at" + i/*minposmtoe*/.ToString());
                         }
                     }
                 }
@@ -374,7 +376,7 @@ namespace Dagon_Stealer
                             float dist = a.Distance2D(b.Position);
                             if (dist < mindistc) { mindistc = dist; minposcreep = b; }
                         }
-                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(50, "at" + i.ToString()); }
+                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else {  Utils.Sleep(tick, "at" + i.ToString()); }
                         }
 
                     //}
@@ -462,7 +464,7 @@ namespace Dagon_Stealer
                             if (nmf > 1)
                             {
                                 //meepo[maxhpfwmeepo].Stop();
-                                poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(10, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
+                                poof[maxhpfwmeepo] = minhpmeepo; Utils.Sleep(tick, "pf" + maxhpfwmeepo.ToString()); //meepo[maxhpfwmeepo].Spellbook.SpellW.UseAbility(meepo[minhpmeepo].Position);
                             }
                             //meepo[minhpmeepo].Stop();
                             poof[minhpmeepo] = j; Utils.Sleep(500, "pf" + minhpmeepo.ToString());//meepo[minhpmeepo].Spellbook.SpellW.UseAbility(meepo[j].Position);
@@ -482,7 +484,7 @@ namespace Dagon_Stealer
             {
                 if (nmf == 0 && Utils.SleepCheck("m"))
                 {
-                    Utils.Sleep(100, "m");
+                    Utils.Sleep(tick+100, "m");
                     meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
                 }
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
@@ -524,7 +526,7 @@ namespace Dagon_Stealer
 
                         if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
 
-                        poof[i] = -2;
+                        poof[i] = -100;
                     }
                 }
             }
