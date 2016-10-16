@@ -646,7 +646,7 @@ namespace Dagon_Stealer
             Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(200, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(350, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(200, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(350, 300), size, colour, font);
             Drawing.DrawText("min dist to b:" + mindist.ToString(), new Vector2(200, 350), size, colour, font); Drawing.DrawText("min dist to b:" + minposmeepo.ToString(), new Vector2(350, 350), size, colour, font);
-            Drawing.DrawText("Swap:" + Math.Max(tmpf, tmpw).ToString(), new Vector2(200, 400), size, colour, font);
+            Drawing.DrawText("Swap:" + Math.Max((int)tmpf,(int)tmpw).ToString(), new Vector2(200, 400), size, colour, font);
 
             Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(600, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhpf.ToString(), new Vector2(600, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpfmeepo.ToString(), new Vector2(750, 250), size, colour, font);
