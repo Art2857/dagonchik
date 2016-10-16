@@ -363,13 +363,13 @@ namespace Dagon_Stealer
                         {
                         float mindistc = 99999;
                         Hero a = meepo[i];
-                        //Hero minposcreep=null;
+                        Unit minposcreep=null;
                         foreach (var b in creeps)
                         {
                             float dist = a.Distance2D(b.Position);
-                            if (dist < mindistc) { mindistc = dist; } //minposcreep = b; }
+                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
                         }
-                        //if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(50, "at" + i.ToString()); }
+                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(50, "at" + i.ToString()); }
                         }
 
                     //}
