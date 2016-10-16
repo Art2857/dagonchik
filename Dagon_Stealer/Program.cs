@@ -273,7 +273,7 @@ namespace Dagon_Stealer
             }*/
 
 
-            
+            /*
             Hero maxhpepmeepo = null;//enemy
             double mindistmtoe = 1000000;//priority
             var minposmtoe = -1;//meepo
@@ -288,7 +288,7 @@ namespace Dagon_Stealer
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
-
+            */
 
 
             /*
