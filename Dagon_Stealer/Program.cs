@@ -558,7 +558,7 @@ namespace Dagon_Stealer
                 }
 
             }
-            if (bd) { damag += poofdamag * dmg; } 
+            //if (bd) { damag += poofdamag * dmg; } 
             }
 
             /*
