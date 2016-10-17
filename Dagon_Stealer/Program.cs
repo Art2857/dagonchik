@@ -297,13 +297,13 @@ namespace Dagon_Stealer
 
 
 
-            
+
             if (minposmtoe > -1 && maxhpepmeepo != null)
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
                     Hero a = meepo[i];
-                    if (a.Health > a.MaximumHealth * 0.5)
+                    if (a.Health > a.MaximumHealth * 0.5 && Utils.SleepCheck("pf" + i.ToString()))
                     {
                     //if (Utils.SleepCheck("event" + i.ToString()))
                     //{
@@ -489,11 +489,9 @@ namespace Dagon_Stealer
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
             foreach (var a in enemy_poof)
             {
-                float dmg = (1 - a.MagicDamageResist);
-                float damag = 0;  
+                
                 float dist=me.Distance2D(a.Position);
-                var nmui=0;
-                string k = "";
+                
                 bool bd=false;
                 if (blink != null && blink.Cooldown == 0 && dist < 1200) { bd = true; }
             for (int i1 = 0; i1 < 4; i1 += 1)
@@ -504,6 +502,10 @@ namespace Dagon_Stealer
                     {
                         for (int i4 = 0; i4 < 4; i4 += 1)
                         {
+                            float dmg = (1 - a.MagicDamageResist);
+                            float damag = 0;  
+                            var nmui = 0;
+                            string k = "";
                             if (i1 != i2 && i1 != i3 && i1 != i4 && i2 != i3 && i2 != i4 && i3 != i4)
                             {
                                 
@@ -688,7 +690,7 @@ namespace Dagon_Stealer
             {
                 //if (Utils.SleepCheck("event" + i.ToString()))
                 //{
-                if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()) && Utils.SleepCheck("stp" + i.ToString()))
+                if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()) /*&& Utils.SleepCheck("stp" + i.ToString())*/)
                     {
                         meepo[minhpmeepo].Stop();
                         Hero a=meepo[i];
@@ -716,7 +718,7 @@ namespace Dagon_Stealer
                         //}
 
                     }
-                    if (poof[i] == -1 && Utils.SleepCheck("stp" + i.ToString()))
+                if (poof[i] == -1 && Utils.SleepCheck("pf" + i.ToString()) && Utils.SleepCheck("stp" + i.ToString()))
                     {
                         if (meepo[i].Health > meepo[i].MaximumHealth * 0.5)
                         {
