@@ -455,7 +455,7 @@ namespace Dagon_Stealer
             {
                 if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
             }*/
-            double ethereal_damag = 0;
+            float ethereal_damag = 0;
             if (ethereal != null)
             {
                 ethereal_damag = me.TotalStrength;
@@ -464,14 +464,14 @@ namespace Dagon_Stealer
                 ethereal_damag *= 2;
                 ethereal_damag += 75;
             }
-            
-
-            if (dagon != null) { double dagon_damag = 400 + 100 * (dagon.Level - 1); } else { double dagon_damage = 0; }
 
 
+            if (dagon != null) { float dagon_damag = 400 + 100 * (dagon.Level - 1); } else { float dagon_damage = 0; }
 
-            
-            double poofdamag = 0;
+
+
+
+            float poofdamag = 0;
             if (blink != null && blink.Cooldown == 0 && W.Level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
 
             float maxdamag = 0;//if (&&  && W.level>0) {var maxdamag=(80+(W.Level-1)*20)*(meepo.Count-1);}else{
@@ -485,7 +485,7 @@ namespace Dagon_Stealer
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
             foreach (var a in enemy_poof)
             {
-                double dmg = (1 - a.MagicDamageResist);
+                float dmg = (1 - a.MagicDamageResist);
                 float damag = 0;  
                 float dist=me.Distance2D(a.Position);
                 var nmui=0;
