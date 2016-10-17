@@ -402,6 +402,8 @@ namespace Dagon_Stealer
             }
             }
 
+
+                
             
                 
                 
@@ -447,31 +449,125 @@ namespace Dagon_Stealer
 
                 }
             }*/
-
+            /*
             float damag = 0;
             foreach (var a in meepo)
             {
                 if (W.Level > 0) { damag += 80 + (W.Level - 1) * 20; }
-            }
-
+            }*/
+            double ethereal_damag = 0;
             if (ethereal != null)
             {
-                double ethereal_damag = me.TotalStrength;
+                ethereal_damag = me.TotalStrength;
                 if ((int)me.PrimaryAttribute == 1) { ethereal_damag = me.TotalAgility; }
                 if ((int)me.PrimaryAttribute == 2) { ethereal_damag = me.TotalIntelligence; }
                 ethereal_damag *= 2;
                 ethereal_damag += 75;
             }
-            else
-            {
-                double ethereal_damag = 0;
-            }
+            
 
             if (dagon != null) { double dagon_damag = 400 + 100 * (dagon.Level - 1); } else { double dagon_damage = 0; }
 
 
 
 
+            var poofdamag=0;
+            if (blick != null && blink.Cooldown == 0 && W.level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
+
+            var maxdamag = 0;//if (&&  && W.level>0) {var maxdamag=(80+(W.Level-1)*20)*(meepo.Count-1);}else{
+            string mbk="";
+            var mindamagkill = 99999;
+            Hero kah = null;//враг
+            string bk = "";//best combo
+            var mui=4;//min use items
+
+            //Hero mk=meepo[minposmtoe];
+            //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
+            foreach (var a in enemy_poof)
+            {
+                float dmg = (1 - a.MagicDamageResist);
+                float damag = 0;  
+                float dist=me.Distance2D(a);
+                var nmui=0;
+                string k = "";
+                bool bd=false;
+                if (blink != null && blink.Cooldown == 0 && dist < 1200) { bd = true; }
+            for(var i1=0; i1<4; i1+=1)
+            {
+                for(var i2=0; i2<4; i2+=1)
+                {
+                    for(var i3=0; i3<4; i3+=1)
+                    {
+                        for(var i4=0; i4<4; i4+=1)
+                        {
+                            if (i1!=i2 && i1!=i3 && i1!=i4 && i2!=i3 && i2!=i4 && i3!=i4)
+                            {
+                                nmui += 1;
+                                switch (i1)
+                                {
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
+                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                }
+                                k += i1.ToString();
+                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+
+                                nmui += 1;
+                                switch (i2)
+                                {
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
+                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                }
+                                k += i2.ToString();
+                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+
+                                nmui += 1;
+                                switch (i3)
+                                {
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
+                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                }
+                                k += i3.ToString();
+                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+
+                                nmui += 1;
+                                switch (i4)
+                                {
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
+                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                }
+                                k += i4.ToString();
+                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+
+
+
+                                if (damag > maxdamag) { mbk = k; maxdamag = damag; }
+                                /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
+                                if (i1 == 1 && ethereal != null) { if (dist < ethereal.CastRange()) { damag += ethereal_damag * dmg; dmg *= 1.4; } 
+                                if (i1 == 2 && dagon!=null) { if (dist < dagon.CastRange()) { damag += (400+100*(dagon.Level-1)) * dmg; } } 
+                                if (i1 == 3 && (orchid!=null || bloodthorn!=null)) { if (dist < dagon.CastRange()) { dmg*=1.3; } } */
+                            }
+                        }
+                    }
+                }
+
+            }
+            if (/*blink != null && blink.Cooldown == 0*/bd) { damag += poofdamag * dmg; } 
+            }
+
+            Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
+            //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
+            Drawing.DrawText("mui:" + mui.ToString(), new Vector2(864, 753), size, colour, font);//itemuse
+
+            Drawing.DrawText("mbk:" + mbk.ToString(), new Vector2(764, 853), size, colour, font); //последовательность максимального дамага
+            Drawing.DrawText("MAXDMG:" + maxdamag.ToString(), new Vector2(864, 853), size, colour, font);//максимальный дамаг
 
             /*if (nmf>1)
             {
