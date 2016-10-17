@@ -697,13 +697,8 @@ namespace Dagon_Stealer
                 if (minposmeepo != minhpmeepo)
                 {
                     Hero b = meepo[minhpmeepo];
-                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5 || b.Mana < b.MaximumMana * 0.33/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
-                    {
-                        //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
 
-
-
-                        var j = maxhpfmeepo;
+                    var j = maxhpfmeepo;
 
                         //ишем кем с базы заменить на того кто в бою
                         float maxhpfw = 0;
@@ -718,6 +713,14 @@ namespace Dagon_Stealer
                                 maxhpfwmeepo = i;
                             }
                         }
+                    
+                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || meepo[maxhpfwmeepo].Health >= b.Health || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5 || b.Mana < b.MaximumMana * 0.33/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    {
+                        //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
+
+
+
+                        
 
                         //ишем того на кого выпрыгнуть из боя
                         for (var i = 0; i < meepo.Count; i += 1)
