@@ -318,7 +318,7 @@ namespace Dagon_Stealer
                                 //}          
 
 
-                                if (a.Distance2D(maxhpepmeepo.Position) < 1200)
+                                /*if (a.Distance2D(maxhpepmeepo.Position) < 1200)
                                 {
                                     var mblink = a.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
                                     if (mblink != null && mblink.Cooldown == 0)//minposmtoe
@@ -347,7 +347,7 @@ namespace Dagon_Stealer
                                         }
                                     }
                                     }
-                                }
+                                }*/
 
 
                                 if (a.Distance2D(maxhpepmeepo.Position) > 750 && Utils.SleepCheck("m" + i.ToString()))//minposmtoe
