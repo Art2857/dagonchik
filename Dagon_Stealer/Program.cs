@@ -250,7 +250,7 @@ namespace Dagon_Stealer
 
             }
 
-            if (nmf == 0)
+            if (meepo.Count <= 1)
             {
                 return;
             }
@@ -668,12 +668,13 @@ namespace Dagon_Stealer
                 }
             }
 
-            Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
-            //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
-            Drawing.DrawText("mui:" + mui.ToString(), new Vector2(864, 753), size, colour, font);//itemuse
+            //Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
+                //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
+            //Drawing.DrawText("mui:" + mui.ToString(), new Vector2(864, 753), size, colour, font);//itemuse
 
-            Drawing.DrawText("mbk:" + mbk.ToString(), new Vector2(764, 853), size, colour, font); //последовательность максимального дамага
-            Drawing.DrawText("MAXDMG:" + maxdamag.ToString(), new Vector2(864, 853), size, colour, font);//максимальный дамаг
+            //Drawing.DrawText("mbk:" + mbk.ToString(), new Vector2(764, 853), size, colour, font); //последовательность максимального дамага
+            //Drawing.DrawText("MAXDMG:" + maxdamag.ToString(), new Vector2(864, 853), size, colour, font);//максимальный дамаг
+
 
             /*blink != null && blink.Cooldown == 0*/
             /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
@@ -877,7 +878,8 @@ namespace Dagon_Stealer
         }*/
 
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }//me.Position[0]
-
+            
+            /*ssss
             Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(200, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(200, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(350, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(200, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(350, 300), size, colour, font);
@@ -891,7 +893,7 @@ namespace Dagon_Stealer
             Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(1000, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(1000, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
-
+            */
 
 
 
