@@ -336,7 +336,7 @@ namespace Dagon_Stealer
                             }
 
 
-                            if (a.Distance2D(maxhpepmeepo.Position) > 750)//minposmtoe
+                            if (a.Distance2D(maxhpepmeepo.Position) > 750 && Utils.SleepCheck("m" + i.ToString()))//minposmtoe
                             {
 
                                 //if (meepo[i].Distance2D(maxhpepmeepo.Position) > 1200)//minposmtoe
@@ -346,6 +346,7 @@ namespace Dagon_Stealer
                                 //else
                                 //{
                                 a.Move(maxhpepmeepo.Position);//minposmtoe
+                                Utils.Sleep(500, "m" + i.ToString());
                                 //}
                             }
                             else
