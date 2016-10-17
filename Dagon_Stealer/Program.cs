@@ -250,6 +250,11 @@ namespace Dagon_Stealer
 
             }
 
+            if (nmf == 0)
+            {
+                return;
+            }
+
 
             //ai kills
 
@@ -691,7 +696,7 @@ namespace Dagon_Stealer
                 if (minposmeepo != minhpmeepo)
                 {
                     Hero b = meepo[minhpmeepo];
-                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5 || b.Mana < 160/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5 || b.Mana < b.MaximumMana * 0.33/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
 
@@ -724,7 +729,7 @@ namespace Dagon_Stealer
                         }
 
 
-                        if (maxhpfwmeepo != minhpmeepo && minhpmeepo != j && meepo[maxhpfwmeepo].Health >= b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || b.Mana < 160 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
+                        if (maxhpfwmeepo != minhpmeepo && minhpmeepo != j && meepo[maxhpfwmeepo].Health >= b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || b.Mana < b.MaximumMana * 0.33 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
                         {
                             Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                             if (nmf > 1)
