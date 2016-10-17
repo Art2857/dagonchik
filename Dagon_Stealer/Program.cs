@@ -281,7 +281,7 @@ namespace Dagon_Stealer
 
             
             Hero maxhpepmeepo = null;//enemy
-            double mindistmtoe = 10000000;//priority
+            double mindistmtoe = 90000000;//priority
             var minposmtoe = -1;//meepo
 
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
@@ -290,7 +290,7 @@ namespace Dagon_Stealer
                 foreach (var b in enemy_poof)
                 {
                     //double dist = a.Distance2D(b.Position);
-                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1.5);
+                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1/1.5);
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
@@ -560,10 +560,10 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i1)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    case 0: { if (discord != null && discord.Cooldown==0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                     default: { break; }
                                 }
                                 k += i1.ToString();
@@ -572,10 +572,10 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i2)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                 }
                                 k += i2.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -583,10 +583,10 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i3)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                 }
                                 k += i3.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -594,10 +594,10 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i4)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                 }
                                 k += i4.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -612,9 +612,9 @@ namespace Dagon_Stealer
                 }
 
             }
-            } 
-            
+            }
 
+            int ev=(int)bk[0];
             
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
             //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
