@@ -470,7 +470,7 @@ namespace Dagon_Stealer
 
 
 
-
+            /*
             float poofdamag = 0;
             if (blick != null && blink.Cooldown == 0 && W.level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
 
@@ -549,17 +549,13 @@ namespace Dagon_Stealer
 
 
                                 if (damag > maxdamag) { mbk = k; maxdamag = damag; }
-                                /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
-                                if (i1 == 1 && ethereal != null) { if (dist < ethereal.CastRange()) { damag += ethereal_damag * dmg; dmg *= 1.4; } 
-                                if (i1 == 2 && dagon!=null) { if (dist < dagon.CastRange()) { damag += (400+100*(dagon.Level-1)) * dmg; } } 
-                                if (i1 == 3 && (orchid!=null || bloodthorn!=null)) { if (dist < dagon.CastRange()) { dmg*=1.3; } } */
-                            }
+                                }
                         }
                     }
                 }
 
             }
-            if (/*blink != null && blink.Cooldown == 0*/bd) { damag += poofdamag * dmg; } 
+            if (bd) { damag += poofdamag * dmg; } 
             }
 
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
@@ -568,7 +564,12 @@ namespace Dagon_Stealer
 
             Drawing.DrawText("mbk:" + mbk.ToString(), new Vector2(764, 853), size, colour, font); //последовательность максимального дамага
             Drawing.DrawText("MAXDMG:" + maxdamag.ToString(), new Vector2(864, 853), size, colour, font);//максимальный дамаг
-
+            */
+            /*blink != null && blink.Cooldown == 0*/
+            /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
+                                if (i1 == 1 && ethereal != null) { if (dist < ethereal.CastRange()) { damag += ethereal_damag * dmg; dmg *= 1.4; } 
+                                if (i1 == 2 && dagon!=null) { if (dist < dagon.CastRange()) { damag += (400+100*(dagon.Level-1)) * dmg; } } 
+                                if (i1 == 3 && (orchid!=null || bloodthorn!=null)) { if (dist < dagon.CastRange()) { dmg*=1.3; } } */
             /*if (nmf>1)
             {
             
