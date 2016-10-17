@@ -615,6 +615,8 @@ namespace Dagon_Stealer
             }
             if (Utils.SleepCheck("combo"))
             {
+                if (kah!=null)
+                {
                 float dist = me.Distance2D(kah.Position);
                 if (bk.Length > 0)
                 {
@@ -629,6 +631,7 @@ namespace Dagon_Stealer
                 }
                 else
                 {
+                    if (mbk.Length > 0)
                     int ev = (int)mbk[0];
                     switch (ev)
                     {
@@ -638,6 +641,8 @@ namespace Dagon_Stealer
                         case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900) { bloodthorn.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
                     }
                 }
+                }
+            }
             }
 
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
