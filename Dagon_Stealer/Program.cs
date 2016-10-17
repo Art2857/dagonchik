@@ -470,7 +470,7 @@ namespace Dagon_Stealer
 
 
 
-            /*
+            
             float poofdamag = 0;
             if (blick != null && blink.Cooldown == 0 && W.level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
 
@@ -483,7 +483,7 @@ namespace Dagon_Stealer
 
             //Hero mk=meepo[minposmtoe];
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
-            foreach (var a in enemy_poof)
+            /*foreach (var a in enemy_poof)
             {
                 float dmg = (1 - a.MagicDamageResist);
                 float damag = 0;  
