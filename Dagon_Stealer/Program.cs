@@ -514,14 +514,14 @@ namespace Dagon_Stealer
                                 }
                                 k += i1.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
-                                /*
+                                
                                 nmui += 1;
                                 switch (i2)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
-                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                 }
                                 k += i2.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -529,10 +529,10 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i3)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
-                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                 }
                                 k += i3.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -540,10 +540,10 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i4)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
-                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < 800 || bd) {  damag = (float)(damag +ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                    case 2: { if (dagon != null) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
                                 }
                                 k += i4.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -551,7 +551,7 @@ namespace Dagon_Stealer
 
 
                                 if (damag > maxdamag) { mbk = k; maxdamag = damag; }
-                                */
+                                
                             }
                         }
                     }
@@ -573,7 +573,13 @@ namespace Dagon_Stealer
             /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
                                 if (i1 == 1 && ethereal != null) { if (dist < ethereal.CastRange()) { damag += ethereal_damag * dmg; dmg *= 1.4; } 
                                 if (i1 == 2 && dagon!=null) { if (dist < dagon.CastRange()) { damag += (400+100*(dagon.Level-1)) * dmg; } } 
-                                if (i1 == 3 && (orchid!=null || bloodthorn!=null)) { if (dist < dagon.CastRange()) { dmg*=1.3; } } */
+                                if (i1 == 3 && (orchid!=null || bloodthorn!=null)) { if (dist < dagon.CastRange()) { dmg*=1.3; } } 
+             
+             * case 0: { if (discord != null) { if (dist < 1600 || bd) { dmg *= 1.25; } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; } break; } }
+                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
+                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
+             */
             /*if (nmf>1)
             {
             
