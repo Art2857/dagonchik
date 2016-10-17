@@ -465,8 +465,8 @@ namespace Dagon_Stealer
                 ethereal_damag += 75;
             }
 
-            float dagon_damage = 0;
-            if (dagon != null) { dagon_damag = 400 + 100 * (dagon.Level - 1); }
+            float dagon_damag = 0;
+            if (dagon != null) { dagon_damag += 400 + 100 * (dagon.Level - 1); }
 
 
 
