@@ -471,7 +471,7 @@ namespace Dagon_Stealer
 
 
             
-            float poofdamag = 0;
+            double poofdamag = 0;
             if (blink != null && blink.Cooldown == 0 && W.Level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
 
             float maxdamag = 0;//if (&&  && W.level>0) {var maxdamag=(80+(W.Level-1)*20)*(meepo.Count-1);}else{
