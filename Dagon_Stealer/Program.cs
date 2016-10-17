@@ -485,7 +485,7 @@ namespace Dagon_Stealer
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
             foreach (var a in enemy_poof)
             {
-                float dmg = (1 - a.MagicDamageResist);
+                double dmg = (1 - a.MagicDamageResist);
                 float damag = 0;  
                 float dist=me.Distance2D(a.Position);
                 var nmui=0;
@@ -506,7 +506,7 @@ namespace Dagon_Stealer
                                 nmui += 1;
                                 switch (i1)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd == true) { /*dmg = dmg * 1.25;*/ } } break; }
+                                    case 0: { if (discord != null) { if (dist < 1600 || bd == true) { dmg = dmg * 1.25; } } break; }
                                     case 1: { /*if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; }}*/ break;  }
                                     case 2: { /*if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } }*/ break; }
                                     case 3: { /*if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } }*/ break; }
