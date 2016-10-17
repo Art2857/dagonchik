@@ -507,9 +507,9 @@ namespace Dagon_Stealer
                                 switch (i1)
                                 {
                                     case 0: { if (discord != null) { if (dist < 1600 || bd == true) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg = (float)(dmg*1.4); }} break; }
-                                    case 2: { if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } } break; }
-                                    case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    case 1: { if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += (float)(ethereal_damag * dmg); dmg = (float)(dmg*1.4); }} break; }
+                                    case 2: { /*if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } }*/ break; }
+                                    case 3: { /*if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } }*/ break; }
                                     default: { break; }
                                 }
                                 k += i1.ToString();
