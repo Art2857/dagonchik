@@ -318,7 +318,7 @@ namespace Dagon_Stealer
                                 //}          
 
 
-                                /*if (a.Distance2D(maxhpepmeepo.Position) < 1200)
+                                if (a.Distance2D(maxhpepmeepo.Position) < 1200)
                                 {
                                     var mblink = a.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
                                     if (mblink != null && mblink.Cooldown == 0)//minposmtoe
@@ -329,7 +329,7 @@ namespace Dagon_Stealer
                                     {
                                         if (nmf > 1)
                                         {
-                                        if (me.Health >= me.MaximumHealth && war[0]==0 && Utils.SleepCheck("w0"))
+                                        if (me.Health >= me.MaximumHealth*0.9 && war[0]==0 && Utils.SleepCheck("w0"))
                                         {
                                             poof[0] = minposmtoe; Utils.Sleep(2000, "war0");
                                             Utils.Sleep(50, "pf0");
@@ -347,7 +347,7 @@ namespace Dagon_Stealer
                                         }
                                     }
                                     }
-                                }*/
+                                }
 
 
                                 if (a.Distance2D(maxhpepmeepo.Position) > 750 && Utils.SleepCheck("m" + i.ToString()))//minposmtoe
@@ -424,34 +424,35 @@ namespace Dagon_Stealer
             {
                 for (var i = 0; i < meepo.Count; i += 1)
                 {
-                    Hero a=meepo[i];
+                    Hero a = meepo[i];
                     if (war[i] == 1)
-                        {
-                            if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0 && a.Health > a.MaximumHealth * 0.5)
-                            {
-                    var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (/*!creep.Invulnerable &&*/
-                        //(creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && 
-                                (
-                                (me.Team != creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth) ||
-                                (me.Team == creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 10) ||
-                                (me.Team != creep.Team && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)) ||
-                                (me.Team == creep.Team && creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 2)
-                                )
-                                )).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
-
-                    if (Utils.SleepCheck("at" + i.ToString()))
                     {
-                        float mindistc = 99999;
-                        Unit minposcreep = null;
-                        foreach (var b in creeps)
+                        if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0 && a.Health > a.MaximumHealth * 0.5)
                         {
-                            float dist = a.Distance2D(b.Position);
-                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                            var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (//!creep.Invulnerable &&
+                                //(creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && 
+                                        (
+                                        (me.Team != creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth) ||
+                                        (me.Team == creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 10) ||
+                                        (me.Team != creep.Team && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)) ||
+                                        (me.Team == creep.Team && creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 2)
+                                        )
+                                        )).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
+
+                            if (Utils.SleepCheck("at" + i.ToString()))
+                            {
+                                float mindistc = 99999;
+                                Unit minposcreep = null;
+                                foreach (var b in creeps)
+                                {
+                                    float dist = a.Distance2D(b.Position);
+                                    if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                                }
+                                if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(500, "at" + i.ToString()); }
+                            }
                         }
-                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(500, "at" + i.ToString()); }
                     }
                 }
-            }
             }
 
                 
