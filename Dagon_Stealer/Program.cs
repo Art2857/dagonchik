@@ -483,7 +483,7 @@ namespace Dagon_Stealer
 
             //Hero mk=meepo[minposmtoe];
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
-            foreach (var a in enemy_poof)
+            /*foreach (var a in enemy_poof)
             {
                 float dmg = (1 - a.MagicDamageResist);
                 float damag = 0;  
@@ -511,7 +511,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }
                                 k += i1.ToString();
-                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
                                 nmui += 1;
                                 switch (i2)
@@ -522,7 +522,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }
                                 k += i2.ToString();
-                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
                                 nmui += 1;
                                 switch (i3)
@@ -533,7 +533,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }
                                 k += i3.ToString();
-                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
                                 nmui += 1;
                                 switch (i4)
@@ -544,7 +544,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }
                                 k += i4.ToString();
-                                if (damag > a.Health && mui < nmui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
 
 
@@ -556,7 +556,8 @@ namespace Dagon_Stealer
 
             }
             if (bd) { damag += poofdamag * dmg; } 
-            }
+            }*/
+
             /*
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
             //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
