@@ -552,6 +552,7 @@ namespace Dagon_Stealer
                             {
                                 float dmg = (1 - a.MagicDamageResist);
                                 float damag = 0;
+                                float mana = me.Mana;
                                 var nmui = 0;
                                 string k = "";
                                 if (i1 != i2 && i1 != i3 && i1 != i4 && i2 != i3 && i2 != i4 && i3 != i4)
@@ -560,10 +561,10 @@ namespace Dagon_Stealer
                                     nmui += 1;
                                     switch (i1)
                                     {
-                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                        case 0: { if (discord != null && discord.Cooldown == 0 && mana >= discord.ManaCost()) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); mana -= discord.ManaCost(); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0 && mana >=100) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); mana -= 100; } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0 && mana >= dagon.ManaCost()) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); mana -= dagon.ManaCost(); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0 && mana >=100) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); mana -= 100; } } break; }
                                         //default: { break; }
                                     }
                                     k += i1.ToString();
@@ -572,10 +573,10 @@ namespace Dagon_Stealer
                                     nmui += 1;
                                     switch (i2)
                                     {
-                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                        case 0: { if (discord != null && discord.Cooldown == 0 && mana >= discord.ManaCost()) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); mana -= discord.ManaCost(); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0 && mana >= 100) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); mana -= 100; } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0 && mana >= dagon.ManaCost()) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); mana -= dagon.ManaCost(); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0 && mana >= 100) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); mana -= 100; } } break; }
                                     }
                                     k += i2.ToString();
                                     if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -583,10 +584,10 @@ namespace Dagon_Stealer
                                     nmui += 1;
                                     switch (i3)
                                     {
-                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                        case 0: { if (discord != null && discord.Cooldown == 0 && mana >= discord.ManaCost()) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); mana -= discord.ManaCost(); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0 && mana >= 100) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); mana -= 100; } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0 && mana >= dagon.ManaCost()) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); mana -= dagon.ManaCost(); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0 && mana >= 100) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); mana -= 100; } } break; }
                                     }
                                     k += i3.ToString();
                                     if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -594,10 +595,10 @@ namespace Dagon_Stealer
                                     nmui += 1;
                                     switch (i4)
                                     {
-                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1000/*1600*/ || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                        case 0: { if (discord != null && discord.Cooldown == 0 && mana >= discord.ManaCost()) { if (dist < 1000/*1600*/ || bd) { dmg = (float)(dmg * 1.25); mana -= discord.ManaCost(); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0 && mana >= 100) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); mana -= 100; } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0 && mana >= dagon.ManaCost()) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); mana -= dagon.ManaCost(); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0 && mana >= 100) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); mana -= 100; } } break; }
                                     }
                                     k += i4.ToString();
                                     if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
@@ -690,7 +691,7 @@ namespace Dagon_Stealer
                 if (minposmeepo != minhpmeepo)
                 {
                     Hero b = meepo[minhpmeepo];
-                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
+                    if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5 || b.Mana < 160/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
 
@@ -723,7 +724,7 @@ namespace Dagon_Stealer
                         }
 
 
-                        if (maxhpfwmeepo != minhpmeepo && minhpmeepo != j && meepo[maxhpfwmeepo].Health > b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
+                        if (maxhpfwmeepo != minhpmeepo && minhpmeepo != j && meepo[maxhpfwmeepo].Health >= b.Health && Utils.SleepCheck("pf" + b.ToString()) && Utils.SleepCheck("stp" + b.ToString()) && (b.Health < b.MaximumHealth * 0.5 || b.Mana < 160 || (meepo[maxhpfwmeepo].CanCast() && meepo[maxhpfwmeepo].Spellbook.SpellW.CanBeCasted() && meepo[j].CanCast() && meepo[j].Spellbook.SpellW.CanBeCasted())))
                         {
                             Utils.Sleep(4500, "w" + minhpmeepo.ToString());
                             if (nmf > 1)
