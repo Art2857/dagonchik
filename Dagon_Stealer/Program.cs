@@ -250,7 +250,7 @@ namespace Dagon_Stealer
 
             }
 
-            if (meepo.Count <= 1)
+            if (meepo.Count < 3)
             {
                 return;
             }
