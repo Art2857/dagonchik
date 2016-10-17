@@ -471,12 +471,12 @@ namespace Dagon_Stealer
 
 
 
-            var poofdamag=0;
+            float poofdamag = 0;
             if (blick != null && blink.Cooldown == 0 && W.level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
 
-            var maxdamag = 0;//if (&&  && W.level>0) {var maxdamag=(80+(W.Level-1)*20)*(meepo.Count-1);}else{
+            float maxdamag = 0;//if (&&  && W.level>0) {var maxdamag=(80+(W.Level-1)*20)*(meepo.Count-1);}else{
             string mbk="";
-            var mindamagkill = 99999;
+            float mindamagkill = 99999;
             Hero kah = null;//враг
             string bk = "";//best combo
             var mui=4;//min use items
