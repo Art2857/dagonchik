@@ -621,7 +621,7 @@ namespace Dagon_Stealer
                 float dist = me.Distance2D(kah.Position);
                 if (bk.Length > 0)
                 {
-                    string ev = bk[0];
+                    char ev = bk[0];
                     Drawing.DrawText(bk[0].ToString(), new Vector2(794, 766), size, colour, font); 
                     Drawing.DrawText(ev.ToString(), new Vector2(844, 766), size, colour, font); 
                     switch (ev)
