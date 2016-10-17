@@ -661,7 +661,7 @@ namespace Dagon_Stealer
             for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo) 
             {
                 Hero a = meepo[i];
-                if (a.Distance2D(new Vector3(-bx, -by, a.Position.Z)) < 1900 && Utils.SleepCheck("m" + i.ToString()))
+                if (a.Distance2D(new Vector3(-bx, -by, a.Position.Z)) < 1300 && Utils.SleepCheck("m" + i.ToString()))
                 {
                     a.Move(new Vector3(bx, by, a.Position.Z));
                     Utils.Sleep(250,"m" + i.ToString());
