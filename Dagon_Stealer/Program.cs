@@ -502,7 +502,7 @@ namespace Dagon_Stealer
                         {
                             if (i1!=i2 && i1!=i3 && i1!=i4 && i2!=i3 && i2!=i4 && i3!=i4)
                             {
-                                /*
+                                
                                 nmui += 1;
                                 switch (i1)
                                 {
@@ -550,7 +550,7 @@ namespace Dagon_Stealer
 
 
                                 if (damag > maxdamag) { mbk = k; maxdamag = damag; }
-                                */
+                                
                                 }
                         }
                     }
