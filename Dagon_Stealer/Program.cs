@@ -513,7 +513,7 @@ namespace Dagon_Stealer
                                     default: { break; }
                                 }
                                 k += i1.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > (float)a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
                                 nmui += 1;
                                 /*switch (i2)
@@ -524,7 +524,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }*/
                                 k += i2.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > (float)a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
                                 nmui += 1;
                                 /*switch (i3)
@@ -535,7 +535,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }*/
                                 k += i3.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > (float)a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
                                 nmui += 1;
                                 /*switch (i4)
@@ -546,7 +546,7 @@ namespace Dagon_Stealer
                                     case 3: { if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } } break; }
                                 }*/
                                 k += i4.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+                                if (damag > (float)a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
 
 
