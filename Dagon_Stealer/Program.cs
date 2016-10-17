@@ -492,22 +492,22 @@ namespace Dagon_Stealer
                 string k = "";
                 bool bd=false;
                 if (blink != null && blink.Cooldown == 0 && dist < 1200) { bd = true; }
-                for (int i1 = 0; i1 < 4; i1 += 1)
+            for (int i1 = 0; i1 < 4; i1 += 1)
             {
                 for (int i2 = 0; i2 < 4; i2 += 1)
                 {
                     for (int i3 = 0; i3 < 4; i3 += 1)
                     {
-                        for(int i4=0; i4<4; i4+=1)
+                        for (int i4 = 0; i4 < 4; i4 += 1)
                         {
-                            if (i1!=i2 && i1!=i3 && i1!=i4 && i2!=i3 && i2!=i4 && i3!=i4)
+                            if (i1 != i2 && i1 != i3 && i1 != i4 && i2 != i3 && i2 != i4 && i3 != i4)
                             {
-                                
+
                                 nmui += 1;
                                 switch (i1)
                                 {
-                                    case 0: { if (discord != null) { if (dist < 1600 || bd == true) { /*dmg = dmg * 1.25;*/ } } break; }
-                                    case 1: { /*if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; }}*/ break;  }
+                                    case 0: { /*if (discord != null) { if (dist < 1600 || bd == true) { dmg = dmg * 1.25; } }*/ break; }
+                                    case 1: { /*if (ethereal != null) { if (dist < ethereal.CastRange() || bd) { damag += ethereal_damag * dmg; dmg *= 1.4; }}*/ break; }
                                     case 2: { /*if (dagon != null) { if (dist < dagon.CastRange() || bd) { damag += (400 + 100 * (dagon.Level - 1)) * dmg; } }*/ break; }
                                     case 3: { /*if ((orchid != null || bloodthorn != null)) { if (dist < 900 || bd) { dmg *= 1.3; } }*/ break; }
                                     default: { break; }
@@ -552,7 +552,7 @@ namespace Dagon_Stealer
 
                                 if (damag > maxdamag) { mbk = k; maxdamag = damag; }
                                 */
-                                }
+                            }
                         }
                     }
                 }
