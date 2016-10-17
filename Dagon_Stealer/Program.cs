@@ -632,6 +632,7 @@ namespace Dagon_Stealer
                 else
                 {
                     if (mbk.Length > 0)
+                    {
                     int ev = (int)mbk[0];
                     switch (ev)
                     {
