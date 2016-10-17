@@ -110,7 +110,11 @@ namespace Dagon_Stealer
             Drawing.DrawText(Game.IsWatchingGame.ToString(), new Vector2(800, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             */
             if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame/*|| !Utils.SleepCheck("tg")*/) { /*Utils.Sleep(100, "tg");*/ return; }
-            
+
+            var size = new Vector2(20, 20);
+            var colour = Color.White;
+            var font = FontFlags.AntiAlias;
+
             //Drawing.DrawText("2", new Vector2(550, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
@@ -771,9 +775,7 @@ namespace Dagon_Stealer
         }*/
 
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }//me.Position[0]
-            var size = new Vector2(20, 20);
-            var colour = Color.White;
-            var font = FontFlags.AntiAlias;
+            
             Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(200, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(200, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(350, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(200, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(350, 300), size, colour, font);
