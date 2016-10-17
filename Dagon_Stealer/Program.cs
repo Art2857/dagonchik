@@ -329,7 +329,7 @@ namespace Dagon_Stealer
                                     {
                                         if (nmf > 1)
                                         {
-                                        if (me.Health >= (float)me.MaximumHealth*0.9 && war[0]==0 && Utils.SleepCheck("w0"))
+                                        if (me.Health >= me.MaximumHealth && war[0]==0 && Utils.SleepCheck("w0"))
                                         {
                                             poof[0] = minposmtoe; Utils.Sleep(2000, "war0");
                                             Utils.Sleep(50, "pf0");
