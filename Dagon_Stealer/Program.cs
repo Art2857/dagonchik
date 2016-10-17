@@ -225,7 +225,7 @@ namespace Dagon_Stealer
                         minhpf = hp;
                         minhpfmeepo = i;
                     }
-                    var c=a.Spellbook.SpellW.Cooldown;
+                    var c = a.Spellbook.SpellW.Cooldown;
                     if (c < tmpf) { tmpf = c; }
                 }
                 else
@@ -249,7 +249,7 @@ namespace Dagon_Stealer
                 }
 
             }
-            
+
 
             //ai kills
 
@@ -279,7 +279,7 @@ namespace Dagon_Stealer
             }*/
 
 
-            
+
             Hero maxhpepmeepo = null;//enemy
             double mindistmtoe = 90000000;//priority
             var minposmtoe = -1;//meepo
@@ -290,7 +290,7 @@ namespace Dagon_Stealer
                 foreach (var b in enemy_poof)
                 {
                     //double dist = a.Distance2D(b.Position);
-                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1/1.5);
+                    double dist = ((b.Health / (1 - b.DamageResist) + b.Health / (1 - b.MagicDamageResist))) + Math.Pow(a.Distance2D(b.Position), 1 / 1.5);
                     if (dist < mindistmtoe) { mindistmtoe = dist; minposmtoe = i; maxhpepmeepo = b; }
                 }
             }
@@ -329,23 +329,23 @@ namespace Dagon_Stealer
                                     {
                                         if (nmf > 1)
                                         {
-                                        if (me.Health >= me.MaximumHealth*0.9 && war[0]==0 && Utils.SleepCheck("w0"))
-                                        {
-                                            poof[0] = minposmtoe; Utils.Sleep(2000, "war0");
-                                            Utils.Sleep(50, "pf0");
-                                            Utils.Sleep(4500, "w0");
-                                        }
-                                        else
-                                        {
-                                            if (war[0]==0)
+                                            if (me.Health >= me.MaximumHealth * 0.9 && war[0] == 0 && Utils.SleepCheck("w0"))
                                             {
-                                                poof[i] = minposmtoe;
-                                                Utils.Sleep(2000, "war" + i.ToString());
-                                            Utils.Sleep(50, "pf" + i.ToString());
-                                            Utils.Sleep(4500, "w" + i.ToString());
+                                                poof[0] = minposmtoe; Utils.Sleep(2000, "war0");
+                                                Utils.Sleep(50, "pf0");
+                                                Utils.Sleep(4500, "w0");
+                                            }
+                                            else
+                                            {
+                                                if (war[0] == 0)
+                                                {
+                                                    poof[i] = minposmtoe;
+                                                    Utils.Sleep(2000, "war" + i.ToString());
+                                                    Utils.Sleep(50, "pf" + i.ToString());
+                                                    Utils.Sleep(4500, "w" + i.ToString());
+                                                }
                                             }
                                         }
-                                    }
                                     }
                                 }
 
@@ -455,13 +455,13 @@ namespace Dagon_Stealer
                 }
             }
 
-                
-            
-                
-                
-                    //if (!(minposmtoe > -1 && maxhpepmeepo != null))
-                    //{
-                
+
+
+
+
+            //if (!(minposmtoe > -1 && maxhpepmeepo != null))
+            //{
+
             /*
             var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (!creep.Invulnerable && (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (me.Team != creep.Team || (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && me.Team == creep.Team && creep.Health < creep.MaximumHealth / 10) || (creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
                 
@@ -490,7 +490,7 @@ namespace Dagon_Stealer
             }
 
             */
-        
+
 
 
             /*
@@ -527,102 +527,126 @@ namespace Dagon_Stealer
             if (blink != null && blink.Cooldown == 0 && W.Level > 0) { poofdamag = (80 + (W.Level - 1) * 20) * (meepo.Count - 1); }
 
             float maxdamag = 0;//if (&&  && W.level>0) {var maxdamag=(80+(W.Level-1)*20)*(meepo.Count-1);}else{
-            string mbk="";
+            string mbk = "";
             float mindamagkill = 99999;
             Hero kah = null;//враг
             string bk = "";//best combo
-            var mui=4;//min use items
+            var mui = 4;//min use items
 
             //Hero mk=meepo[minposmtoe];
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
             foreach (var a in enemy_poof)
             {
-                
-                float dist=me.Distance2D(a.Position);
-                
-                bool bd=false;
+
+                float dist = me.Distance2D(a.Position);
+
+                bool bd = false;
                 if (blink != null && blink.Cooldown == 0 && dist < 1200) { bd = true; }
-            for (int i1 = 0; i1 < 4; i1 += 1)
-            {
-                for (int i2 = 0; i2 < 4; i2 += 1)
+                for (int i1 = 0; i1 < 4; i1 += 1)
                 {
-                    for (int i3 = 0; i3 < 4; i3 += 1)
+                    for (int i2 = 0; i2 < 4; i2 += 1)
                     {
-                        for (int i4 = 0; i4 < 4; i4 += 1)
+                        for (int i3 = 0; i3 < 4; i3 += 1)
                         {
-                            float dmg = (1 - a.MagicDamageResist);
-                            float damag = 0;  
-                            var nmui = 0;
-                            string k = "";
-                            if (i1 != i2 && i1 != i3 && i1 != i4 && i2 != i3 && i2 != i4 && i3 != i4)
+                            for (int i4 = 0; i4 < 4; i4 += 1)
                             {
-                                
-                                nmui += 1;
-                                switch (i1)
+                                float dmg = (1 - a.MagicDamageResist);
+                                float damag = 0;
+                                var nmui = 0;
+                                string k = "";
+                                if (i1 != i2 && i1 != i3 && i1 != i4 && i2 != i3 && i2 != i4 && i3 != i4)
                                 {
-                                    case 0: { if (discord != null && discord.Cooldown==0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
-                                    default: { break; }
-                                }
-                                k += i1.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
-                                
-                                nmui += 1;
-                                switch (i2)
-                                {
-                                    case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
-                                }
-                                k += i2.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
-                                nmui += 1;
-                                switch (i3)
-                                {
-                                    case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    nmui += 1;
+                                    switch (i1)
+                                    {
+                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                        //default: { break; }
+                                    }
+                                    k += i1.ToString();
+                                    if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+
+                                    nmui += 1;
+                                    switch (i2)
+                                    {
+                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    }
+                                    k += i2.ToString();
+                                    if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+
+                                    nmui += 1;
+                                    switch (i3)
+                                    {
+                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    }
+                                    k += i3.ToString();
+                                    if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+
+                                    nmui += 1;
+                                    switch (i4)
+                                    {
+                                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1000/*1600*/ || bd) { dmg = (float)(dmg * 1.25); } } break; }
+                                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
+                                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
+                                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
+                                    }
+                                    k += i4.ToString();
+                                    if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
+
+                                    //if (bd) { damag += (float)(poofdamag * dmg); }
+
+                                    if (damag > maxdamag) { mbk = k; maxdamag = damag; }
+
                                 }
-                                k += i3.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
-
-                                nmui += 1;
-                                switch (i4)
-                                {
-                                    case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1600 || bd) { dmg = (float)(dmg * 1.25); } } break; }
-                                    case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800 || bd) { damag = (float)(damag + ethereal_damag * dmg); dmg = (float)(dmg * 1.4); } } break; }
-                                    case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1) || bd) { damag += (float)((400 + 100 * (dagon.Level - 1)) * dmg); } } break; }
-                                    case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900 || bd) { dmg = (float)(dmg * 1.3); } } break; }
-                                }
-                                k += i4.ToString();
-                                if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
-
-                                //if (bd) { damag += (float)(poofdamag * dmg); }
-
-                                if (damag > maxdamag) { mbk = k; maxdamag = damag; }
-                                
                             }
                         }
                     }
+
                 }
-
             }
+            if (Utils.SleepCheck("combo"))
+            {
+                float dist = me.Distance2D(kah.Position);
+                if (bk.Length > 0)
+                {
+                    int ev = (int)bk[0];
+                    switch (ev)
+                    {
+                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1000) { discord.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800) { ethereal.UseAbility(kah); Utils.Sleep(666, "combo"); } } break; }
+                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1)) { dagon.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900) { bloodthorn.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                    }
+                }
+                else
+                {
+                    int ev = (int)mbk[0];
+                    switch (ev)
+                    {
+                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1000) { discord.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800) { ethereal.UseAbility(kah); Utils.Sleep(666, "combo"); } } break; }
+                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1)) { dagon.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900) { bloodthorn.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                    }
+                }
             }
 
-            int ev=(int)bk[0];
-            
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
             //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
             Drawing.DrawText("mui:" + mui.ToString(), new Vector2(864, 753), size, colour, font);//itemuse
 
             Drawing.DrawText("mbk:" + mbk.ToString(), new Vector2(764, 853), size, colour, font); //последовательность максимального дамага
             Drawing.DrawText("MAXDMG:" + maxdamag.ToString(), new Vector2(864, 853), size, colour, font);//максимальный дамаг
-            
+
             /*blink != null && blink.Cooldown == 0*/
             /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
                                 if (i1 == 1 && ethereal != null) { if (dist < ethereal.CastRange()) { damag += ethereal_damag * dmg; dmg *= 1.4; } 
@@ -638,8 +662,8 @@ namespace Dagon_Stealer
             {
             
             }*/
-           
-            if (nmf>0 && war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
+
+            if (nmf > 0 && war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
             {
                 if (minposmeepo != minhpmeepo)
                 {
@@ -647,7 +671,7 @@ namespace Dagon_Stealer
                     if (((b.Spellbook.SpellW.Cooldown == 0 && b.CanCast() && b.Spellbook.SpellW.CanBeCasted()) || /*(travel != null &&*/ b.Health < b.MaximumHealth * 0.5/*)*/) && Utils.SleepCheck("w" + minhpmeepo.ToString()))
                     {
                         //Utils.Sleep(2000, "w" + minhpmeepo.ToString());
-                        
+
 
 
                         var j = maxhpfmeepo;
@@ -705,26 +729,26 @@ namespace Dagon_Stealer
                 {
                     for (var i = 0; i < meepo.Count; i += 1)
                     {
-                       Hero a = meepo[i];
-                       float hp = a.Health;
-                       if (meepo[i].Health < meepo[i].MaximumHealth * 0.5)
-                       {
-                           if (meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 5000 && i != minposmeepo) { poof[i] = minposmeepo; Utils.Sleep(50, "pf" + i.ToString()); }
-                           else
-                           {
-                               var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-                               if (mtp == null)
-                               {
-                                   mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
-                                   if (mtp != null) { mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z)); }
-                               }
-                               else
-                               {
-                                   mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z));
-                               }
-                               
-                           }
-                       }
+                        Hero a = meepo[i];
+                        float hp = a.Health;
+                        if (meepo[i].Health < meepo[i].MaximumHealth * 0.5)
+                        {
+                            if (meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 5000 && i != minposmeepo) { poof[i] = minposmeepo; Utils.Sleep(50, "pf" + i.ToString()); }
+                            else
+                            {
+                                var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
+                                if (mtp == null)
+                                {
+                                    mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+                                    if (mtp != null) { mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z)); }
+                                }
+                                else
+                                {
+                                    mtp.UseAbility(new Vector3(bx, by, meepo[i].Position.Z));
+                                }
+
+                            }
+                        }
                     }
 
                     meepo[minposmeepo].Move(new Vector3(bx, by, meepo[minposmeepo].Position.Z));
@@ -733,52 +757,52 @@ namespace Dagon_Stealer
                 //Если есть тп, делаем тп на базу, если нет, то ишем самого безопасного Meepo
             }
 
-            
+
             for (var i = 0; i < meepo.Count; i += 1)
             {
                 //if (Utils.SleepCheck("event" + i.ToString()))
                 //{
                 if ((poof[i] >= 0) && Utils.SleepCheck("pf" + i.ToString()) /*&& Utils.SleepCheck("stp" + i.ToString())*/)
+                {
+                    meepo[minhpmeepo].Stop();
+                    Hero a = meepo[i];
+                    if (a.Spellbook.SpellW.Cooldown == 0 && a.CanCast() && a.Spellbook.SpellW.CanBeCasted())
                     {
-                        meepo[minhpmeepo].Stop();
-                        Hero a=meepo[i];
-                        if (a.Spellbook.SpellW.Cooldown == 0 && a.CanCast() && a.Spellbook.SpellW.CanBeCasted())
-                        {
-                            a.Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
-                            Utils.Sleep(2000, "war" + i.ToString());//2500
-                            poof[i] = -1; Utils.Sleep(2000, "stp" + i.ToString());//2500
-                            //Utils.Sleep(2000, "event" + i.ToString());
-                        }
-                        //else
-                        //{
-                         //   var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
-                          //  if (mtp == null)
-                          //  {
-                         //       mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
-                          //      poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
-                           // }
-                          //  if (mtp != null)
-                          //  {
-                           //     mtp.UseAbility(meepo[poof[i]].Position);
-                          //      Utils.Sleep(2500, "war" + i.ToString());
-                           //     poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
-                          //  }
-                        //}
-
+                        a.Spellbook.SpellW.UseAbility(meepo[poof[i]].Position);
+                        Utils.Sleep(2000, "war" + i.ToString());//2500
+                        poof[i] = -1; Utils.Sleep(2000, "stp" + i.ToString());//2500
+                        //Utils.Sleep(2000, "event" + i.ToString());
                     }
+                    //else
+                    //{
+                    //   var mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_travel_boots")));
+                    //  if (mtp == null)
+                    //  {
+                    //       mtp = meepo[i].Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_tpscroll")));
+                    //      poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
+                    // }
+                    //  if (mtp != null)
+                    //  {
+                    //     mtp.UseAbility(meepo[poof[i]].Position);
+                    //      Utils.Sleep(2500, "war" + i.ToString());
+                    //     poof[i] = -1; Utils.Sleep(5000, "stp" + i.ToString());
+                    //  }
+                    //}
+
+                }
                 if (poof[i] == -1 && Utils.SleepCheck("pf" + i.ToString()) && Utils.SleepCheck("stp" + i.ToString()))
+                {
+                    if (meepo[i].Health > meepo[i].MaximumHealth * 0.5)
                     {
-                        if (meepo[i].Health > meepo[i].MaximumHealth * 0.5)
-                        {
 
-                            if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
-                        }
-                        poof[i] = -2;
-
+                        if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
                     }
+                    poof[i] = -2;
+
+                }
                 //}
             }
-            
+
 
             /*var mousePosition = Game.MousePosition;
             //me.Move(mousePosition);
@@ -825,12 +849,12 @@ namespace Dagon_Stealer
         }*/
 
             //if (Drawing.Direct3DDevice9 == null || Drawing.Direct3DDevice9.IsDisposed) { return; }//me.Position[0]
-            
+
             Drawing.DrawText("Overall: " + meepo.Count.ToString(), new Vector2(200, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhp.ToString(), new Vector2(200, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpmeepo.ToString(), new Vector2(350, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhp.ToString(), new Vector2(200, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpmeepo.ToString(), new Vector2(350, 300), size, colour, font);
             Drawing.DrawText("min dist to b:" + mindist.ToString(), new Vector2(200, 350), size, colour, font); Drawing.DrawText("min dist to b:" + minposmeepo.ToString(), new Vector2(350, 350), size, colour, font);
-            Drawing.DrawText("Swap:" + Math.Max((int)tmpf,(int)tmpw).ToString(), new Vector2(200, 400), size, colour, font);
+            Drawing.DrawText("Swap:" + Math.Max((int)tmpf, (int)tmpw).ToString(), new Vector2(200, 400), size, colour, font);
 
             Drawing.DrawText("Fountain(Base): " + nmf.ToString(), new Vector2(600, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhpf.ToString(), new Vector2(600, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpfmeepo.ToString(), new Vector2(750, 250), size, colour, font);
@@ -839,21 +863,21 @@ namespace Dagon_Stealer
             Drawing.DrawText("In War: " + nmw.ToString(), new Vector2(1000, 200), size, colour, font);
             Drawing.DrawText("min hp:" + minhpw.ToString(), new Vector2(1000, 250), size, colour, font); Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
             Drawing.DrawText("max hp:" + maxhpw.ToString(), new Vector2(1000, 300), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
-            
-            
-            
-            
+
+
+
+
             //Drawing.DrawText("min dist to b:"+mindistw.ToString(), new Vector2(700, 350), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
-            
+
             //Drawing.DrawText("tick: " + tick.ToString(), new Vector2(1000, 700), size, colour, font); Drawing.DrawText("number meepo max hp:" + maxhpwmeepo.ToString(), new Vector2(1150, 300), size, colour, font);
 
             //double mindistmtoe = 1000000;//priority
             //var minposmtoe = -1;//meepo
 
             //Drawing.DrawText("priority:" + mindistmtoe.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
-            
+
             //Drawing.DrawText("minposmtoe:" + mindistmtoe.ToString(), new Vector2(1400, 300), size, colour, font); //Drawing.DrawText("number meepo min dist toe:" + minposmtoe.ToString(), new Vector2(1600, 300), size, colour, font);
-            
+
             /*
             Drawing.DrawText("Enemies: " + enemy_poof.Count.ToString(), new Vector2(1400, 200), size, colour, font);
             Drawing.DrawText("min hp e:" + minhpep.ToString(), new Vector2(1400, 250), size, colour, font);//Drawing.DrawText("number meepo min hp:" + minhpwmeepo.ToString(), new Vector2(1150, 250), size, colour, font);
