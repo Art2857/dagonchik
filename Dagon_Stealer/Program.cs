@@ -554,7 +554,7 @@ namespace Dagon_Stealer
                                 k += i4.ToString();
                                 if (damag > a.Health && nmui < mui) { bk = k; mui = nmui; kah = a; }
 
-                                //if (bd) { damag += (float)(poofdamag * dmg); 
+                                //if (bd) { damag += (float)(poofdamag * dmg); }
 
                                 if (damag > maxdamag) { mbk = k; maxdamag = damag; }
                                 
@@ -565,7 +565,7 @@ namespace Dagon_Stealer
 
             }
             } 
-            }
+            
 
             
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
