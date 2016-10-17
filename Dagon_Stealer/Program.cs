@@ -561,14 +561,14 @@ namespace Dagon_Stealer
             if (bd) { damag += (float)(poofdamag * dmg); } 
             }
 
-            /*
+            
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
             //Drawing.DrawText("kah:" + kah.ToString(), new Vector2(864, 753), size, colour, font); 
             Drawing.DrawText("mui:" + mui.ToString(), new Vector2(864, 753), size, colour, font);//itemuse
 
             Drawing.DrawText("mbk:" + mbk.ToString(), new Vector2(764, 853), size, colour, font); //последовательность максимального дамага
             Drawing.DrawText("MAXDMG:" + maxdamag.ToString(), new Vector2(864, 853), size, colour, font);//максимальный дамаг
-            */
+            
             /*blink != null && blink.Cooldown == 0*/
             /*if (i1 == 0 && discord!=null) { if (dist < 1600) { dmg *= 1.25; } }
                                 if (i1 == 1 && ethereal != null) { if (dist < ethereal.CastRange()) { damag += ethereal_damag * dmg; dmg *= 1.4; } 
