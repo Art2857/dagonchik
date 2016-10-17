@@ -622,8 +622,8 @@ namespace Dagon_Stealer
                 if (bk.Length > 0)
                 {
                     int ev = (int)bk[0];
-                    //Drawing.DrawText(bk[0], new Vector2(794, 766), size, colour, font); 
-                    //Drawing.DrawText(ev.ToString(), new Vector2(844, 766), size, colour, font); 
+                    Drawing.DrawText(bk[0].ToString(), new Vector2(794, 766), size, colour, font); 
+                    Drawing.DrawText(ev.ToString(), new Vector2(844, 766), size, colour, font); 
                     switch (ev)
                     {
                         case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1000) { discord.UseAbility(kah.Position); Utils.Sleep(250, "combo"); } } break; }
