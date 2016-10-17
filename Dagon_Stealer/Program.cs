@@ -15,23 +15,7 @@ using System.Windows.Input;
 using Ensage.Common.Objects;
 using Ensage.Items;
 
-//using System;
-//using System.Linq;
-//using System.Collections.Generic;
 
-//using Ensage;
-//using SharpDX;
-//using Ensage.Common.Extensions;
-//using Ensage.Common;
-//using SharpDX.Direct3D9;
-//using System.Windows.Input;
-
-
-//using System.Reflection;
-//using System.Runtime.InteropServices;
-//using System.Security;
-
-//using Attribute = Ensage.Attribute;
 
 namespace Dagon_Stealer
 {
@@ -126,7 +110,7 @@ namespace Dagon_Stealer
             Drawing.DrawText(Game.IsWatchingGame.ToString(), new Vector2(800, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             */
             if (me == null || !me.IsAlive || !Game.IsInGame || me.ClassID != ClassID.CDOTA_Unit_Hero_Meepo || Game.IsWatchingGame/*|| !Utils.SleepCheck("tg")*/) { /*Utils.Sleep(100, "tg");*/ return; }
-
+            
             //Drawing.DrawText("2", new Vector2(550, 500), new Vector2(20, 20), Color.White, FontFlags.AntiAlias);
             //double damag = 0;
             var dps = me.AttacksPerSecond * me.MinimumDamage;
@@ -383,20 +367,49 @@ namespace Dagon_Stealer
                                 }
                             }
 
-                            Utils.Sleep(500, "at" + i.ToString());//minposmtoe
+                            //Utils.Sleep(500, "at" + i.ToString());//minposmtoe
                         }
+
+
+                        var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (/*!creep.Invulnerable &&*/ 
+                            //(creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && 
+                            (
+                            (me.Team != creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth) ||
+                            (me.Team == creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 10) ||
+                            (me.Team != creep.Team && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)) ||
+                            (me.Team == creep.Team && creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 2)
+                            )
+                            )).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
+                                                    
+                                if (Utils.SleepCheck("at" + i.ToString()))
+                                {
+                                    float mindistc = 99999;
+                                    Unit minposcreep = null;
+                                        foreach (var b in creeps)
+                                        {
+                                            float dist = a.Distance2D(b.Position);
+                                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                                        }
+                                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(500, "at" + i.ToString()); }
+                                }
+
+                                //}
+                                                   
+                        
                     }
                 //}
                 }
             }
             }
-            else
-            {
+
+            
                 
                 
                     //if (!(minposmtoe > -1 && maxhpepmeepo != null))
                     //{
-                var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (!creep.Invulnerable && (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege/*|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan*/) && (me.Team != creep.Team || (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && me.Team == creep.Team && creep.Health < creep.MaximumHealth / 10) || (creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))
+                
+            /*
+            var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (!creep.Invulnerable && (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && (me.Team != creep.Team || (creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && me.Team == creep.Team && creep.Health < creep.MaximumHealth / 10) || (creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && me.Team == creep.Team && creep.Health < creep.MaximumHealth / 2)))).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
                 
                     for (var i = 0; i < meepo.Count; i += 1)//foreach (var a in meepo)
                     {
@@ -421,7 +434,9 @@ namespace Dagon_Stealer
                     //}
                     }
             }
-        }
+
+            */
+        
 
 
             /*
@@ -595,7 +610,7 @@ namespace Dagon_Stealer
                         if (meepo[i].Health > meepo[i].MaximumHealth * 0.5)
                         {
 
-                            if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } //else { meepo[i].Stop(); }
+                            if (meepo[i].Distance2D(new Vector3(bx, by, meepo[i].Position.Z)) < 2000) { meepo[i].Move(new Vector3(bx, by, meepo[i].Position.Z)); } else { meepo[i].Stop(); }
                         }
                         poof[i] = -2;
 
