@@ -621,14 +621,14 @@ namespace Dagon_Stealer
                 float dist = me.Distance2D(kah.Position);
                 if (bk.Length > 0)
                 {
-                    int ev = (int)bk[0];
-                    Drawing.DrawText(ev.ToString(), new Vector2(844, 766), size, colour, font); 
+                    char ev = bk[0];
+                    Drawing.DrawText(ev, new Vector2(844, 766), size, colour, font); 
                     switch (ev)
                     {
-                        case 0: { if (discord != null && discord.Cooldown == 0) { if (dist < 1000) { discord.UseAbility(kah.Position); Utils.Sleep(250, "combo"); } } break; }
-                        case 1: { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800) { ethereal.UseAbility(kah); Utils.Sleep(666, "combo"); } } break; }
-                        case 2: { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1)) { dagon.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
-                        case 3: { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900) { bloodthorn.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                        case '0': { if (discord != null && discord.Cooldown == 0) { if (dist < 1000) { discord.UseAbility(kah.Position); Utils.Sleep(250, "combo"); } } break; }
+                        case '1': { if (ethereal != null && ethereal.Cooldown == 0) { if (dist < 800) { ethereal.UseAbility(kah); Utils.Sleep(666, "combo"); } } break; }
+                        case '2': { if (dagon != null && dagon.Cooldown == 0) { if (dist < 600 + 50 * (dagon.Level - 1)) { dagon.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
+                        case '3': { if (((orchid != null && orchid.Cooldown == 0) || (bloodthorn != null && bloodthorn.Cooldown == 0))) { if (dist < 900) { bloodthorn.UseAbility(kah); Utils.Sleep(250, "combo"); } } break; }
                     }
                 }
                 else
