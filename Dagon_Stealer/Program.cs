@@ -305,108 +305,154 @@ namespace Dagon_Stealer
                     Hero a = meepo[i];
                     if (a.Health > a.MaximumHealth * 0.5 && Utils.SleepCheck("pf" + i.ToString()))
                     {
-                    //if (Utils.SleepCheck("event" + i.ToString()))
-                    //{
-                    if (war[i] == 1)
-                    {
-                        if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
+                        //if (Utils.SleepCheck("event" + i.ToString()))
+                        //{
+                        if (war[i] == 1)
                         {
-                            
-                            //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
-                            //{
-                            //if //tp
-                            //}          
-
-                            
-                            if (a.Distance2D(maxhpepmeepo.Position) < 1200)
+                            if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0)//minposmtoe > -1 && maxhpepmeepo!=null//minposmtoe
                             {
-                                var mblink = a.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
-                                if (mblink != null && mblink.Cooldown == 0)//minposmtoe
+
+                                //if (meepo[minposmtoe].Distance2D(maxhpepmeepo.Position) > 2000)
+                                //{
+                                //if //tp
+                                //}          
+
+
+                                if (a.Distance2D(maxhpepmeepo.Position) < 1200)
                                 {
-                                    mblink.UseAbility(maxhpepmeepo.Predict(100));//Position
+                                    var mblink = a.Inventory.Items.FirstOrDefault(item => (item.Name.Contains("item_blink")));//minposmtoe
+                                    if (mblink != null && mblink.Cooldown == 0)//minposmtoe
+                                    {
+                                        mblink.UseAbility(maxhpepmeepo.Predict(100));//Position
+                                    }
+                                    else
+                                    {
+                                        if (nmf > 1)
+                                        {
+                                        if (me.Health >= me.MaximumHealth*0.9 && war[0]==0 && Utils.SleepCheck("w0"))
+                                        {
+                                            poof[0] = minposmtoe; Utils.Sleep(2000, "war0");
+                                            Utils.Sleep(50, "pf0");
+                                            Utils.Sleep(4500, "w0");
+                                        }
+                                        else
+                                        {
+                                            if (war[0]==0)
+                                            {
+                                                poof[i] = minposmtoe;
+                                                Utils.Sleep(2000, "war" + i.ToString());
+                                            Utils.Sleep(50, "pf" + i.ToString());
+                                            Utils.Sleep(4500, "w" + i.ToString());
+                                            }
+                                        }
+                                    }
+                                    }
+                                }
+
+
+                                if (a.Distance2D(maxhpepmeepo.Position) > 750 && Utils.SleepCheck("m" + i.ToString()))//minposmtoe
+                                {
+
+                                    //if (meepo[i].Distance2D(maxhpepmeepo.Position) > 1200)//minposmtoe
+                                    //{
+                                    //    meepo[i].Move(maxhpepmeepo.Predict(500));//minposmtoe
+                                    //}
+                                    //else
+                                    //{
+                                    a.Move(maxhpepmeepo.Position);//minposmtoe
+                                    Utils.Sleep(500, "m" + i.ToString());
+                                    //}
                                 }
                                 else
                                 {
-                                    if (me.Health == me.MaximumHealth && nmf > 1 && Utils.SleepCheck("w" + i.ToString()))
-                                    {
-                                        poof[0] = minposmtoe; Utils.Sleep(50, "pf" + i.ToString());
-                                        Utils.Sleep(4500, "w" + i.ToString());
-                                    }
+                                    a.Attack(maxhpepmeepo);//minposmtoe
+                                    Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "at" + i.ToString());//250
                                 }
-                            }
 
 
-                            if (a.Distance2D(maxhpepmeepo.Position) > 750 && Utils.SleepCheck("m" + i.ToString()))//minposmtoe
-                            {
-
-                                //if (meepo[i].Distance2D(maxhpepmeepo.Position) > 1200)//minposmtoe
-                                //{
-                                //    meepo[i].Move(maxhpepmeepo.Predict(500));//minposmtoe
-                                //}
-                                //else
-                                //{
-                                a.Move(maxhpepmeepo.Position);//minposmtoe
-                                Utils.Sleep(500, "m" + i.ToString());
-                                //}
-                            }
-                            else
-                            {
-                                a.Attack(maxhpepmeepo);//minposmtoe
-                                Utils.Sleep(meepo[i].SecondsPerAttack * 1000, "at" + i.ToString());//250
-                            }
-
-
-                            if (Utils.SleepCheck("q"))
-                            {
-                                if (a.Spellbook.SpellQ.Level > 0)
+                                if (Utils.SleepCheck("q"))
                                 {
-                                    if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_earthbind")) && a.Distance2D(maxhpepmeepo.Position) < 500 + 250 * (a.Spellbook.SpellQ.Level - 1) && a.Spellbook.SpellQ.Cooldown == 0)
+                                    if (a.Spellbook.SpellQ.Level > 0)
                                     {
-                                        var pos = maxhpepmeepo.Predict(300 + a.Distance2D(maxhpepmeepo.Position) / 857 * 1000);
-                                        //var dir = Math.Atan2(meepo[i].Position.Y - pos.Y, pos.X - meepo[i].Position.X);
-                                        a.Spellbook.SpellQ.UseAbility(pos);//new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
-                                        Utils.Sleep((500 + 250 * (a.Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
-
-                                        //Utils.Sleep(300, "event" + i.ToString());
-                                    }
-                                }
-                            }
-
-                            //Utils.Sleep(500, "at" + i.ToString());//minposmtoe
-                        }
-
-
-                        var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (/*!creep.Invulnerable &&*/ 
-                            //(creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && 
-                            (
-                            (me.Team != creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth) ||
-                            (me.Team == creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 10) ||
-                            (me.Team != creep.Team && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)) ||
-                            (me.Team == creep.Team && creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 2)
-                            )
-                            )).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
-                                                    
-                                if (Utils.SleepCheck("at" + i.ToString()))
-                                {
-                                    float mindistc = 99999;
-                                    Unit minposcreep = null;
-                                        foreach (var b in creeps)
+                                        if (!(maxhpepmeepo.Modifiers.Any(o => o.Name == "modifier_meepo_earthbind")) && a.Distance2D(maxhpepmeepo.Position) < 500 + 250 * (a.Spellbook.SpellQ.Level - 1) && a.Spellbook.SpellQ.Cooldown == 0)
                                         {
-                                            float dist = a.Distance2D(b.Position);
-                                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                                            var pos = maxhpepmeepo.Predict(300 + a.Distance2D(maxhpepmeepo.Position) / 857 * 1000);
+                                            //var dir = Math.Atan2(meepo[i].Position.Y - pos.Y, pos.X - meepo[i].Position.X);
+                                            a.Spellbook.SpellQ.UseAbility(pos);//new Vector3(pos.X + (int)(Math.Cos(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), pos.Y + (int)(Math.Sin(dir) * (500 + 250 * (meepo[i].Spellbook.SpellQ.Level - 1))), meepo[minposmeepo].Position.Z));//pos);
+                                            Utils.Sleep((500 + 250 * (a.Spellbook.SpellQ.Level - 1)) / 857 * 1000, "q");
+
+                                            //Utils.Sleep(300, "event" + i.ToString());
                                         }
-                                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(500, "at" + i.ToString()); }
+                                    }
                                 }
 
-                                //}
-                                                   
-                        
+                                //Utils.Sleep(500, "at" + i.ToString());//minposmtoe
+                            }
+
+
+                            /*var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (//!creep.Invulnerable && 
+                                //(creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && 
+                                (
+                                (me.Team != creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth) ||
+                                (me.Team == creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 10) ||
+                                (me.Team != creep.Team && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)) ||
+                                (me.Team == creep.Team && creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 2)
+                                )
+                                )).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
+                                                    
+                                    if (Utils.SleepCheck("at" + i.ToString()))
+                                    {
+                                        float mindistc = 99999;
+                                        Unit minposcreep = null;
+                                            foreach (var b in creeps)
+                                            {
+                                                float dist = a.Distance2D(b.Position);
+                                                if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                                            }
+                                            if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(500, "at" + i.ToString()); }
+                                    }*/
+
+                            //}
+
+
+                        }
+                        //}
                     }
-                //}
+                }
+            }
+            else
+            {
+                for (var i = 0; i < meepo.Count; i += 1)
+                {
+                    Hero a=meepo[i];
+                    if (war[i] == 1)
+                        {
+                            if (Utils.SleepCheck("at" + i.ToString()) && nmf > 0 && a.Health > a.MaximumHealth * 0.5)
+                            {
+                    var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => (/*!creep.Invulnerable &&*/
+                        //(creep.ClassID == ClassID.CDOTA_BaseNPC_Tower || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && 
+                                (
+                                (me.Team != creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth) ||
+                                (me.Team == creep.Team && creep.ClassID == ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 10) ||
+                                (me.Team != creep.Team && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)) ||
+                                (me.Team == creep.Team && creep.ClassID != ClassID.CDOTA_BaseNPC_Tower && creep.Health < creep.MaximumHealth / 2)
+                                )
+                                )).ToList();//(me.Team != creep.Team && creep.Health < damag * (1 - creep.DamageResist))//|| creep.ClassID == ClassID.CDOTA_BaseNPC_Roshan
+
+                    if (Utils.SleepCheck("at" + i.ToString()))
+                    {
+                        float mindistc = 99999;
+                        Unit minposcreep = null;
+                        foreach (var b in creeps)
+                        {
+                            float dist = a.Distance2D(b.Position);
+                            if (dist < mindistc) { mindistc = dist; minposcreep = b; }
+                        }
+                        if (minposcreep != null) { a.Attack(minposcreep); Utils.Sleep(a.SecondsPerAttack * 1000, "at" + i.ToString()); } else { Utils.Sleep(500, "at" + i.ToString()); }
+                    }
                 }
             }
             }
-
 
                 
             
