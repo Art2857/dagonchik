@@ -483,7 +483,7 @@ namespace Dagon_Stealer
 
             //Hero mk=meepo[minposmtoe];
             //discord,ethereal(800),dagon(600,650,700,750,800),orchid-bloodthorn
-            foreach (var a in enemy_poof)
+            /*foreach (var a in enemy_poof)
             {
                 float dmg = (1 - a.MagicDamageResist);
                 float damag = 0;  
@@ -503,7 +503,7 @@ namespace Dagon_Stealer
                             if (i1 != i2 && i1 != i3 && i1 != i4 && i2 != i3 && i2 != i4 && i3 != i4)
                             {
 
-                                /*nmui += 1;
+                                nmui += 1;
                                 switch (i1)
                                 {
                                     case 0: { if (discord != null) { if (dist < 1600 || bd == true) { dmg = dmg * 1.25; } } break; }
@@ -551,7 +551,7 @@ namespace Dagon_Stealer
 
 
                                 if (damag > maxdamag) { mbk = k; maxdamag = damag; }
-                                */
+                                
                             }
                         }
                     }
@@ -559,7 +559,7 @@ namespace Dagon_Stealer
 
             }
             //if (bd) { damag += poofdamag * dmg; } 
-            }
+            }*/
 
             /*
             Drawing.DrawText("BK:" + bk.ToString(), new Vector2(764, 753), size, colour, font); //последовательность
