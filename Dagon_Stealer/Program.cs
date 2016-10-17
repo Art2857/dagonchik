@@ -692,7 +692,7 @@ namespace Dagon_Stealer
             
             }*/
 
-            if (nmf > 0 && war[minposmeepo] == 0 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
+            if (nmf > 0 && war[minposmeepo] == 0 && meepo.Count > 2 && Utils.SleepCheck("war" + meepo[minposmeepo].ToString()))//&& Utils.SleepCheck("bottle")//minposmeepo//meepo[minposmeepo].Modifiers.Any(o => o.Name == "modifier_fountain_aura_buff") && meepo[minposmeepo].Distance2D(new Vector3(bx, by, meepo[minposmeepo].Position.Z)) < 700
             {
                 if (minposmeepo != minhpmeepo)
                 {
